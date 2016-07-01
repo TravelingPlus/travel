@@ -23,6 +23,8 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/partners', 'PartnersController@index' );
+
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
