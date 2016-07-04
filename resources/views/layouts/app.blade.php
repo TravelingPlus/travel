@@ -12,22 +12,13 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+     <link href="{{ URL::asset('css/foundation.css') }}" rel="stylesheet">
      <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Lato';
-        }
-
-        .fa-btn {
-            margin-right: 6px;
-        }
-    </style>
 </head>
-<body id="app-layout" ng-controller="AllYoWaysController">
+<body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
+        <div class="row">
             <div class="navbar-header">
 
                 <!-- Collapsed Hamburger -->
@@ -75,18 +66,26 @@
         </div>
     </nav>
 
-    @yield('content')
+    @yield('content');
+
+    <div class="row">
+        тут футер
+    </div>
+
+
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <script src='{{ URL::asset('js/lib/lodash.min.js') }}'></script>
     <script src='{{ URL::asset('js/lib/angular.min.js') }}'></script>
     <script src='{{ URL::asset('js/lib/angular-simple-logger.light.min.js') }}'></script>
     <script src="{{ URL::asset('js/lib/angular-maps.js') }}"></script>
-    <script src="{{ URL::asset('js/app.js') }}"></script>
-    <script src="{{ URL::asset('js/controllers/homeCtrl.js') }}"></script>
-    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+    {{--<script src="{{ URL::asset('js/app.js') }}"></script>--}}
+    {{--<script src="{{ URL::asset('js/controllers/homeCtrl.js') }}"></script>--}}
+    <script src="{{ URL::asset('js/controllers/mainCtrl.js') }}"></script>
+
+
+    <script src='//maps.googleapis.com/maps/api/js?key=AIzaSyA9ryo3MwUUszyGD4G6OBe_c-TL-38AkGI'></script>
 
 </body>
 </html>
