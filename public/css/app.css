@@ -1,1 +1,86 @@
 .angular-google-map-container { height: 600px; }
+.row1{
+    height: 5rem;
+    background: url(../images/backgroundhead.jpg) repeat-x;
+}
+
+.absolute1{
+    position:absolute;
+    left: 0;
+    z-index: 9;
+}
+
+.absolute2{
+    position:absolute;
+    right: 0;
+}
+
+.relative{
+    position:relative;
+}
+
+.padding{
+    padding:22px;
+}
+
+.border{
+    border: 0.2rem solid #fff;
+    border-radius: 3rem;
+}
+
+.margin{
+    margin: 0 0 1rem 0;
+}
+
+.padding-top{
+    padding-top: 1rem;
+}
+
+.background{
+    background-color:#000;
+    opacity: 0.5;
+}
+
+.row2{
+    height:38rem;
+}
+
+.row3{
+    width:64rem;
+    margin:0 auto;
+}
+
+.row3>div{
+    border-right: 1px solid;
+    height: 4.69rem;
+    padding: 1.6rem;
+}
+
+.row3>div:first-child{
+    border-left: 1px solid;
+}
+
+.rowmenu{
+    background-color: #e6e6e6;
+}
+
+.row5{
+    padding-top:11.81rem;
+}
+
+.message{
+    width:58.06rem;
+    background-color:#e6e6e6;
+    border:none !important;
+    margin:0 auto;
+    height: auto !important;
+    margin-bottom:1.5rem
+}
+
+.inputmessage{
+    background-color:#fff;
+}
+
+.buttons{
+    background-color:#e6e6e6;
+}
