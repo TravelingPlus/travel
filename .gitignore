@@ -5,3 +5,8 @@ Homestead.yaml
 Homestead.json
 .env
 .idea
+node_modules
+app/Http/Controllers/PartnersController.php
+public/js/.DS_Store
+public/js/directives/
+public/js/services/
