@@ -22,6 +22,9 @@ Route::get('/map', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/map', 'HomeController@map');
+
+Route::get('/partners', 'PartnersController@index' );
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
