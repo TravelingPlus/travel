@@ -17,12 +17,12 @@
     </div>
     <div class="expanded row row2">
         <div class="small-1 medium-1 large-1 columns absolute1 padding-top background">
-            <div class="padding border margin"><img src="images/punkt.png"></div>
-            <div class="padding border margin"><img src="images/bed.png"></div>
-            <div class="padding border margin"><img src="images/clubs.png"></div>
-            <div class="padding border margin"><img src="images/museum.png"></div>
-            <div class="padding border margin"><img src="images/food.png"></div>
-            <div class="padding border margin"><img src="images/views.png"></div>
+            <div class="padding border margin"><img src="../../public/images/punkt.png"></div>
+            <div class="padding border margin"><img src="../../public/images/bed.png"></div>
+            <div class="padding border margin"><img src="../../public/images/clubs.png"></div>
+            <div class="padding border margin"><img src="../../public/images/museum.png"></div>
+            <div class="padding border margin"><img src="../../public/images/food.png"></div>
+            <div class="padding border margin"><img src="../../public/images/views.png"></div>
         </div>
         <div class="small-1 madium-1 large-12 columns text-center">
 
@@ -35,12 +35,12 @@
 
         </div>
         <div class="small-1 madium-1 large-1 columns absolute2 padding-top background">
-            <div class="padding border margin"><img src="images/planes.png"></div>
-            <div class="padding border margin"><img src="images/train.png"></div>
-            <div class="padding border margin"><img src="images/bus.png"></div>
-            <div class="padding border margin"><img src="images/car.png"></div>
-            <div class="padding border margin"><img src="images/feet.png"></div>
-            <div class="padding border margin"><img src="images/bike.png"></div>
+            <div class="padding border margin"><img src="../../public/images/planes.png"></div>
+            <div class="padding border margin"><img src="../../public/images/train.png"></div>
+            <div class="padding border margin"><img src="../../public/images/bus.png"></div>
+            <div class="padding border margin"><img src="../../public/images/car.png"></div>
+            <div class="padding border margin"><img src="../../public/images/feet.png"></div>
+            <div class="padding border margin"><img src="../../public/images/bike.png"></div>
         </div>
     </div>
     <div class="expanded row rowmenu">
