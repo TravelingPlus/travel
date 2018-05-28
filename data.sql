@@ -8,11 +8,8 @@ USE `travel`;
 --
 
 CREATE TABLE `routes` (
-  `id` int(10) DEFAULT NULL,
-  `title` varchar(10) DEFAULT NULL,
-  `current_cost` varchar(10) DEFAULT NULL,
-  `hotels_ids` varchar(10) DEFAULT NULL,
-  `transport_ids` varchar(10) DEFAULT NULL
+  `login` int(10) DEFAULT NULL,
+  `trip` varchar(20) DEFAULT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -27,18 +24,6 @@ CREATE TABLE `user` (
   `last_name` varchar(10) DEFAULT NULL,
   `login` varchar(10) DEFAULT NULL,
   `password` varchar(10) DEFAULT NULL,
-  `role` varchar(10) DEFAULT NULL,
+  `email` varchar(10) DEFAULT NULL,
   `base_country` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `users_routes`
---
-
-CREATE TABLE `users_routes` (
-  `user_id` int(10) DEFAULT NULL,
-  `route_id` int(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
