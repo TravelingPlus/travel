@@ -2,7 +2,6 @@ CREATE DATABASE IF NOT EXISTS `travel` DEFAULT CHARACTER SET utf8 COLLATE utf8_g
 USE `travel`;
 
 -- --------------------------------------------------------
-
 --
 -- Структура таблицы `routes`
 --
@@ -13,7 +12,6 @@ CREATE TABLE `routes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
-
 --
 -- Структура таблицы `user`
 --
