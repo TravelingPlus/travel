@@ -9,7 +9,7 @@ USE `travel`;
 
 CREATE TABLE `routes` (
   `login` int(10) DEFAULT NULL,
-  `trip` varchar(20) DEFAULT NULL,
+  `trip` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
