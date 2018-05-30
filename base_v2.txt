@@ -4,12 +4,15 @@ USE `travel`;
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `routes`
+-- Структура таблицы `trip_info`
 --
 
-CREATE TABLE `routes` (
-  `login` int(10) DEFAULT NULL,
-  `trip` varchar(20) DEFAULT NULL
+CREATE TABLE `trip_info` (
+  `email` varchar(20) DEFAULT NULL,
+  `history_ticket` varchar(30) DEFAULT NULL,
+  `time_out` DATE,
+  `time_in` DATE,
+  `money` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -19,14 +22,14 @@ CREATE TABLE `routes` (
 --
 
 CREATE TABLE `user` (
-  `login` varchar(10) DEFAULT NULL,
-  `first_name` varchar(10) DEFAULT NULL,
-  `last_name` varchar(10) DEFAULT NULL,
-  `patronymic` varchar(10) DEFAULT NULL,
+  `email` varchar(20) DEFAULT NULL,
+  `first_name` varchar(40) DEFAULT NULL,
+  `last_name` varchar(40) DEFAULT NULL,
+  `patronymic` varchar(40) DEFAULT NULL,
   `password` varchar(10) DEFAULT NULL,
-  `email` varchar(10) DEFAULT NULL,
-  `visa` varchar(3) DEFAULT NULL,
+  `visa` ENUM('0', '1'),
   `sex` ENUM('M', 'F'),
-  `base_country` varchar(10) DEFAULT NULL
+  `nationality` varchar(20) DEFAULT NULL,
+  `birthday` DATE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
