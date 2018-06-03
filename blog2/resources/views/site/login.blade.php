@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/fontsLogin.css">
+    <link rel="stylesheet" href="css/stylesLogin.css">
+    <script type="text/javascript" src="scripts/script.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="header">
+        <h1>Welcome</h1>
+        <h6>log in</h6>
+    </div>
+    <div id="login-block">
+        <div class="social">
+            <label>Log in with a social network</label>
+            <div class="social-buttons">
+                <button class="social-twitter">Connect with <b>Twitter</b></button>
+                <button class="social-facebook">Login with <b>Facebook</b></button>
+            </div>
+        </div>
+        <form class="login-form">
+            <label>Log in with registered details</label>
+            <ul>
+                <li class="input-li">
+                    <input type="text" placeholder="Username" id="username">
+                    <img src="img/username.png" alt="user">
+                </li>
+                <li class="input-li">
+                    <input type="password" placeholder="Password" id="password">
+                    <img src="img/password.png" alt="pass">
+                </li>
+                <li class="login-li">
+                    <label class="checkbox">
+                        <input type="checkbox" name="">
+                        <i></i>
+                        Keep me signed in
+                    </label>
+                    <button class="login-btn" onclick="return validateForm();">Log in</button>
+                </li>
+                <li class="login-li">
+                    <a>Forgotten your password</a>
+                    <label>Don`t have an account? <a onclick="register();">Register now</a></label>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div id="register-block" class="register-form">
+
+    </div>
+</div>
+</body>
+</html>
