@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API</title>
+
+    <!--<scrip src="1.js" defer></scrip>-->
+
+</head>
+<body>
+
+    <form action="trip.php" method="get">
+        <select name="currency">
+            <option value="usd">USD</option>
+            <option value="rub">RUB</option>
+            <option value="eur">EUR</option>
+        </select>
+        <br><br><br><br>
+        <input type="date" name="depart" max="2020-12-01" min="now">
+        <input type="date" name="return" max="2020-12-01" min="now">
+        <input type="search" name="frm" placeholder="Откуда">
+        <input type="search" name="too" placeholder="Куда">
+        <input type="submit" value="Отправить">
+    </form>
+<!--<select name="currency" id=""></select>-->
+
+</body>
+</html>
