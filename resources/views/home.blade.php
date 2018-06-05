@@ -84,6 +84,7 @@
     <input id="to" name="to">
     <input type="button" id="btn" value="Отправить">
 </form>
+<div id="add">+</div>
 <div id="result_form"></div>
 <script>
     function initMap()
@@ -185,6 +186,12 @@
             }
         });
     }
+</script>
+<script>
+add.onclick = function(){
+var newinput = document.createElement('input');
+  ajax_form.appendChild(newinput);
+}
 </script>
 </body>
 </html>
