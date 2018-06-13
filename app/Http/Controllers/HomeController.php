@@ -26,8 +26,10 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function json()
+    public function json(Request $request)
     {
+        $currency = $request->input('currency');
+
         if ($_POST['currency'] == 'usd') {
             $curr = 'usd';
         } elseif ($_POST['currency'] == 'eur') {
@@ -38,11 +40,11 @@ class HomeController extends Controller
             echo 'Выберите валюту из выше перечисленных';
         }  
 
-        $depa = $_POST['depart'];
-        $retu = $_POST['return'];
+        $depa = $request->input('depart');
+        $retu = $request->input('return');
 
-        $from = $_POST['frm'];
-        $to = $_POST['too'];
+        $from = $request->input('frm');
+        $to = $request->input('too');
 
 
         //City codes in format IATA
