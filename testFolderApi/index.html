@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Гугл АПИ</title>
+    <style>
+        #map
+        {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+
+
+<script>
+    function initMap() {
+        var element = document.getElementById('map');
+        var options = {
+            zoom: 5,
+            center: {lat: 49.988358, lng: 36.232845}
+        };
+
+        var myMap = new google.maps.Map(element, options);
+        var lat = "<?php $lat ?>";
+
+        var lon = "<?php $lon ?>";
+
+        addMarker({lat: lat, lng: lon});
+        addMarker({lat: 49.92078, lng: 36.281185});
+
+
+
+
+        // var InfpWin = new google.maps.InfoWindow({
+        //     content: "<h1>да ты тут блин, вау!</h1>"
+        // });
+        //
+        // InfpWin.open(myMap, marker);
+        //
+        //
+        // marker.addListener('click', function () {
+        //     InfpWin.open(myMap, marker);
+        // })
+
+        function addMarker(coordinates) {
+            var marker = new google.maps.Marker({
+                position: coordinates,
+                map: myMap
+            });
+        }
+
+    }
+
+
+
+    // var a = "<?php echo $id; ?>";
+
+    console.log(a);
+
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVTzKHuF-tO1GHhkVHHvXpsgTNpoRFr14&callback=initMap">
+</script>
+
+    <form action="trip.php" method="post">
+        <select name="currency">
+            <option value="usd">USD</option>
+            <option value="rub">RUB</option>
+            <option value="eur">EUR</option>
+        </select>
+        <br><br><br><br>
+        <input type="date" name="depart" max="2020-12-01" min="now">
+        <input type="date" name="return" max="2020-12-01" min="now">
+        <input type="search" name="frm" placeholder="Откуда">
+        <input type="search" name="too" placeholder="Куда">
+        <input type="submit" value="Отправить">
+    </form>
+
+</body>
+</html>
