@@ -30,11 +30,11 @@ class HomeController extends Controller
     {
         $currency = $request->input('currency');
 
-        if ($_POST['currency'] == 'usd') {
+        if ($currency == 'usd') {
             $curr = 'usd';
-        } elseif ($_POST['currency'] == 'eur') {
+        } elseif ($currency == 'eur') {
             $curr = 'eur';
-        } elseif ($_POST['currency'] == 'rub') {
+        } elseif ($currency == 'rub') {
             $curr = 'rub';
         } else {
             echo 'Выберите валюту из выше перечисленных';

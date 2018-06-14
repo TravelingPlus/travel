@@ -78,13 +78,19 @@
 <div  id="map"></div>
 <form name="form" id="ajax_form" action="" method="post">
     {{ csrf_field() }}
-    <label>From: </label>
-    <input id="from" name="from" >
-    <label>To: </label>
-    <input id="to" name="to">
-    <input type="button" id="btn" value="Отправить">
+            <select name="currency">
+            <option value="usd">USD</option>
+            <option value="rub">RUB</option>
+            <option value="eur">EUR</option>
+        </select>
+        <br><br><br><br>
+        <input type="date" name="depart" max="2020-12-01" min="now">
+        <input type="date" name="return" max="2020-12-01" min="now">
+        <input type="search" name="frm" placeholder="Откуда">
+        <input type="search" name="too" placeholder="Куда">
+        <input type="submit" value="Отправить" id="btn">
 </form>
-<div id="add">+</div>
+<a href="#">+</div>
 <div id="result_form"></div>
 <script>
     function initMap()
@@ -179,19 +185,14 @@
             data: jQuery("#"+ajax_form).serialize(),  // Сеарилизуем объект
             success: function(response) { //Данные отправлены успешно
                 result = jQuery.parseJSON(response);
-                jQuery('#result_form').html('ОТ: '+result.a+'<br>До: '+result.b);
+                console.log(result);
+                //jQuery('#result_form').html('ОТ: '+result.a+'<br>До: '+result.b);
             },
             error: function(response) { // Данные не отправлены
                 jQuery('#result_form').html('Ошибка. Данные не отправлены.');
             }
         });
     }
-</script>
-<script>
-add.onclick = function(){
-var newinput = document.createElement('input');
-  ajax_form.appendChild(newinput);
-}
 </script>
 </body>
 </html>
