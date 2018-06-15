@@ -21,19 +21,20 @@
 
 <script>
     function initMap() {
+        // var  position_lat = position.coords.latitude;
+        // var  position_lon = position.coords.longitude;
+
         var element = document.getElementById('map');
         var options = {
             zoom: 5,
-            center: {lat: 49.988358, lng: 36.232845}
+            center: {lat: 30.988358, lng: 25.232341}
         };
 
         var myMap = new google.maps.Map(element, options);
-        var lat = "<?php $lat ?>";
 
-        var lon = "<?php $lon ?>";
 
-        addMarker({lat: lat, lng: lon});
-        addMarker({lat: 49.92078, lng: 36.281185});
+        addMarker({lat: latitude1, lng: longtude1});
+        addMarker({lat: latitude2, lng: longtude2});
 
 
 
@@ -56,6 +57,8 @@
             });
         }
 
+
+
     }
 
 
@@ -75,10 +78,10 @@
             <option value="eur">EUR</option>
         </select>
         <br><br><br><br>
-        <input type="date" name="depart" max="2020-12-01" min="now">
-        <input type="date" name="return" max="2020-12-01" min="now">
-        <input type="search" name="frm" placeholder="Откуда">
-        <input type="search" name="too" placeholder="Куда">
+        <input type="date" name="departureDate" max="2020-12-01" min="now">
+        <input type="date" name="ArrivalDate" max="2020-12-01" min="now">
+        <input type="search" name="departurePoint" placeholder="Откуда">
+        <input type="search" name="arrivalPoint" placeholder="Куда">
         <input type="submit" value="Отправить">
     </form>
 
