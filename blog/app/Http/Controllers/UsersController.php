@@ -22,7 +22,8 @@ class UsersController extends Controller
 
     public function create()
     {
-        return view('pages.create');
+        return view('auth.admin-login');
+        //return view('pages.create');
     }
 
    // public function store(Request $request)

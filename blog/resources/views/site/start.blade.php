@@ -43,10 +43,14 @@
             <a href="#" class="banner">
                 <img src="img/banner.png" alt="" />
             </a>
+
+
             <div class="subscription">
                 <div class="table-cell">
-                    <input type="submit" class="btn" value="Sign Up">
-                    <input type="submit" class="btn" value="Registration">
+                    <a href="{{ route('login') }}">Login</a>
+                    <a href="{{ route('register') }}">Register</a>
+                    <!--<input type="submit" class="btn" value="Sign Up">
+                    <input type="submit" class="btn" value="Registration">!-->
                 </div>
             </div>
         </div>

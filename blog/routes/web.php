@@ -24,6 +24,20 @@ Route::get('login', function () {
 });
 
 
+//Route::get('admin/login', 'Auth\AdminLoginController@showLoginFrom')->name('admin.login');
+
+//Route::get('admin/login', function () {
+//    return view('auth.admin-login');
+//});
+
+//Route::prefix('admin')->group(function (){
+//Route::get('www', 'Admin@showLoginForm');
+    Route::get('admin/login', 'Admin@showLoginForm' )->name('admin.login');
+    Route::post('admin/login', 'Admin@login')->name('admin.login.submit');
+    Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
+//});
+
+
 Route::get('help', function () {
     return view('pages.help');
 });
@@ -44,3 +58,7 @@ Route::get('inform',['uses' => 'UsersController@index']);
 Route::get('users/create',['uses' => 'UsersController@create']);
 
 Route::post('users',['uses' => 'UsersController@store']);
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/home/json', 'HomeController@json')->name('json');
