@@ -26,7 +26,11 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function json(Request $request)
+    //public function json()
+    //{
+     //   echo"1111";
+    //}
+   public function json(Request $request)
     {
         $currency = $request->input('currency');
 
