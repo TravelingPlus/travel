@@ -83,9 +83,13 @@ class HomeController extends Controller
 
         //Departures from and to. According to the calendar and without. Currency
         $codeTickets = file_get_contents("https://api.travelpayouts.com/v1/prices/calendar?depart_date={$departureDate}&return_date={$ArrivalDate}&currency={$currency}&origin={$cityOfDeparture}&destination={$cityOfArrival}&calendar_type=departure_date&token=ff86a5b4622103a85185456756893056");
-        //return $codeTickets;
         $info = [0=>$latitude1,1=>$longtude1,2=>$latitude2,3=>$longtude2 ];
-        return $info;
+        $res=[ 0=>$codeTickets, 1=> $info ];
+        return $res;
+        //print($codeTickets);
+        //$codeTickets[]=$info;
+        //return $codeTickets;
+        //return $info;
         //return file_get_contents("https://api.travelpayouts.com/v1/prices/calendar?depart_date={$depa}&return_date={$retu}&currency={$curr}&origin={$a}&destination={$b}&calendar_type=departure_date&token=ff86a5b4622103a85185456756893056");
         //$decodeTickets = json_decode($codeTickets, true);
     }

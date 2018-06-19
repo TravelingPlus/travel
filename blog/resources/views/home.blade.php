@@ -104,11 +104,16 @@
     {
         var element = document.getElementById('map');
         var options = {
-            zoom: 5,
+            zoom: 3,
             center: {lat: 30.988358, lng: 25.232341}
         };
 
         var myMap = new google.maps.Map(element, options);
+
+        //console.log(allCoordinates[0]);
+        //console.log(allCoordinates[1]);
+        //console.log(allCoordinates[2]);
+        //console.log(allCoordinates[3]);
 
         addMarker({lat: allCoordinates[0], lng: allCoordinates[1]});
         addMarker({lat: allCoordinates[2], lng: allCoordinates[3]});
@@ -149,9 +154,12 @@
             data: jQuery("#"+ajax_form).serialize(),  // Сеарилизуем объект
             success: function(response) { //Данные отправлены успешно
                 result = jQuery.parseJSON(response);
-               // response=result;
-                //console.log(result);
-                initMap(result);
+                information = jQuery.parseJSON(result[0]);
+                console.log(information);
+                //response=result;
+                coordinatesInform = result[1];
+                initMap(coordinatesInform);
+
                 //jQuery('#result_form').html('ОТ: '+result.a+'<br>До: '+result.b);
             },
             error: function(response) { // Данные не отправлены
