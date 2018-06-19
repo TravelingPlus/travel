@@ -73,7 +73,7 @@
 <script src="js/addForm.js"></script>
 <form name="form" id="ajax_form" action="" method="post">
     {{ csrf_field() }}
-            <select name="currency">
+        <select name="currency">
             <option value="usd">USD</option>
             <option value="rub">RUB</option>
             <option value="eur">EUR</option>
@@ -81,21 +81,22 @@
         <br><br><br><br>
         <input type="date" name="depart" max="2020-12-01" min="now">
         <input type="date" name="return" max="2020-12-01" min="now">
-
-    <div class="inputs">
+        <!-- <div class="inputs">
         <input id=1  type="search" name="frm" placeholder="from"/>
         <input id=2  type="search" name="too" placeholder="to"/>
-    </div>
-
-    <input type="submit" value="Отправить" id="btn">
+         </div> -->
+        <div class="inputs">
+             <input  type="search" name="frm" placeholder="from"/>
+             <input  type="search" name="too" placeholder="to"/>
+        </div>
+        <input type="submit" value="Отправить" id="btn">
 		<input type="button" onclick="add_input()" value="Добавить" />
 
 </form>
 
-<p>here is: {{isset($info) ? $info : 'Default'}}</p>
+<h1 id="time">Итог - <div id="min"></div> </h1>
 
 
-< href="#">+</div>
 <div id="result_form"></div>
 
 
@@ -158,6 +159,7 @@
                 console.log(information);
                 //response=result;
                 coordinatesInform = result[1];
+                document.getElementById("min").innerHTML = JSON.stringify(information);
                 initMap(coordinatesInform);
 
                 //jQuery('#result_form').html('ОТ: '+result.a+'<br>До: '+result.b);
@@ -168,7 +170,6 @@
         });
     }
 </script>
-<script>alert(response);</script>>
 
 
 </body>

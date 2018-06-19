@@ -86,6 +86,7 @@ class HomeController extends Controller
         $info = [0=>$latitude1,1=>$longtude1,2=>$latitude2,3=>$longtude2 ];
         $res=[ 0=>$codeTickets, 1=> $info ];
         return $res;
+        //return'159';
         //print($codeTickets);
         //$codeTickets[]=$info;
         //return $codeTickets;
