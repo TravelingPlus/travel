@@ -16,14 +16,7 @@
     <script src="js/slider.js"></script>
     <script src="js/mobmenu.js"></script>
     <script src="js/main.js"></script>
-    <script type="text/javascript" src="//vk.com/js/api/openapi.js?116"></script>
-    <script type="text/javascript">
-        VK.init({apiId: 4825158, onlyWidgets: true});
-    </script>
-    <script type="text/javascript">
-        VK.Widgets.Like("vk_like", {type: "button"});
-    </script>
-</head>
+  </head>
 
 <body>
 

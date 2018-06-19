@@ -85,20 +85,22 @@
     <div class="inputs">
         <input id=1  type="search" name="frm" placeholder="from"/>
         <input id=2  type="search" name="too" placeholder="to"/>
-    </div>!-->
+    </div>
 
     <input type="submit" value="Отправить" id="btn">
 		<input type="button" onclick="add_input()" value="Добавить" />
 
 </form>
 
+<p>here is: {{isset($info) ? $info : 'Default'}}</p>
 
 
-
-<a href="#">+</div>
+< href="#">+</div>
 <div id="result_form"></div>
-<script>
-    function initMap()
+
+
+    <script>
+    function initMap(allCoordinates)
     {
         var element = document.getElementById('map');
         var options = {
@@ -108,11 +110,8 @@
 
         var myMap = new google.maps.Map(element, options);
 
-
-        addMarker({lat: latitude1, lng: longtude1});
-        addMarker({lat: latitude2, lng: longtude2});
-
-
+        addMarker({lat: allCoordinates[0], lng: allCoordinates[1]});
+        addMarker({lat: allCoordinates[2], lng: allCoordinates[3]});
 
         function addMarker(coordinates) {
             var marker = new google.maps.Marker({
@@ -120,9 +119,6 @@
                 map: myMap
             });
         }
-
-
-
     }
 </script>
 <script async defer
@@ -139,7 +135,7 @@
     jQuery( document ).ready(function() {
         jQuery("#btn").click(
             function(){
-                sendAjaxForm('result_form', 'ajax_form', 'http://travel/public/home/json');
+                sendAjaxForm('result_form', 'ajax_form', 'http://travelwork/public/home/json');
                 return false;
             }
         );
@@ -153,7 +149,9 @@
             data: jQuery("#"+ajax_form).serialize(),  // Сеарилизуем объект
             success: function(response) { //Данные отправлены успешно
                 result = jQuery.parseJSON(response);
-                console.log(result);
+               // response=result;
+                //console.log(result);
+                initMap(result);
                 //jQuery('#result_form').html('ОТ: '+result.a+'<br>До: '+result.b);
             },
             error: function(response) { // Данные не отправлены
@@ -162,7 +160,7 @@
         });
     }
 </script>
-
+<script>alert(response);</script>>
 
 
 </body>
