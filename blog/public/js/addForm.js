@@ -18,9 +18,9 @@ function add_input(){
         //area.value='333';
 
         if(i%2 == 0){
-            $('.inputs').append('<input id=idnew  name="[]" placeholder="to"/>');
+            $('.inputs').append('<input id=idnew  name="name[]" placeholder="to"/>');
         }else {
-            $('.inputs').append('<input id=idnew name="[]" placeholder="from"/>');
+            $('.inputs').append('<input id=idnew name="name[]" placeholder="from"/>');
         }
     }
 

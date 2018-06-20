@@ -86,8 +86,8 @@
         <input id=2  type="search" name="too" placeholder="to"/>
          </div> -->
         <div class="inputs">
-             <input  type="search" name="frm" placeholder="from"/>
-             <input  type="search" name="too" placeholder="to"/>
+             <input  type="search" name="name[]" placeholder="from"/>
+             <input  type="search" name="name[]" placeholder="to"/>
         </div>
         <input type="submit" value="Отправить" id="btn">
 		<input type="button" onclick="add_input()" value="Добавить" />
@@ -154,6 +154,7 @@
             dataType: "html", //формат данных
             data: jQuery("#"+ajax_form).serialize(),  // Сеарилизуем объект
             success: function(response) { //Данные отправлены успешно
+
                 result = jQuery.parseJSON(response);
                 information = jQuery.parseJSON(result[0]);
                 console.log(information);
