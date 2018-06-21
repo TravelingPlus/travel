@@ -111,14 +111,15 @@
 
         var myMap = new google.maps.Map(element, options);
 
-        //console.log(allCoordinates[0]);
-        //console.log(allCoordinates[1]);
-        //console.log(allCoordinates[2]);
-        //console.log(allCoordinates[3]);
+        for (var i = 0; i < allCoordinates.length; i++)
+        {
+            console.log(allCoordinates[i]);
+        }
 
-        addMarker({lat: allCoordinates[0], lng: allCoordinates[1]});
-        addMarker({lat: allCoordinates[2], lng: allCoordinates[3]});
-
+        for (var i = 0; i < allCoordinates.length; i+=2)
+        {
+             addMarker({lat: allCoordinates[i], lng: allCoordinates[i+1]});
+        }
         function addMarker(coordinates) {
             var marker = new google.maps.Marker({
                 position: coordinates,
@@ -158,11 +159,18 @@
                 result = jQuery.parseJSON(response);
                 information = jQuery.parseJSON(result[0]);
                 console.log(information);
-                //response=result;
                 coordinatesInform = result[1];
+                if(window.coord == undefined)
+                {
+                    window.coord=[];
+                }
+                for (var i = 0; i < coordinatesInform.length; i++)
+                {
+                    window.coord.push(coordinatesInform[i]);
+                }
                 document.getElementById("min").innerHTML = JSON.stringify(information);
-                initMap(coordinatesInform);
-
+                //initMap(coordinatesInform);
+                initMap(window.coord);
                 //jQuery('#result_form').html('ОТ: '+result.a+'<br>До: '+result.b);
             },
             error: function(response) { // Данные не отправлены
