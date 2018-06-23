@@ -15,13 +15,7 @@
                     You are logged in!!!
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                     <script src="js/find.js"></script>
-                    <form name="form" id="ajax_form" action="">
-                         <label>From: </label>
-                         <input id="from" name="from" >
-                         <label>To: </label>
-                         <input id="to" name="to">
-                         <input type="button" id="btn" value="Отправить">
-                    </form>
+
                         <div id="result_form"></div>
                             </div>
             </div>
@@ -76,9 +70,10 @@
 
 <body>
 <div  id="map"></div>
+<script src="js/addForm.js"></script>
 <form name="form" id="ajax_form" action="" method="post">
     {{ csrf_field() }}
-            <select name="currency">
+        <select name="currency">
             <option value="usd">USD</option>
             <option value="rub">RUB</option>
             <option value="eur">EUR</option>
@@ -86,75 +81,70 @@
         <br><br><br><br>
         <input type="date" name="depart" max="2020-12-01" min="now">
         <input type="date" name="return" max="2020-12-01" min="now">
-        <input type="search" name="frm" placeholder="Откуда">
-        <input type="search" name="too" placeholder="Куда">
+        <!-- <div class="inputs">
+        <input id=1  type="search" name="frm" placeholder="from"/>
+        <input id=2  type="search" name="too" placeholder="to"/>
+         </div> -->
+        <div class="inputs">
+             <input  type="search" name="name[]" placeholder="from"/>
+             <input  type="search" name="name[]" placeholder="to"/>
+        </div>
         <input type="submit" value="Отправить" id="btn">
+		<input type="button" onclick="add_input()" value="Добавить" />
+
 </form>
-<a href="#">+</div>
+
+<h1 id="time">Итог - <div id="min"></div> </h1>
+
+
 <div id="result_form"></div>
-<script>
-    function initMap()
+
+
+    <script>
+    function initMap(allCoordinates)
     {
-        //var position_lat;
-        //var position_lon;
-        if (navigator.geolocation) {
-            var timeoutVal = 10 * 1000 * 1000;
-            navigator.geolocation.getCurrentPosition(
-                displayPosition,
-                displayError,
-                {enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
-            );
-        }
-        else {
-            alert("Geolocation не поддерживается данным браузером");
-        }
-
-        function displayPosition(position) {
-            alert("Широта: " + position.coords.latitude + ", Долгота: " + position.coords.longitude);
-            var  position_lat = position.coords.latitude;
-            var  position_lon = position.coords.longitude;
-            addMarker({
-                //coordinates: {lat: 49.988358, lng: 36.232845},
-                coordinates: {lat: position_lat, lng: position_lon},
-                info: '<h1>Hey there</h1>'
-            });
-        }
-
-        function displayError(error) {
-            var errors = {
-                1: 'Нет прав доступа',
-                2: 'Местоположение невозможно определить',
-                3: 'Таймаут соединения'
-            };
-            alert("Ошибка: " + errors[error.code]);
-        }
-
         var element = document.getElementById('map');
         var options = {
             zoom: 3,
-            center: {lat: 55.7558, lng: 37.6173}
+            center: {lat: 30.988358, lng: 25.232341}
         };
+
         var myMap = new google.maps.Map(element, options);
-        addMarker({
-            coordinates: {lat: 38.736946, lng: -9.142685},
-            info: '<h1>Hey there 1</h1>'
-        });
-        function addMarker(properties){
+
+        for (var i = 0; i < allCoordinates.length; i++)
+        {
+            console.log(allCoordinates[i]);
+        }
+
+        var coords;
+
+        if(coords == undefined){
+            coords=[];
+        }
+
+        for (var i = 0; i < allCoordinates.length; i+=2)
+        {
+            addMarker({lat: allCoordinates[i], lng: allCoordinates[i+1]});
+            coords.push({lat:allCoordinates[i], lng:+allCoordinates[i+1]});
+            console.log(coords);
+        }
+
+        function addMarker(coordinates) {
             var marker = new google.maps.Marker({
-                position: properties.coordinates,
+                position: coordinates,
                 map: myMap
             });
-            if(properties.info)
-            {
-                var InfoWindow = new google.maps.InfoWindow({
-                    content: properties.info
-                });
-
-                marker.addListener('click', function(){
-                    InfoWindow.open(myMap, marker);
-                });
-            }
         }
+
+        var flightPath = new google.maps.Polyline({
+            path: coords,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+
+        flightPath.setMap(myMap);
     }
 </script>
 <script async defer
@@ -184,8 +174,22 @@
             dataType: "html", //формат данных
             data: jQuery("#"+ajax_form).serialize(),  // Сеарилизуем объект
             success: function(response) { //Данные отправлены успешно
+                //console.log(response);
                 result = jQuery.parseJSON(response);
-                console.log(result);
+                information = jQuery.parseJSON(result[0]);
+                console.log(information);
+                coordinatesInform = result[1];
+                if(window.coord == undefined)
+                {
+                    window.coord=[];
+                }
+                for (var i = 0; i < coordinatesInform.length; i++)
+                {
+                    window.coord.push(coordinatesInform[i]);
+                }
+                document.getElementById("min").innerHTML = JSON.stringify(information);
+                //initMap(coordinatesInform);
+                initMap(window.coord);
                 //jQuery('#result_form').html('ОТ: '+result.a+'<br>До: '+result.b);
             },
             error: function(response) { // Данные не отправлены
@@ -194,6 +198,8 @@
         });
     }
 </script>
+
+
 </body>
 </html>
 
