@@ -116,16 +116,43 @@
             console.log(allCoordinates[i]);
         }
 
+        var coords;
+
+        if(coords == undefined){
+            coords=[];
+        }
+
         for (var i = 0; i < allCoordinates.length; i+=2)
         {
-             addMarker({lat: allCoordinates[i], lng: allCoordinates[i+1]});
+            addMarker({lat: allCoordinates[i], lng: allCoordinates[i+1]});
+            coords.push({lat:allCoordinates[i], lng:+allCoordinates[i+1]});
+            console.log(coords);
         }
+
         function addMarker(coordinates) {
             var marker = new google.maps.Marker({
                 position: coordinates,
                 map: myMap
             });
         }
+
+        var lineSymbol = {
+          path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+        };
+
+        var flightPath = new google.maps.Polyline({
+            path: coords,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2,
+            icons: [{
+                icon: lineSymbol,
+                offset: '100%'
+            }],
+        });
+
+        flightPath.setMap(myMap);
     }
 </script>
 <script async defer
@@ -142,7 +169,7 @@
     jQuery( document ).ready(function() {
         jQuery("#btn").click(
             function(){
-                sendAjaxForm('result_form', 'ajax_form', 'http://travelwork/public/home/json');
+                sendAjaxForm('result_form', 'ajax_form', 'http://travelwithline/public/home/json');
                 return false;
             }
         );
