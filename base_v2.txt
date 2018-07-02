@@ -26,10 +26,17 @@ CREATE TABLE `user` (
   `first_name` varchar(40) DEFAULT NULL,
   `last_name` varchar(40) DEFAULT NULL,
   `patronymic` varchar(40) DEFAULT NULL,
-  `password` varchar(10) DEFAULT NULL,
-  `visa` ENUM('0', '1'),
   `sex` ENUM('M', 'F'),
   `nationality` varchar(20) DEFAULT NULL,
   `birthday` DATE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `all_country`
+--
+CREATE TABLE `all_country` (
+  `country` varchar(20) DEFAULT NULL,
+  `visa` TINYINT (1)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
