@@ -39,12 +39,20 @@ class HomeController extends Controller
         } else {
             echo 'Выберите валюту из выше перечисленных';
         }
-            
+
         $departureDate = $request->input('depart');
         $ArrivalDate = $request->input('return');
 
-        $departurePoint = $request->input('name')[0];
-        $arrivalPoint = $request->input('name')[1];
+        //$rrr = count($request);
+        $count = 0;
+        $i=0;
+        while (isset($request->input('name')[$i]) )
+        {
+            $count++;
+            $i++;
+        }
+        $departurePoint = $request->input('name')[$count-2];
+        $arrivalPoint = $request->input('name')[$count-1];
 
 
         //City codes in format IATA
@@ -80,11 +88,11 @@ class HomeController extends Controller
         }
 
         //Departures from and to. According to the calendar and without. Currency
-        $codeTickets = file_get_contents("https://api.travelpayouts.com/v1/prices/calendar?depart_date={$departureDate}&return_date={$ArrivalDate}&currency={$currency}&origin={$cityOfDeparture}&destination={$cityOfArrival}&calendar_type=departure_date&token=b8503c894652441a0b74820d0f539cc5");
+        $codeTickets = file_get_contents("https://api.travelpayouts.com/v1/prices/calendar?depart_date={$departureDate}&return_date={$ArrivalDate}&currency={$currency}&origin={$cityOfDeparture}&destination={$cityOfArrival}&calendar_type=departure_date&token=ff86a5b4622103a85185456756893056");
         $info = [0=>$latitude1,1=>$longtude1,2=>$latitude2,3=>$longtude2 ];
         $res=[ 0=>$codeTickets, 1=> $info ];
         return $res;
-        //return $_COOKIE['cooo'];
+        //return $count;
     }
 
 }
