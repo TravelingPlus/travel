@@ -15,8 +15,17 @@ class CreateAddInformsTable extends Migration
     {
         Schema::create('add_informs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            //$table->string('title');
             $table->timestamps();
+
+            $table->string('email',40);
+            $table->string('first_name',40);
+            $table->string('last_name',40);
+            $table->string('patronymic',40);
+            $table->enum('visa', ['YES', 'NO']);
+            $table->enum('sex', ['M', 'F']);
+            $table->string('nationality',40);
+            $table->date('birthday');
         });
     }
 
