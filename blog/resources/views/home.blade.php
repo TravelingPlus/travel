@@ -71,6 +71,7 @@
 <body>
 <div  id="map"></div>
 <script src="js/addForm.js"></script>
+<script src="js/prepareToSave.js"></script>
 <form name="form" id="ajax_form" action="" method="post">
     {{ csrf_field() }}
         <select name="currency">
@@ -93,6 +94,7 @@
 		<input type="button" onclick="add_input()" value="Добавить" />
 
 </form>
+    <input type="button" onclick="save()" value="Save in db" />
 
 <h1 id="time">Итог - <div id="min"></div> </h1>
 
@@ -169,7 +171,7 @@
     jQuery( document ).ready(function() {
         jQuery("#btn").click(
             function(){
-                sendAjaxForm('result_form', 'ajax_form', 'http://travelwithline/public/home/json');
+                sendAjaxForm('result_form', 'ajax_form', 'http://travel-anton/public/home/json');
                 return false;
             }
         );
@@ -186,6 +188,20 @@
                 result = jQuery.parseJSON(response);
                 information = jQuery.parseJSON(result[0]);
                 console.log(information);
+
+                //informationToSaveInDB=information['data'];
+                //console.log(informationToSaveInDB);
+                //console.log(result[2]);
+                //console.log(informationToSaveInDB[result[2]]['origin']);
+
+                if(window.informationToSaveInDB == undefined)
+                {
+                    window.informationToSaveInDB=[];
+                }
+                window.informationToSaveInDB.push(information['data'][result[2]]);
+                console.log(window.informationToSaveInDB);
+
+
                 coordinatesInform = result[1];
                 if(window.coord == undefined)
                 {
