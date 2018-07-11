@@ -29,7 +29,7 @@ function add_input(){
     //console.log(text[text.length-6].value);
     //console.log(text[text.length-7].value);
     len_all=text.length;
-    var area=document.getElementsByTagName("input")[len_all-5];
-    area.value=text[text.length-6].value;
+    var area=document.getElementsByTagName("input")[len_all-4];
+    area.value=text[text.length-5].value;
     //var area=document.getElementsByTagName("input")[3];
 }
