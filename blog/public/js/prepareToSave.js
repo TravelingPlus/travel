@@ -6,7 +6,7 @@ function save()
 
     $.ajax({
         type: "POST",
-        url: "http://travel-anton/public/home/prepareToSave",
+        url: "http://travel-anton1/public/home/prepareToSave",
         data: dataString
     });
 
