@@ -168,6 +168,9 @@
                     <div style="padding:0;color: #fff;text-align:center;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">Hotel</div>
                 </div>
 
+                <script src="js/prepareToSave.js"></script>
+
+
                 <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form" action="" method="post" style="margin: 0;">
                     {{ csrf_field() }}
                     <hr class="hr">
@@ -210,7 +213,9 @@
                         </div>
                     </div>
                     </form>
-
+                <form name="form" id="ajax_form1" action="" method="post">
+                    <input type="button" onclick="save()" value="Save in db" id="btn1"/>
+                </form>
                 <hr>
                 <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="time" style="width:190px; margin: 0;">
                     <hr>
@@ -220,7 +225,9 @@
                 </h1>
 
 
+
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="result_form"></div>
+
             </div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                 <div id="map"></div>
@@ -228,6 +235,7 @@
         </div>
     </div>
 </div>
+
 <div class="footer">
     <div class="content" style="color: #fff; font-size: 14px;">
         <div>All rights reserved by MEGO</div>
@@ -278,7 +286,59 @@
 
         flightPath.setMap(myMap);
     }
+
 </script>
+
+
+
+
+
+
+
+<script>
+    jQuery.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+    jQuery( document ).ready(function() {
+        jQuery("#btn1").click(
+            function(){
+                sendAjaxForm1('result_form1', 'ajax_form1', 'http://travel-anton1/public/home/');
+                return false;
+            }
+        );
+    });
+
+    function sendAjaxForm1(result_form, ajax_form, url) {
+        var dataString = 'from=' + '7777' + '&to=' + '999999' ;
+        jQuery.ajax({
+            url:  url, //url страницы (action_ajax_form.php)
+            type:     "POST", //метод отправки
+            dataType: "html", //формат данных
+            data: dataString,  // Сеарилизуем объект
+            success: function(response) { //Данные отправлены успешно
+                console.log('yeeeees');
+                console.log(response);
+            },
+            error: function(response) { // Данные не отправлены
+                jQuery('#result_form').html('Ошибка. Данные не отправлены.');
+            }
+        });
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
 <script>
     jQuery.ajaxSetup({
         headers: {
@@ -307,6 +367,20 @@
                 result = jQuery.parseJSON(response);
                 information = jQuery.parseJSON(result[0]);
                 console.log(information);
+
+                //informationToSaveInDB=information['data'];
+                //console.log(informationToSaveInDB);
+                //console.log(result[2]);
+                //console.log(informationToSaveInDB[result[2]]['origin']);
+
+                if(window.informationToSaveInDB == undefined)
+                {
+                    window.informationToSaveInDB=[];
+                }
+                window.informationToSaveInDB.push(information['data'][result[2]]);
+                console.log(window.informationToSaveInDB);
+
+
                 coordinatesInform = result[1];
                 if(window.coord == undefined)
                 {

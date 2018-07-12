@@ -25,10 +25,11 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    public function prepareToSave(Request $request)
+    public function prepareToSave()
     {
+        //$d = $request['from'];
         //print('hiiiiii');
-        return '111';
+        return '77777';
     }
     public function json(Request $request)
     {
