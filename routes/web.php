@@ -67,3 +67,6 @@ Route::post('/home/json', 'HomeController@json')->name('json');
 Route::get('/check', function () {
     return view('welcome', ['name' => 'Samantha']);
 });
+
+Route::resource('/home/add', 'AddInformController');
+Route::post('/home/prepareToSave', 'HomeController@prepareToSave')->name('prepareToSave');

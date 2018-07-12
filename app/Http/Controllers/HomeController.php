@@ -25,7 +25,12 @@ class HomeController extends Controller
     {
         return view('home');
     }
-
+    public function prepareToSave()
+    {
+        //$d = $request['from'];
+        //print('hiiiiii');
+        return '77777';
+    }
     public function json(Request $request)
     {
         $currency = $request->input('currency');
@@ -90,7 +95,7 @@ class HomeController extends Controller
         //Departures from and to. According to the calendar and without. Currency
         $codeTickets = file_get_contents("https://api.travelpayouts.com/v1/prices/calendar?depart_date={$departureDate}&return_date={$ArrivalDate}&currency={$currency}&origin={$cityOfDeparture}&destination={$cityOfArrival}&calendar_type=departure_date&token=ff86a5b4622103a85185456756893056");
         $info = [0=>$latitude1,1=>$longtude1,2=>$latitude2,3=>$longtude2 ];
-        $res=[ 0=>$codeTickets, 1=> $info ];
+        $res=[ 0=>$codeTickets, 1=>$info, 2=>$departureDate ];
         return $res;
         //return $count;
     }
