@@ -214,7 +214,8 @@
                     </div>
                     </form>
                 <form name="form" id="ajax_form1" action="" method="post">
-                    <input type="button" onclick="save()" value="Save in db" id="btn1"/>
+                    {{ csrf_field() }}
+                    <input type="button" value="Save in db" id="btn1"/>
                 </form>
                 <hr>
                 <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="time" style="width:190px; margin: 0;">
@@ -298,7 +299,7 @@
 <script>
     jQuery.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
         }
     });
 
@@ -306,19 +307,60 @@
     jQuery( document ).ready(function() {
         jQuery("#btn1").click(
             function(){
-                sendAjaxForm1('result_form1', 'ajax_form1', 'http://travel-anton1/public/home/');
+                sendAjaxForm1('result_form1', 'ajax_form1', 'http://prepare/public/home/prepareToSave');
                 return false;
             }
         );
     });
 
     function sendAjaxForm1(result_form, ajax_form, url) {
-        var dataString = 'from=' + '7777' + '&to=' + '999999' ;
+        //var dataString = 'from=' + '7777' + '&to=' + '999999';
+        //var dataString='';
+        if(window.dataString == undefined)
+        {
+            window.dataString='';
+        }
+        for (var i = 0; i < window.informationToSaveInDB.length; i++)
+        {
+            /*if (window.dataString=''){
+            window.dataString= '&airline'+i+"="+window.informationToSaveInDB[i]['airline']+
+                '&departure_at'+i+"="+window.informationToSaveInDB[i]['departure_at']+
+                '&destination'+i+"="+window.informationToSaveInDB[i]['destination']+
+                '&expires_at'+i+"="+window.informationToSaveInDB[i]['expires_at']+
+                '&flight_number'+i+"="+window.informationToSaveInDB[i]['flight_number']+
+                '&origin'+i+"="+window.informationToSaveInDB[i]['origin']+
+                '&price'+i+"="+window.informationToSaveInDB[i]['price']+
+                '&return_at'+i+"="+window.informationToSaveInDB[i]['return_at']+
+                '&transfers'+i+"="+window.informationToSaveInDB[i]['transfers'];
+            }else{*/
+                window.dataString+='&airline'+i+"="+window.informationToSaveInDB[i]['airline']+
+                    '&departure_at'+i+"="+window.informationToSaveInDB[i]['departure_at']+
+                    '&destination'+i+"="+window.informationToSaveInDB[i]['destination']+
+                    '&expires_at'+i+"="+window.informationToSaveInDB[i]['expires_at']+
+                    '&flight_number'+i+"="+window.informationToSaveInDB[i]['flight_number']+
+                    '&origin'+i+"="+window.informationToSaveInDB[i]['origin']+
+                    '&price'+i+"="+window.informationToSaveInDB[i]['price']+
+                    '&return_at'+i+"="+window.informationToSaveInDB[i]['return_at']+
+                    '&transfers'+i+"="+window.informationToSaveInDB[i]['transfers'];
+           // }
+           /* expires_at: "2018-07-13T20:35:00Z"
+​​              flight_number: 678
+​​            origin: "MOW"
+            price: 492
+​​              return_at: "2018-07-15T06:30:00Z"
+​​          transfers
+            */
+            //console.log(window.informationToSaveInDB[i]['airline']);
+            //console.log(window.informationToSaveInDB[i]['departure_at']);
+            //console.log(window.informationToSaveInDB[i]['destination']);
+        }
+        console.log(dataString);
+        console.log(window.informationToSaveInDB);
         jQuery.ajax({
             url:  url, //url страницы (action_ajax_form.php)
             type:     "POST", //метод отправки
             dataType: "html", //формат данных
-            data: dataString,  // Сеарилизуем объект
+            data: jQuery("#"+ajax_form).serialize()+ dataString,  // Сеарилизуем объект
             success: function(response) { //Данные отправлены успешно
                 console.log('yeeeees');
                 console.log(response);
@@ -350,7 +392,7 @@
     jQuery( document ).ready(function() {
         jQuery("#btn").click(
             function(){
-                sendAjaxForm('result_form', 'ajax_form', 'http://travel-anton1/public/home/json');
+                sendAjaxForm('result_form', 'ajax_form', 'http://prepare/public/home/json');
                 return false;
             }
         );
