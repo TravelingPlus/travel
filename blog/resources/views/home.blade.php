@@ -168,6 +168,9 @@
                     <div style="padding:0;color: #fff;text-align:center;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">Hotel</div>
                 </div>
 
+                <script src="js/prepareToSave.js"></script>
+
+
                 <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form" action="" method="post" style="margin: 0;">
                     {{ csrf_field() }}
                     <hr class="hr">
@@ -210,7 +213,10 @@
                         </div>
                     </div>
                     </form>
-
+                <form name="form" id="ajax_form1" action="" method="post">
+                    {{ csrf_field() }}
+                    <input type="button" value="Save in db" id="btn1"/>
+                </form>
                 <hr>
                 <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="time" style="width:190px; margin: 0;">
                     <hr>
@@ -220,7 +226,9 @@
                 </h1>
 
 
+
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="result_form"></div>
+
             </div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                 <div id="map"></div>
@@ -228,6 +236,7 @@
         </div>
     </div>
 </div>
+
 <div class="footer">
     <div class="content" style="color: #fff; font-size: 14px;">
         <div>All rights reserved by MEGO</div>
@@ -278,7 +287,100 @@
 
         flightPath.setMap(myMap);
     }
+
 </script>
+
+
+
+
+
+
+
+<script>
+    jQuery.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+    jQuery( document ).ready(function() {
+        jQuery("#btn1").click(
+            function(){
+                sendAjaxForm1('result_form1', 'ajax_form1', 'http://prepare/public/home/prepareToSave');
+                return false;
+            }
+        );
+    });
+
+    function sendAjaxForm1(result_form, ajax_form, url) {
+        //var dataString = 'from=' + '7777' + '&to=' + '999999';
+        //var dataString='';
+        if(window.dataString == undefined)
+        {
+            window.dataString='';
+        }
+        for (var i = 0; i < window.informationToSaveInDB.length; i++)
+        {
+            /*if (window.dataString=''){
+            window.dataString= '&airline'+i+"="+window.informationToSaveInDB[i]['airline']+
+                '&departure_at'+i+"="+window.informationToSaveInDB[i]['departure_at']+
+                '&destination'+i+"="+window.informationToSaveInDB[i]['destination']+
+                '&expires_at'+i+"="+window.informationToSaveInDB[i]['expires_at']+
+                '&flight_number'+i+"="+window.informationToSaveInDB[i]['flight_number']+
+                '&origin'+i+"="+window.informationToSaveInDB[i]['origin']+
+                '&price'+i+"="+window.informationToSaveInDB[i]['price']+
+                '&return_at'+i+"="+window.informationToSaveInDB[i]['return_at']+
+                '&transfers'+i+"="+window.informationToSaveInDB[i]['transfers'];
+            }else{*/
+                window.dataString+='&airline'+i+"="+window.informationToSaveInDB[i]['airline']+
+                    '&departure_at'+i+"="+window.informationToSaveInDB[i]['departure_at']+
+                    '&destination'+i+"="+window.informationToSaveInDB[i]['destination']+
+                    '&expires_at'+i+"="+window.informationToSaveInDB[i]['expires_at']+
+                    '&flight_number'+i+"="+window.informationToSaveInDB[i]['flight_number']+
+                    '&origin'+i+"="+window.informationToSaveInDB[i]['origin']+
+                    '&price'+i+"="+window.informationToSaveInDB[i]['price']+
+                    '&return_at'+i+"="+window.informationToSaveInDB[i]['return_at']+
+                    '&transfers'+i+"="+window.informationToSaveInDB[i]['transfers'];
+           // }
+           /* expires_at: "2018-07-13T20:35:00Z"
+​​              flight_number: 678
+​​            origin: "MOW"
+            price: 492
+​​              return_at: "2018-07-15T06:30:00Z"
+​​          transfers
+            */
+            //console.log(window.informationToSaveInDB[i]['airline']);
+            //console.log(window.informationToSaveInDB[i]['departure_at']);
+            //console.log(window.informationToSaveInDB[i]['destination']);
+        }
+        console.log(dataString);
+        console.log(window.informationToSaveInDB);
+        jQuery.ajax({
+            url:  url, //url страницы (action_ajax_form.php)
+            type:     "POST", //метод отправки
+            dataType: "html", //формат данных
+            data: jQuery("#"+ajax_form).serialize()+ dataString,  // Сеарилизуем объект
+            success: function(response) { //Данные отправлены успешно
+                console.log('yeeeees');
+                console.log(response);
+            },
+            error: function(response) { // Данные не отправлены
+                jQuery('#result_form').html('Ошибка. Данные не отправлены.');
+            }
+        });
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
 <script>
     jQuery.ajaxSetup({
         headers: {
@@ -307,6 +409,20 @@
                 result = jQuery.parseJSON(response);
                 information = jQuery.parseJSON(result[0]);
                 console.log(information);
+
+                //informationToSaveInDB=information['data'];
+                //console.log(informationToSaveInDB);
+                //console.log(result[2]);
+                //console.log(informationToSaveInDB[result[2]]['origin']);
+
+                if(window.informationToSaveInDB == undefined)
+                {
+                    window.informationToSaveInDB=[];
+                }
+                window.informationToSaveInDB.push(information['data'][result[2]]);
+                console.log(window.informationToSaveInDB);
+
+
                 coordinatesInform = result[1];
                 if(window.coord == undefined)
                 {

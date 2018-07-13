@@ -69,4 +69,4 @@ Route::get('/check', function () {
 });
 
 Route::resource('/home/add', 'AddInformController');
-Route::post('/home/prepareToSave', 'HomeController@prepareToSave');
+Route::post('/home/prepareToSave', 'HomeController@prepareToSave')->name('prepareToSave');

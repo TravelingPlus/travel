@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Travel;
-
 class HomeController extends Controller
 {
     /**
@@ -27,11 +25,15 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
     public function prepareToSave(Request $request)
     {
+        //$d = $request['from'];
         //print('hiiiiii');
-        return '111';
+        //return '777778';
+        return $request;
     }
+
     public function json(Request $request)
     {
         $currency = $request->input('currency');
@@ -51,14 +53,13 @@ class HomeController extends Controller
 
         //$rrr = count($request);
         $count = 0;
-        $i=0;
-        while (isset($request->input('name')[$i]) )
-        {
+        $i = 0;
+        while (isset($request->input('name')[$i])) {
             $count++;
             $i++;
         }
-        $departurePoint = $request->input('name')[$count-2];
-        $arrivalPoint = $request->input('name')[$count-1];
+        $departurePoint = $request->input('name')[$count - 2];
+        $arrivalPoint = $request->input('name')[$count - 1];
 
 
         //City codes in format IATA
@@ -75,10 +76,10 @@ class HomeController extends Controller
         //Данные о городах в json формате
         $cities = file_get_contents("http://api.travelpayouts.com/data/cities.json");
         $infoOnCities = json_decode($cities, true);
-        $latitude1=null;
-        $longtude1=null;
-        $latitude2=null;
-        $longtude2=null;
+        $latitude1 = null;
+        $longtude1 = null;
+        $latitude2 = null;
+        $longtude2 = null;
         foreach ($infoOnCities as $city) {
             if ($city['code'] == $a) {
                 $latitude1 = $city['coordinates']['lat'];
@@ -95,15 +96,10 @@ class HomeController extends Controller
 
         //Departures from and to. According to the calendar and without. Currency
         $codeTickets = file_get_contents("https://api.travelpayouts.com/v1/prices/calendar?depart_date={$departureDate}&return_date={$ArrivalDate}&currency={$currency}&origin={$cityOfDeparture}&destination={$cityOfArrival}&calendar_type=departure_date&token=ff86a5b4622103a85185456756893056");
-        $info = [0=>$latitude1,1=>$longtude1,2=>$latitude2,3=>$longtude2 ];
-        $res=[ 0=>$codeTickets, 1=>$info, 2=>$departureDate ];
+        $info = [0 => $latitude1, 1 => $longtude1, 2 => $latitude2, 3 => $longtude2];
+        $res = [0 => $codeTickets, 1 => $info, 2 => $departureDate];
         return $res;
         //return $count;
-
-//        echo '<pre>' . print_r($res, true) . '</pre>';
-
-
-
     }
 
 }
