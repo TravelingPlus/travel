@@ -55,7 +55,7 @@ Route::get('first/second', function () {
 });
 Route::get('inform',['uses' => 'UsersController@index']);
 
-Route::get('users/create',['uses' => 'UsersController@create']);
+Route::post('users/create',['uses' => 'UsersController@create']);
 
 Route::post('users',['uses' => 'UsersController@store']);
 Auth::routes();
@@ -70,3 +70,4 @@ Route::get('/check', function () {
 
 Route::resource('/home/add', 'AddInformController');
 Route::post('/home/prepareToSave', 'HomeController@prepareToSave')->name('prepareToSave');
+Route::post('/home/getUserInfo', 'HomeController@getUserInfo')->name('getUserInfo');

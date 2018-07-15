@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,14 +24,31 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user_info = DB::table('users_info')->where('email', 'dmitryfedoryaka@gmail.com')->first();
+        return view('home', ['first_name' => $user_info->first_name, 'last_name' => $user_info->last_name]);
     }
-    public function prepareToSave()
+
+    public function getUserInfo(){
+        $last_name = DB::table('users_info')->where('email', 'dmitryfedoryaka@gmail.com')->first();
+        return $last_name->last_name . $last_name->first_name;
+    }
+
+    public function prepareToSave(Request $request)
     {
         //$d = $request['from'];
         //print('hiiiiii');
-        return '77777';
+        //return '777778';
+        return $request;
     }
+
+    public function addUser(Request $request)
+    {
+        //$d = $request['from'];
+        //print('hiiiiii');
+        //return '777778';
+        return $request;
+    }
+
     public function json(Request $request)
     {
         $currency = $request->input('currency');
@@ -50,14 +68,13 @@ class HomeController extends Controller
 
         //$rrr = count($request);
         $count = 0;
-        $i=0;
-        while (isset($request->input('name')[$i]) )
-        {
+        $i = 0;
+        while (isset($request->input('name')[$i])) {
             $count++;
             $i++;
         }
-        $departurePoint = $request->input('name')[$count-2];
-        $arrivalPoint = $request->input('name')[$count-1];
+        $departurePoint = $request->input('name')[$count - 2];
+        $arrivalPoint = $request->input('name')[$count - 1];
 
 
         //City codes in format IATA
@@ -74,10 +91,10 @@ class HomeController extends Controller
         //Данные о городах в json формате
         $cities = file_get_contents("http://api.travelpayouts.com/data/cities.json");
         $infoOnCities = json_decode($cities, true);
-        $latitude1=null;
-        $longtude1=null;
-        $latitude2=null;
-        $longtude2=null;
+        $latitude1 = null;
+        $longtude1 = null;
+        $latitude2 = null;
+        $longtude2 = null;
         foreach ($infoOnCities as $city) {
             if ($city['code'] == $a) {
                 $latitude1 = $city['coordinates']['lat'];
@@ -94,8 +111,8 @@ class HomeController extends Controller
 
         //Departures from and to. According to the calendar and without. Currency
         $codeTickets = file_get_contents("https://api.travelpayouts.com/v1/prices/calendar?depart_date={$departureDate}&return_date={$ArrivalDate}&currency={$currency}&origin={$cityOfDeparture}&destination={$cityOfArrival}&calendar_type=departure_date&token=ff86a5b4622103a85185456756893056");
-        $info = [0=>$latitude1,1=>$longtude1,2=>$latitude2,3=>$longtude2 ];
-        $res=[ 0=>$codeTickets, 1=>$info, 2=>$departureDate ];
+        $info = [0 => $latitude1, 1 => $longtude1, 2 => $latitude2, 3 => $longtude2];
+        $res = [0 => $codeTickets, 1 => $info, 2 => $departureDate];
         return $res;
         //return $count;
     }

@@ -217,6 +217,10 @@
                     {{ csrf_field() }}
                     <input type="button" value="Save in db" id="btn1"/>
                 </form>
+                <form name="form" id="ajax_form2" action="" method="post">
+                    {{ csrf_field() }}
+                    <input type="button" value="Get user info" id="btn2"/>
+                </form>
                 <hr>
                 <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="time" style="width:190px; margin: 0;">
                     <hr>
@@ -224,6 +228,9 @@
                     <span class="got-result"></span>
                     <div id="min"></div>
                 </h1>
+
+                <div style="color:white;"><b>{{$first_name}}</b></div>
+                <div style="color:white"><b>{{$last_name}}</b></div>
 
 
 
@@ -314,12 +321,53 @@
     });
 
     function sendAjaxForm1(result_form, ajax_form, url) {
-        var dataString = 'from=' + '7777' + '&to=' + '999999' ;
+        //var dataString = 'from=' + '7777' + '&to=' + '999999';
+        //var dataString='';
+        if(window.dataString == undefined)
+        {
+            window.dataString='';
+        }
+        for (var i = 0; i < window.informationToSaveInDB.length; i++)
+        {
+            /*if (window.dataString=''){
+            window.dataString= '&airline'+i+"="+window.informationToSaveInDB[i]['airline']+
+                '&departure_at'+i+"="+window.informationToSaveInDB[i]['departure_at']+
+                '&destination'+i+"="+window.informationToSaveInDB[i]['destination']+
+                '&expires_at'+i+"="+window.informationToSaveInDB[i]['expires_at']+
+                '&flight_number'+i+"="+window.informationToSaveInDB[i]['flight_number']+
+                '&origin'+i+"="+window.informationToSaveInDB[i]['origin']+
+                '&price'+i+"="+window.informationToSaveInDB[i]['price']+
+                '&return_at'+i+"="+window.informationToSaveInDB[i]['return_at']+
+                '&transfers'+i+"="+window.informationToSaveInDB[i]['transfers'];
+            }else{*/
+                window.dataString+='&airline'+i+"="+window.informationToSaveInDB[i]['airline']+
+                    '&departure_at'+i+"="+window.informationToSaveInDB[i]['departure_at']+
+                    '&destination'+i+"="+window.informationToSaveInDB[i]['destination']+
+                    '&expires_at'+i+"="+window.informationToSaveInDB[i]['expires_at']+
+                    '&flight_number'+i+"="+window.informationToSaveInDB[i]['flight_number']+
+                    '&origin'+i+"="+window.informationToSaveInDB[i]['origin']+
+                    '&price'+i+"="+window.informationToSaveInDB[i]['price']+
+                    '&return_at'+i+"="+window.informationToSaveInDB[i]['return_at']+
+                    '&transfers'+i+"="+window.informationToSaveInDB[i]['transfers'];
+           // }
+           /* expires_at: "2018-07-13T20:35:00Z"
+​​              flight_number: 678
+​​            origin: "MOW"
+            price: 492
+​​              return_at: "2018-07-15T06:30:00Z"
+​​          transfers
+            */
+            //console.log(window.informationToSaveInDB[i]['airline']);
+            //console.log(window.informationToSaveInDB[i]['departure_at']);
+            //console.log(window.informationToSaveInDB[i]['destination']);
+        }
+        console.log(dataString);
+        console.log(window.informationToSaveInDB);
         jQuery.ajax({
             url:  url, //url страницы (action_ajax_form.php)
             type:     "POST", //метод отправки
             dataType: "html", //формат данных
-            data: jQuery("#"+ajax_form).serialize(),  // Сеарилизуем объект
+            data: jQuery("#"+ajax_form).serialize()+ dataString,  // Сеарилизуем объект
             success: function(response) { //Данные отправлены успешно
                 console.log('yeeeees');
                 console.log(response);
@@ -402,6 +450,41 @@
         });
     }
 </script>
+
+<script>
+    jQuery.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+    jQuery( document ).ready(function() {
+        jQuery("#btn2").click(
+            function(){
+                sendAjaxForm2('result_form1', 'ajax_form2', 'http://localhost/lara2/blog/public/home/getUserInfo');
+                return false;
+            }
+        );
+    });
+
+    function sendAjaxForm2(result_form, ajax_form, url) {
+        jQuery.ajax({
+            url:  url, //url страницы (action_ajax_form.php)
+            type:     "POST", //метод отправки
+            dataType: "html", //формат данных
+            data: jQuery("#"+ajax_form).serialize(),  // Сеарилизуем объект
+            success: function(response) { //Данные отправлены успешно
+                console.log('yeeeees');
+                console.log(response);
+            },
+            error: function(response) { // Данные не отправлены
+                jQuery('#result_form').html('Ошибка. Данные не отправлены.');
+            }
+        });
+    }
+</script>
+
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhZNdBlfHjvqdPZ4z5Uk3hGeyZYCaXzZY&callback=initMap">
 </script>
