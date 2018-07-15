@@ -183,21 +183,21 @@
                     <hr class="hr">
                         <div class="form-group">
                         <label>Depart date:</label>
-                            <input type="date" name="depart" class="input form-control text-muted" max="2020-12-01" min="now">
+                            <input type="date" name="depart" class="input form-control text-muted dep" max="2020-12-01" min="now">
                         </div>
 
                         <div class="form-group">
                         <label>Return date:</label>
-                            <input type="date" class="input form-control text-muted" name="return" max="2020-12-01" min="now">
+                            <input type="date" class="input form-control text-muted ret" name="return" max="2020-12-01" min="now">
                         </div>
 
 
                     <div class="form-group">
                         <div class="inputs">
                             <label>Go from:</label>
-                            <input  type="search" class="input form-control text-muted" name="name[]" placeholder="from"/>
+                            <input  type="search" class="input form-control text-muted from" name="name[]" placeholder="from"/>
                             <label>To:</label>
-                            <input  type="search" class="input form-control" name="name[]" placeholder="to"/>
+                            <input  type="search" class="input form-control to" name="name[]" placeholder="to"/>
                         </div>
                     </div>
 
@@ -228,9 +228,15 @@
                     <span class="got-result"></span>
                     <div id="min"></div>
                 </h1>
-
-                <div style="color:white;"><b>{{$first_name}}</b></div>
-                <div style="color:white"><b>{{$last_name}}</b></div>
+                <form name="form" id="ajax_form3" action="" method="post">
+                <input class="bookdep" type="date" name="departureddate" value="" disabled>
+                <input class="bookdret" type="date" name="returndate" value="" disabled>
+                <input class="bookfrom" type="text" name="from" value="" disabled>
+                <input class="bookto" type="text" name="to" value="" disabled>
+                <input class="bookfirstname" type="text" name="firstname" value="{{$first_name}}" disabled>
+                <input class="booklastname" type="text" name="lastname" value="{{$last_name}}" disabled>
+                <input class="bookpersons" type="number" name="persons">
+                </form>
 
 
 
@@ -406,6 +412,14 @@
     });
 
     function sendAjaxForm(result_form, ajax_form, url) {
+        var bookdep = jQuery('.dep').val();
+        var bookret = jQuery('.ret').val();
+        var bookfrom = jQuery('.from').val();
+        var bookto = jQuery('.to').val();
+        jQuery('.bookdep').attr('value', bookdep);
+        jQuery('.bookret').attr('value', bookret);
+        jQuery('.bookfrom').attr('value', bookfrom);
+        jQuery('.bookto').attr('value', bookto);
         jQuery.ajax({
             url:  url, //url страницы (action_ajax_form.php)
             type:     "POST", //метод отправки
