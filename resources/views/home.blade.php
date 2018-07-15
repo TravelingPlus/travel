@@ -230,7 +230,7 @@
                 </h1>
                 <form name="form" id="ajax_form3" action="" method="post">
                 <input class="bookdep" type="date" name="departureddate" value="" disabled>
-                <input class="bookdret" type="date" name="returndate" value="" disabled>
+                <input class="bookret" type="date" name="returndate" value="" disabled>
                 <input class="bookfrom" type="text" name="from" value="" disabled>
                 <input class="bookto" type="text" name="to" value="" disabled>
                 <input class="bookfirstname" type="text" name="firstname" value="{{$first_name}}" disabled>
