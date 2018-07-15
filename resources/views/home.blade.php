@@ -236,6 +236,7 @@
                 <input class="bookfirstname" type="text" name="firstname" value="{{$first_name}}" disabled>
                 <input class="booklastname" type="text" name="lastname" value="{{$last_name}}" disabled>
                 <input class="bookpersons" type="number" name="persons">
+                <input type="button" value="Отправить">
                 </form>
 
 
