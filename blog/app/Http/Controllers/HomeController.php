@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Save as ExemplarOfModel;
 class HomeController extends Controller
 {
     /**
@@ -28,9 +28,9 @@ class HomeController extends Controller
 
     public function prepareToSave(Request $request)
     {
-        //$d = $request['from'];
-        //print('hiiiiii');
-        //return '777778';
+        $add = new ExemplarOfModel();
+        $add->origin='test';
+        $add->save();
         return $request;
     }
 

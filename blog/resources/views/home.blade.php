@@ -307,7 +307,7 @@
     jQuery( document ).ready(function() {
         jQuery("#btn1").click(
             function(){
-                sendAjaxForm1('result_form1', 'ajax_form1', 'http://prepare/public/home/prepareToSave');
+                sendAjaxForm1('result_form1', 'ajax_form1', 'http://travel-all/public/home/prepareToSave');
                 return false;
             }
         );
@@ -322,18 +322,17 @@
         }
         for (var i = 0; i < window.informationToSaveInDB.length; i++)
         {
-            /*if (window.dataString=''){
-            window.dataString= '&airline'+i+"="+window.informationToSaveInDB[i]['airline']+
-                '&departure_at'+i+"="+window.informationToSaveInDB[i]['departure_at']+
-                '&destination'+i+"="+window.informationToSaveInDB[i]['destination']+
-                '&expires_at'+i+"="+window.informationToSaveInDB[i]['expires_at']+
-                '&flight_number'+i+"="+window.informationToSaveInDB[i]['flight_number']+
-                '&origin'+i+"="+window.informationToSaveInDB[i]['origin']+
-                '&price'+i+"="+window.informationToSaveInDB[i]['price']+
-                '&return_at'+i+"="+window.informationToSaveInDB[i]['return_at']+
-                '&transfers'+i+"="+window.informationToSaveInDB[i]['transfers'];
-            }else{*/
-                window.dataString+='&airline'+i+"="+window.informationToSaveInDB[i]['airline']+
+                 window.dataString= '&airline'+"="+window.informationToSaveInDB[i]['airline']+
+                '&departure_at'+"="+window.informationToSaveInDB[i]['departure_at']+
+                '&destination'+"="+window.informationToSaveInDB[i]['destination']+
+                '&expires_at'+"="+window.informationToSaveInDB[i]['expires_at']+
+                '&flight_number'+"="+window.informationToSaveInDB[i]['flight_number']+
+                '&origin'+"="+window.informationToSaveInDB[i]['origin']+
+                '&price'+"="+window.informationToSaveInDB[i]['price']+
+                '&return_at'+"="+window.informationToSaveInDB[i]['return_at']+
+                '&transfers'+"="+window.informationToSaveInDB[i]['transfers'];
+
+                /*window.dataString+='&airline'+i+"="+window.informationToSaveInDB[i]['airline']+
                     '&departure_at'+i+"="+window.informationToSaveInDB[i]['departure_at']+
                     '&destination'+i+"="+window.informationToSaveInDB[i]['destination']+
                     '&expires_at'+i+"="+window.informationToSaveInDB[i]['expires_at']+
@@ -341,21 +340,11 @@
                     '&origin'+i+"="+window.informationToSaveInDB[i]['origin']+
                     '&price'+i+"="+window.informationToSaveInDB[i]['price']+
                     '&return_at'+i+"="+window.informationToSaveInDB[i]['return_at']+
-                    '&transfers'+i+"="+window.informationToSaveInDB[i]['transfers'];
-           // }
-           /* expires_at: "2018-07-13T20:35:00Z"
-​​              flight_number: 678
-​​            origin: "MOW"
-            price: 492
-​​              return_at: "2018-07-15T06:30:00Z"
-​​          transfers
-            */
-            //console.log(window.informationToSaveInDB[i]['airline']);
-            //console.log(window.informationToSaveInDB[i]['departure_at']);
-            //console.log(window.informationToSaveInDB[i]['destination']);
+                    '&transfers'+i+"="+window.informationToSaveInDB[i]['transfers'];*/
         }
         console.log(dataString);
         console.log(window.informationToSaveInDB);
+
         jQuery.ajax({
             url:  url, //url страницы (action_ajax_form.php)
             type:     "POST", //метод отправки
@@ -392,7 +381,7 @@
     jQuery( document ).ready(function() {
         jQuery("#btn").click(
             function(){
-                sendAjaxForm('result_form', 'ajax_form', 'http://prepare/public/home/json');
+                sendAjaxForm('result_form', 'ajax_form', 'http://travel-all/public/home/json');
                 return false;
             }
         );
@@ -422,7 +411,7 @@
                 window.informationToSaveInDB.push(information['data'][result[2]]);
                 console.log(window.informationToSaveInDB);
 
-
+                //console.log(window.informationToSaveInDB[0]['price']);
                 coordinatesInform = result[1];
                 if(window.coord == undefined)
                 {
