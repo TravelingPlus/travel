@@ -213,20 +213,24 @@
                         </div>
                     </div>
                     </form>
+                    <form name="form" id="ajax_form4" action="" method="post">
+                    {{ csrf_field() }}
+                    <input type="text" value="to" name="to">
+                    <input type="text" value="from" name="from">
+                    <input type="text" value="city" name="city">
+                    <input class="btn btn-primary send form-text text-muted" type="submit" value="Отправить" id="btn4">
+                    </form>
+                    <ul id="hotel" style="color:white;"></ul>
                 <form name="form" id="ajax_form1" action="" method="post">
                     {{ csrf_field() }}
                     <input type="button" value="Save in db" id="btn1"/>
-                </form>
-                <form name="form" id="ajax_form2" action="" method="post">
-                    {{ csrf_field() }}
-                    <input type="button" value="Get user info" id="btn2"/>
                 </form>
                 <hr>
                 <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="time" style="width:190px; margin: 0;">
                     <hr>
                     <div class="result">Result:</div>
                     <span class="got-result"></span>
-                    <div id="min"></div>
+                    <div id="min" style="color:white;"></div>
                 </h1>
                 <form name="form" id="ajax_form3" action="" method="post">
                 <input class="bookdep" type="date" name="departureddate" value="" disabled>
@@ -475,23 +479,28 @@
 
 
     jQuery( document ).ready(function() {
-        jQuery("#btn2").click(
+        jQuery("#btn4").click(
             function(){
-                sendAjaxForm2('result_form1', 'ajax_form2', 'http://localhost/lara2/blog/public/home/getUserInfo');
+                sendAjaxForm4('result_form1', 'ajax_form4', 'http://localhost/lara2/blog/public/home/hotels');
                 return false;
             }
         );
     });
 
-    function sendAjaxForm2(result_form, ajax_form, url) {
+    function sendAjaxForm4(result_form, ajax_form, url) {
         jQuery.ajax({
             url:  url, //url страницы (action_ajax_form.php)
             type:     "POST", //метод отправки
             dataType: "html", //формат данных
             data: jQuery("#"+ajax_form).serialize(),  // Сеарилизуем объект
             success: function(response) { //Данные отправлены успешно
-                console.log('yeeeees');
-                console.log(response);
+                res = jQuery.parseJSON(response);
+                for (var i = 0; i < res.length; i++)
+                {
+                    var newLi = document.createElement('li');
+                    newLi.innerHTML = res[i].hotelName;
+                    hotel.appendChild(newLi);
+                }
             },
             error: function(response) { // Данные не отправлены
                 jQuery('#result_form').html('Ошибка. Данные не отправлены.');

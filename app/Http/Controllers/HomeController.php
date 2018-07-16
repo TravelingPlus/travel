@@ -49,6 +49,15 @@ class HomeController extends Controller
         return $request;
     }
 
+    public function hotels(Request $request)
+    {
+        $to = $request->input('to');
+        $from = $request->input('from');
+        $city = $request->input('city');
+        $res = file_get_contents("http://engine.hotellook.com/api/v2/cache.json?location={$city}&currency=rub&checkIn={$to}&checkOut={$from}&limit=10");
+        return $res;
+    }
+
     public function json(Request $request)
     {
         $currency = $request->input('currency');
