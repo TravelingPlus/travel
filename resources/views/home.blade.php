@@ -198,8 +198,10 @@
                             <input  type="search" class="input form-control text-muted from" name="name[]" placeholder="from"/>
                             <label>To:</label>
                             <input  type="search" class="input form-control to" name="name[]" placeholder="to"/>
+                            <span style="color:white;" class="bron">Book hotel</span>
                         </div>
                     </div>
+
 
                     <div class="form-group">
                         <div class="row">
@@ -207,7 +209,7 @@
                                 <input class="btn btn-primary send form-text text-muted" type="submit" value="Отправить" id="btn">
                             </div>
                             <div class="col-lg-8">
-                                <input type="button" class="btn btn-success add form-text text-muted" onclick="add_input()" value="Добавить" />
+                                <input type="button" class="btn btn-success add form-text text-muted" value="Добавить" />
                                 </div>
 
                         </div>
@@ -215,9 +217,9 @@
                     </form>
                     <form name="form" id="ajax_form4" action="" method="post">
                     {{ csrf_field() }}
-                    <input type="text" value="to" name="to">
-                    <input type="text" value="from" name="from">
-                    <input type="text" value="city" name="city">
+                    <input type="text" value="to" name="to" class="to">
+                    <input type="text" value="from" name="from" class="from">
+                    <input type="text" value="city" name="city" class="city">
                     <input class="btn btn-primary send form-text text-muted" type="submit" value="Отправить" id="btn4">
                     </form>
                     <ul id="hotel" style="color:white;"></ul>
@@ -233,6 +235,7 @@
                     <div id="min" style="color:white;"></div>
                 </h1>
                 <form name="form" id="ajax_form3" action="" method="post">
+                <span style="color:white;">Planes</span>
                 <input class="bookdep" type="date" name="departureddate" value="" disabled>
                 <input class="bookret" type="date" name="returndate" value="" disabled>
                 <input class="bookfrom" type="text" name="from" value="" disabled>
@@ -240,6 +243,18 @@
                 <input class="bookfirstname" type="text" name="firstname" value="{{$first_name}}" disabled>
                 <input class="booklastname" type="text" name="lastname" value="{{$last_name}}" disabled>
                 <input class="bookpersons" type="number" name="persons">
+                <input type="button" value="Отправить">
+                </form>
+
+                <form name="form" id="ajax_form5" action="" method="post">
+                <span style="color:white;">Hotels</span>
+                <input class="bookdeph" type="date" name="departureddate" value="" disabled>
+                <input class="bookreth" type="date" name="returndate" value="" disabled>
+                <input class="bookfromh" type="text" name="from" value="" disabled>
+                <input class="booktoh" type="text" name="to" value="" disabled>
+                <input class="bookfirstnameh" type="text" name="firstname" value="{{$first_name}}" disabled>
+                <input class="booklastnameh" type="text" name="lastname" value="{{$last_name}}" disabled>
+                <input class="bookpersonsh" type="number" name="persons">
                 <input type="button" value="Отправить">
                 </form>
 
@@ -482,6 +497,9 @@
         jQuery("#btn4").click(
             function(){
                 sendAjaxForm4('result_form1', 'ajax_form4', 'http://localhost/lara2/blog/public/home/hotels');
+                jQuery(document).on('click','#hotel li',function(){
+                    alert('uraaaaaaaaaa');
+                });
                 return false;
             }
         );
@@ -501,16 +519,33 @@
                     newLi.innerHTML = res[i].hotelName;
                     hotel.appendChild(newLi);
                 }
+                console.log(res);
             },
             error: function(response) { // Данные не отправлены
                 jQuery('#result_form').html('Ошибка. Данные не отправлены.');
             }
         });
     }
-</script>
+</script>destination
 
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhZNdBlfHjvqdPZ4z5Uk3hGeyZYCaXzZY&callback=initMap">
+</script>
+
+<script>
+jQuery(document).on('click','.btn-success',function(){
+    add_input();
+    jQuery(document).on('click','.bron',function(){
+        var bookdep = jQuery('.dep').val();
+        jQuery('#ajax_form4 .to, .bookdeph').attr('value', bookdep);
+    });
+});
+</script>
+<script>
+jQuery(document).on('click','.bron',function(){
+        var bookdep = jQuery('.dep').val();
+        jQuery('#ajax_form4 .to, .bookdeph').attr('value', bookdep);
+    });
 </script>
 
 </div>

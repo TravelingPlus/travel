@@ -18,7 +18,7 @@ function add_input(){
         //area.value='333';
 
         if(i%2 == 0){
-            $('.inputs').append('<input id=idnew  name="name[]" placeholder="to"/><br/>');
+            $('.inputs').append('<input id=idnew  name="name[]" placeholder="to"/><br/><span class="bron" style="color:white;">Book hotel</span>');
         }else {
             $('.inputs').append('<input id=idnew name="name[]" placeholder="from"/>');
         }

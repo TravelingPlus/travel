@@ -28,10 +28,6 @@ class HomeController extends Controller
         return view('home', ['first_name' => $user_info->first_name, 'last_name' => $user_info->last_name]);
     }
 
-    public function getUserInfo(){
-        $last_name = DB::table('users_info')->where('email', 'dmitryfedoryaka@gmail.com')->first();
-        return $last_name->last_name . $last_name->first_name;
-    }
 
     public function prepareToSave(Request $request)
     {
