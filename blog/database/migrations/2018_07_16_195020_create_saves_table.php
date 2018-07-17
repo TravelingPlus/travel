@@ -15,7 +15,7 @@ class CreateSavesTable extends Migration
     {
         Schema::create('saves', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            //$table->timestamps();
             $table->string('origin',40);
             $table->string('destination',40);
             $table->integer('price');
@@ -25,6 +25,9 @@ class CreateSavesTable extends Migration
             $table->dateTime('departure_at');
             $table->dateTime('return_at');
             $table->dateTime('expires_at');
+
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

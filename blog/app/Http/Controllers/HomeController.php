@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Saave;
 use Illuminate\Http\Request;
-use App\Save as ExemplarOfModel;
+//use App\Save as ExemplarOfModel;
 class HomeController extends Controller
 {
     /**
@@ -28,10 +29,21 @@ class HomeController extends Controller
 
     public function prepareToSave(Request $request)
     {
-        $add = new ExemplarOfModel();
-        $add->origin='test';
+
+       // $add = new ExemplarOfModel();
+        $add = new Saave();
+        //$add->email='someemail@gmail.com';
+        $add->airline=$request['airline'];
+        $add->price=$request['price'];
+        $add->origin=$request['origin'];
+        $add->destination=$request['destination'];
+        $add->transfers=$request['transfers'];
+        $add->flight_number=$request['flight_number'];
+        $add->departure_at=$request['departure_at'];
+        $add->return_at=$request['return_at'];
+        $add->expires_at=$request['expires_at'];
         $add->save();
-        return $request;
+        return ($add);
     }
 
     public function json(Request $request)
