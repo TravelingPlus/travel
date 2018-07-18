@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Saave;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
+
 //use App\Save as ExemplarOfModel;
 class HomeController extends Controller
 {
@@ -32,18 +35,24 @@ class HomeController extends Controller
 
        // $add = new ExemplarOfModel();
         $add = new Saave();
-        //$add->email='someemail@gmail.com';
-        $add->airline=$request['airline'];
-        $add->price=$request['price'];
-        $add->origin=$request['origin'];
-        $add->destination=$request['destination'];
-        $add->transfers=$request['transfers'];
-        $add->flight_number=$request['flight_number'];
-        $add->departure_at=$request['departure_at'];
-        $add->return_at=$request['return_at'];
-        $add->expires_at=$request['expires_at'];
+        $add->airline= $request['airline'];
+        $add->price= $request['price'];
+        $add->origin= $request['origin'];
+        $add->destination= $request['destination'];
+        $add->transfers= $request['transfers'];
+        $add->flight_number= $request['flight_number'];
+        $add->departure_at= $request['departure_at'];
+        $add->return_at= $request['return_at'];
+        $add->expires_at= $request['expires_at'];
+        $user = Auth::user();
+        $user_email= $user['email'];
+        $add->email_user= $user_email;
+
         $add->save();
         return ($add);
+        //$res=(json_decode($request, true));
+        //return $request['aaaaa'];
+        //return $request;
     }
 
     public function json(Request $request)

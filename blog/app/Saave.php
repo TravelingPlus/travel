@@ -12,5 +12,5 @@ class Saave extends Model
      * @var string
      */
     //protected $table = 'save1';
-    protected $table = 'alltripsuser';
+    protected $table = 'all_trips';
 }

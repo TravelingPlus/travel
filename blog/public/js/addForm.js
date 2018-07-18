@@ -18,23 +18,28 @@ function add_input(){
         //area.value='333';
 
         if(i%2 == 0){
-            $('.inputs').append('<input id=idnew  name="name[]" placeholder="to"/>');
+            $('.inputs').append('<input id=idnew   class="input form-control"  name="name[]" placeholder="to"/>');
         }else {
-            $('.inputs').append('<input id=idnew name="name[]" placeholder="from"/>');
+            $('.inputs').append('<input id=idnew  class="input form-control"  name="name[]" placeholder="from"/>');
         }
     }
 
     var text = document.getElementsByTagName("input");
     console.log('7897');
-    //console.log(text[text.length-2].value);
-    //console.log(text[text.length-3].value);
-    //console.log(text[text.length-4].value);
-    //console.log(text[text.length-5].value);
-    //console.log(text[text.length-6].value);
-    //console.log(text[text.length-7].value);
+    /*for (var i = 0; i < text.length; i++)
+    {
+        console.log(text[i].value);;
+    }*/
+    /*console.log(text[text.length-2].value);
+    console.log(text[text.length-3].value);
+    console.log(text[text.length-4].value);
+    console.log(text[text.length-5].value);
+    console.log(text[text.length-6].value);
+    console.log(text[text.length-7].value);
+    */
     len_all=text.length;
     //4 5
-    var area=document.getElementsByTagName("input")[len_all-6];
-    area.value=text[text.length-7].value;
+    var area=document.getElementsByTagName("input")[len_all-7];
+    area.value=text[text.length-8].value;
     //var area=document.getElementsByTagName("input")[3];
 }

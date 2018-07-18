@@ -218,6 +218,9 @@
                     <input type="button" value="Save in db" id="btn1"/>
                 </form>
                 <hr>
+                {{--<p><input maxlength="25" size="40" name="textAreaAllCoust" ></p>--}}
+                <input  class="input form-control" id="123" name="textAreaAllCoust"/>
+
                 <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="time" style="width:190px; margin: 0;">
                     <hr>
                     <div class="result">Result:</div>
@@ -411,7 +414,41 @@
                 window.informationToSaveInDB.push(information['data'][result[2]]);
                 console.log(window.informationToSaveInDB);
 
+                 areaCoust=document.getElementsByTagName("textAreaAllCoust");
+                //areaCoust.value=window.informationToSaveInDB[0]['price'];
+                console.log(areaCoust);
+                //var sum=null;
+                //var strCoust;
+
+                if(window.strCoust == undefined)
+                {
+                    window.strCoust='';
+                }
+                if(window.sum == undefined)
+                {
+                    window.sum=0;
+                }
                 //console.log(window.informationToSaveInDB[0]['price']);
+                var areaCoust=document.getElementById('123');
+
+                for (var i = 0; i < informationToSaveInDB.length; i++)
+                {
+                    if (i==0)
+                    {
+                        strCoust+=informationToSaveInDB[i]['price'];
+                    }
+                    else
+                    {
+                        strCoust += "+" + informationToSaveInDB[i]['price'];
+                    }
+                    sum+=informationToSaveInDB[i]['price'];
+                }
+                console.log('555555555555');
+                console.log(window.sum);
+                console.log(window.strCoust);
+                areaCoust.value='';
+                areaCoust.value=window.strCoust;
+
                 coordinatesInform = result[1];
                 if(window.coord == undefined)
                 {
