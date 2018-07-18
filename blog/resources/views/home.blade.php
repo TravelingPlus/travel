@@ -196,7 +196,9 @@
                          class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">Hotel
                     </div>
                 </div>
-                <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form2" action="" method="post"
+
+                <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form2" action=""
+                      method="post"
                       style="margin: 0;">
                     {{ csrf_field() }}
                     <hr class="hr">
@@ -227,6 +229,7 @@
                     <input class="btn btn-primary send form-text text-muted" type="submit" value="Найти" id="btn2">
 
                 </form>
+
                 <script src="js/prepareToSave.js"></script>
 
 
@@ -283,6 +286,9 @@
                     <input type="button" value="Save in db" id="btn1"/>
                 </form>
                 <hr>
+                {{--<p><input maxlength="25" size="40" name="textAreaAllCoust" ></p>--}}
+                <input class="input form-control" id="123" name="textAreaAllCoust"/>
+
                 <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="time" style="width:190px; margin: 0;">
                     <hr>
                     <div class="result">Result:</div>
@@ -377,8 +383,17 @@
             window.dataString = '';
         }
         for (var i = 0; i < window.informationToSaveInDB.length; i++) {
-            /*if (window.dataString=''){
-            window.dataString= '&airline'+i+"="+window.informationToSaveInDB[i]['airline']+
+            window.dataString = '&airline' + "=" + window.informationToSaveInDB[i]['airline'] +
+                '&departure_at' + "=" + window.informationToSaveInDB[i]['departure_at'] +
+                '&destination' + "=" + window.informationToSaveInDB[i]['destination'] +
+                '&expires_at' + "=" + window.informationToSaveInDB[i]['expires_at'] +
+                '&flight_number' + "=" + window.informationToSaveInDB[i]['flight_number'] +
+                '&origin' + "=" + window.informationToSaveInDB[i]['origin'] +
+                '&price' + "=" + window.informationToSaveInDB[i]['price'] +
+                '&return_at' + "=" + window.informationToSaveInDB[i]['return_at'] +
+                '&transfers' + "=" + window.informationToSaveInDB[i]['transfers'];
+
+            /*window.dataString+='&airline'+i+"="+window.informationToSaveInDB[i]['airline']+
                 '&departure_at'+i+"="+window.informationToSaveInDB[i]['departure_at']+
                 '&destination'+i+"="+window.informationToSaveInDB[i]['destination']+
                 '&expires_at'+i+"="+window.informationToSaveInDB[i]['expires_at']+
@@ -386,31 +401,11 @@
                 '&origin'+i+"="+window.informationToSaveInDB[i]['origin']+
                 '&price'+i+"="+window.informationToSaveInDB[i]['price']+
                 '&return_at'+i+"="+window.informationToSaveInDB[i]['return_at']+
-                '&transfers'+i+"="+window.informationToSaveInDB[i]['transfers'];
-            }else{*/
-            window.dataString += '&airline' + i + "=" + window.informationToSaveInDB[i]['airline'] +
-                '&departure_at' + i + "=" + window.informationToSaveInDB[i]['departure_at'] +
-                '&destination' + i + "=" + window.informationToSaveInDB[i]['destination'] +
-                '&expires_at' + i + "=" + window.informationToSaveInDB[i]['expires_at'] +
-                '&flight_number' + i + "=" + window.informationToSaveInDB[i]['flight_number'] +
-                '&origin' + i + "=" + window.informationToSaveInDB[i]['origin'] +
-                '&price' + i + "=" + window.informationToSaveInDB[i]['price'] +
-                '&return_at' + i + "=" + window.informationToSaveInDB[i]['return_at'] +
-                '&transfers' + i + "=" + window.informationToSaveInDB[i]['transfers'];
-            // }
-            /* expires_at: "2018-07-13T20:35:00Z"
- ​​              flight_number: 678
- ​​            origin: "MOW"
-             price: 492
- ​​              return_at: "2018-07-15T06:30:00Z"
- ​​          transfers
-             */
-            //console.log(window.informationToSaveInDB[i]['airline']);
-            //console.log(window.informationToSaveInDB[i]['departure_at']);
-            //console.log(window.informationToSaveInDB[i]['destination']);
+                '&transfers'+i+"="+window.informationToSaveInDB[i]['transfers'];*/
         }
         console.log(dataString);
         console.log(window.informationToSaveInDB);
+
         jQuery.ajax({
             url: url, //url страницы (action_ajax_form.php)
             type: "POST", //метод отправки
@@ -468,6 +463,35 @@
                 window.informationToSaveInDB.push(information['data'][result[2]]);
                 console.log(window.informationToSaveInDB);
 
+                areaCoust = document.getElementsByTagName("textAreaAllCoust");
+                //areaCoust.value=window.informationToSaveInDB[0]['price'];
+                console.log(areaCoust);
+                //var sum=null;
+                //var strCoust;
+
+                if (window.strCoust == undefined) {
+                    window.strCoust = '';
+                }
+                if (window.sum == undefined) {
+                    window.sum = 0;
+                }
+                //console.log(window.informationToSaveInDB[0]['price']);
+                var areaCoust = document.getElementById('123');
+
+                for (var i = 0; i < informationToSaveInDB.length; i++) {
+                    if (i == 0) {
+                        strCoust += informationToSaveInDB[i]['price'];
+                    }
+                    else {
+                        strCoust += "+" + informationToSaveInDB[i]['price'];
+                    }
+                    sum += informationToSaveInDB[i]['price'];
+                }
+                console.log('555555555555');
+                console.log(window.sum);
+                console.log(window.strCoust);
+                areaCoust.value = '';
+                areaCoust.value = window.strCoust;
 
                 coordinatesInform = result[1];
                 if (window.coord == undefined) {
@@ -486,8 +510,8 @@
             }
         });
     }
-</script>
 
+</script>
 <script>
     jQuery.ajaxSetup({
         headers: {
@@ -516,7 +540,17 @@
                 result = jQuery.parseJSON(response);
                 information = jQuery.parseJSON(result[0]);
                 console.log(information);
-                 // console.log(response);
+
+                coordinatesInformPopular = result[1];
+                if (window.coordPopular == undefined) {
+                    window.coordPopular = [];
+                }
+                for (var i = 0; i < coordinatesInformPopular.length; i++) {
+                    window.coordPopular.push(coordinatesInformPopular[i]);
+                }
+                initMap(window.coordPopular);
+                // console.log(response);
+
             },
             error: function (response) { // Данные не отправлены
                 jQuery('#result_form').html('Ошибка. Данные не отправлены.');
@@ -524,7 +558,6 @@
         });
     }
 </script>
-
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhZNdBlfHjvqdPZ4z5Uk3hGeyZYCaXzZY&callback=initMap">
 </script>

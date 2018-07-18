@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Saave;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
+//use App\Save as ExemplarOfModel;
 class HomeController extends Controller
 {
     /**
@@ -28,10 +32,27 @@ class HomeController extends Controller
 
     public function prepareToSave(Request $request)
     {
-        //$d = $request['from'];
-        //print('hiiiiii');
-        //return '777778';
-        return $request;
+
+       // $add = new ExemplarOfModel();
+        $add = new Saave();
+        $add->airline= $request['airline'];
+        $add->price= $request['price'];
+        $add->origin= $request['origin'];
+        $add->destination= $request['destination'];
+        $add->transfers= $request['transfers'];
+        $add->flight_number= $request['flight_number'];
+        $add->departure_at= $request['departure_at'];
+        $add->return_at= $request['return_at'];
+        $add->expires_at= $request['expires_at'];
+        $user = Auth::user();
+        $user_email= $user['email'];
+        $add->email_user= $user_email;
+
+        $add->save();
+        return ($add);
+        //$res=(json_decode($request, true));
+        //return $request['aaaaa'];
+        //return $request;
     }
 
     public function json(Request $request)
@@ -100,6 +121,8 @@ class HomeController extends Controller
         $res = [0 => $codeTickets, 1 => $info, 2 => $departureDate];
         return $res;
         //return $count;
+
+
     }
 
     public function popular(Request $request)
@@ -119,8 +142,8 @@ class HomeController extends Controller
 
 
 //        if ($request->input('popularCities') == 'KhKvLv'){
-            $Kharkov = 'Харьков';
-            $Kiev = 'Киев';
+        $Kharkov = 'Харьков';
+        $Kiev = 'Киев';
 //        }
 //        else {
 //            echo 'Это не популярный маршрут';

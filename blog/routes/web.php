@@ -70,4 +70,11 @@ Route::get('/check', function () {
 
 Route::resource('/home/add', 'AddInformController');
 Route::post('/home/prepareToSave', 'HomeController@prepareToSave')->name('prepareToSave');
+
+Route::resource('/home/add1', 'SaaveController');
+
+//Route::post('/home/save', 'SaveController');
+
+Route::resource('/home/add', 'AddInformController');
+Route::post('/home/prepareToSave', 'HomeController@prepareToSave')->name('prepareToSave');
 Route::post('/home/popular', 'HomeController@popular')->name('popular');

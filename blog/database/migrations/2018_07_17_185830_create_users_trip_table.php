@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TravelFromApi extends Migration
+class CreateUsersTripTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,9 @@ class TravelFromApi extends Migration
      */
     public function up()
     {
-        Schema::create('travel_from_api', function (Blueprint $table) {
+        Schema::create('userstrip', function (Blueprint $table) {
+            $table->increments('id');
+            //$table->timestamps();
             $table->string('origin',40);
             $table->string('destination',40);
             $table->integer('price');
@@ -23,6 +25,8 @@ class TravelFromApi extends Migration
             $table->dateTime('departure_at');
             $table->dateTime('return_at');
             $table->dateTime('expires_at');
+            $table->dateTime('updated_at');
+            $table->dateTime('created_at');
 
         });
     }
@@ -34,7 +38,6 @@ class TravelFromApi extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('travel_from_api');
-
+        Schema::dropIfExists('users_trip');
     }
 }
