@@ -1,0 +1,47 @@
+create table alltrips(
+	id int(5) not null primary key auto_increment,
+	updated_at datetime,
+	created_at datetime,
+	origin varchar(50),
+	destination varchar(50),
+	price int(10),
+	transfers int(10),
+	airline varchar(50),
+	flight_number varchar(40),
+	departure_at datetime,
+	return_at datetime,
+	expires_at datetime
+);
+
+
+create table alltripsuser(
+	id int(5) not null primary key auto_increment,
+	updated_at datetime,
+	created_at datetime,
+	origin varchar(50),
+	destination varchar(50),
+	price int(10),
+	transfers int(10),
+	airline varchar(50),
+	flight_number varchar(40),
+	departure_at varchar(40),
+	return_at varchar(40),
+	expires_at varchar(40)
+);
+
+
+create table all_trips(
+	id int(5) not null primary key auto_increment,
+	updated_at datetime,
+	created_at datetime,
+	origin varchar(50),
+	destination varchar(50),
+	price int(10),
+	transfers int(10),
+	airline varchar(50),
+	flight_number varchar(40),
+	departure_at varchar(40),
+	return_at varchar(40),
+	expires_at varchar(40),
+	email_user varchar(50)
+);

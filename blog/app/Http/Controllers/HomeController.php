@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AllInfo;
 use App\dateTrips;
 use App\Saave;
 use Illuminate\Http\Request;
@@ -58,6 +59,7 @@ class HomeController extends Controller
 
         $exemlarTrips = new Trips();
         $exemlarDateTrips = new dateTrips();
+        $exemlarAllInfo = new AllInfo();
 
         $origin = $request['name'][0];
         $destination = $request['name'][1];
@@ -83,8 +85,17 @@ class HomeController extends Controller
 
         }
 
-        //return $resultTrips;
-        return $flag;
+        //$resultTrips = $exemlarTrips->getInformationApi($request);
+
+        //$exemlarAllInfo->coordinates =   serialize( $resultTrips[1] );
+        //$exemlarAllInfo->info_trip =  $resultTrips[0] ;
+        //$exemlarAllInfo->date_trip = $resultTrips[2];
+        //$exemlarAllInfo->save();
+        //$check=serialize( $resultTrips[1] );
+        //$resss=unserialize( $check );
+
+        //return $resss;
+        //return $flag;
     }
 
     public function popular(Request $request)
