@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,8 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user_info = DB::table('users_info')->where('email', 'dmitryfedoryaka@gmail.com')->first();
-        return view('home', ['first_name' => $user_info->first_name, 'last_name' => $user_info->last_name]);
+        $id = Auth::id();
+        $user = DB::table('users')->where('id', $id)->first();
+        return view('home', ['name' => $user->name]);
     }
 
 

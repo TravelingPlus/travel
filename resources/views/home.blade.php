@@ -240,22 +240,19 @@
                 <input class="bookret" type="date" name="returndate" value="" disabled>
                 <input class="bookfrom" type="text" name="from" value="" disabled>
                 <input class="bookto" type="text" name="to" value="" disabled>
-                <input class="bookfirstname" type="text" name="firstname" value="{{$first_name}}" disabled>
-                <input class="booklastname" type="text" name="lastname" value="{{$last_name}}" disabled>
+                <input class="bookfirstname" type="text" name="firstname" value="{{$name}}" disabled>
                 <input class="bookpersons" type="number" name="persons">
                 <input type="button" value="Отправить">
                 </form>
 
                 <form name="form" id="ajax_form5" action="" method="post">
                 <span style="color:white;">Hotels</span>
-                <input class="bookdeph" type="date" name="departureddate" value="" disabled>
-                <input class="bookreth" type="date" name="returndate" value="" disabled>
-                <input class="bookfromh" type="text" name="from" value="" disabled>
-                <input class="booktoh" type="text" name="to" value="" disabled>
-                <input class="bookfirstnameh" type="text" name="firstname" value="{{$first_name}}" disabled>
-                <input class="booklastnameh" type="text" name="lastname" value="{{$last_name}}" disabled>
-                <input class="bookpersonsh" type="number" name="persons">
-                <input type="button" value="Отправить">
+                {{ csrf_field() }}
+                <input class="booktitle" type="text" name="title" value="">
+                <input class="bookdeph" type="date" name="checkin" value="">
+                <input class="bookreth" type="date" name="checkout" value="">
+                <input class="booklastnameh" type="text" name="name" value="{{$name}}">
+                <input type="button" value="Отправить" id="btn5">
                 </form>
 
 
@@ -498,7 +495,8 @@
             function(){
                 sendAjaxForm4('result_form1', 'ajax_form4', 'http://localhost/lara2/blog/public/home/hotels');
                 jQuery(document).on('click','#hotel li',function(){
-                    alert('uraaaaaaaaaa');
+                    var booktitle = jQuery('#hotel li').text();
+                    jQuery('#ajax_form5 .booktitle').attr('value', booktitle);
                 });
                 return false;
             }
@@ -546,6 +544,39 @@ jQuery(document).on('click','.bron',function(){
         var bookdep = jQuery('.dep').val();
         jQuery('#ajax_form4 .to, .bookdeph').attr('value', bookdep);
     });
+</script>
+
+<script>
+    jQuery.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+    jQuery( document ).ready(function() {
+        jQuery("#btn5").click(
+            function(){
+                sendAjaxForm5('result_form1', 'ajax_form5', 'http://localhost/lara2/blog/public/hotels');
+                return false;
+            }
+        );
+    });
+
+    function sendAjaxForm5(result_form, ajax_form, url) {
+        jQuery.ajax({
+            url:  url, //url страницы (action_ajax_form.php)
+            type:     "POST", //метод отправки
+            dataType: "html", //формат данных
+            data: jQuery("#"+ajax_form).serialize(),  // Сеарилизуем объект
+            success: function(response) { //Данные отправлены успешно
+                alert('uraaaaaaaaa');
+            },
+            error: function(response) { // Данные не отправлены
+                jQuery('#result_form').html('Ошибка. Данные не отправлены.');
+            }
+        });
+    }
 </script>
 
 </div>
