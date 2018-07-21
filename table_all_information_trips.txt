@@ -1,0 +1,8 @@
+create table all_information_trips(
+	id int(5) not null primary key auto_increment,
+	updated_at datetime,
+	created_at datetime,
+	coordinates text,
+	info_trip text, 
+	date_trip varchar(30)
+);
