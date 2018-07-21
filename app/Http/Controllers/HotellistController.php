@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Hotel;
+use App\Hotellist;
 use Illuminate\Http\Request;
 
-class HotelController extends Controller
+class HotellistController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,25 +36,15 @@ class HotelController extends Controller
     public function store(Request $request)
     {
         //
-        $hotels = new Hotel;
-        $hotels->user_name = $request->input('name');
-        $hotels->title = $request->input('title');
-        $hotels->checkin = $request->input('checkin');
-        $hotels->checkout = $request->input('checkout');
-        $hotels->persons = $request->input('persons');
-        $hotels->price = $request->input('price');
-        $hotels->save();
-
-        return $hotels;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Hotel  $hotel
+     * @param  \App\Hotellist  $hotellist
      * @return \Illuminate\Http\Response
      */
-    public function show(Hotel $hotel)
+    public function show(Hotellist $hotellist)
     {
         //
     }
@@ -62,10 +52,10 @@ class HotelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Hotel  $hotel
+     * @param  \App\Hotellist  $hotellist
      * @return \Illuminate\Http\Response
      */
-    public function edit(Hotel $hotel)
+    public function edit(Hotellist $hotellist)
     {
         //
     }
@@ -74,10 +64,10 @@ class HotelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Hotel  $hotel
+     * @param  \App\Hotellist  $hotellist
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hotel $hotel)
+    public function update(Request $request, Hotellist $hotellist)
     {
         //
     }
@@ -85,10 +75,10 @@ class HotelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Hotel  $hotel
+     * @param  \App\Hotellist  $hotellist
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hotel $hotel)
+    public function destroy(Hotellist $hotellist)
     {
         //
     }

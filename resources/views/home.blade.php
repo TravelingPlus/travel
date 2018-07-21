@@ -252,6 +252,8 @@
                 <input class="bookdeph" type="date" name="checkin" value="">
                 <input class="bookreth" type="date" name="checkout" value="">
                 <input class="booklastnameh" type="text" name="name" value="{{$name}}">
+                <input class="bookpersonsh" type="number" name="persons" value="">
+                <input class="bookpriceh" type="number" name="price" value="">
                 <input type="button" value="Отправить" id="btn5">
                 </form>
 
