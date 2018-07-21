@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Saave;
+use App\SaveDataInfoTrip;
 use Illuminate\Http\Request;
-
+use App\Trips;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 //use App\Save as ExemplarOfModel;
 class HomeController extends Controller
@@ -33,20 +35,20 @@ class HomeController extends Controller
     public function prepareToSave(Request $request)
     {
 
-       // $add = new ExemplarOfModel();
+        // $add = new ExemplarOfModel();
         $add = new Saave();
-        $add->airline= $request['airline'];
-        $add->price= $request['price'];
-        $add->origin= $request['origin'];
-        $add->destination= $request['destination'];
-        $add->transfers= $request['transfers'];
-        $add->flight_number= $request['flight_number'];
-        $add->departure_at= $request['departure_at'];
-        $add->return_at= $request['return_at'];
-        $add->expires_at= $request['expires_at'];
+        $add->airline = $request['airline'];
+        $add->price = $request['price'];
+        $add->origin = $request['origin'];
+        $add->destination = $request['destination'];
+        $add->transfers = $request['transfers'];
+        $add->flight_number = $request['flight_number'];
+        $add->departure_at = $request['departure_at'];
+        $add->return_at = $request['return_at'];
+        $add->expires_at = $request['expires_at'];
         $user = Auth::user();
-        $user_email= $user['email'];
-        $add->email_user= $user_email;
+        $user_email = $user['email'];
+        $add->email_user = $user_email;
 
         $add->save();
         return ($add);
@@ -55,8 +57,59 @@ class HomeController extends Controller
         //return $request;
     }
 
+    public function prepareToDataInfoTrip(Request $request)
+    {
+        $resData = new SaveDataInfoTrip();
+
+
+        $count = 0;
+        $i = 0;
+        while (isset($request->input('name')[$i])) {
+            $count++;
+            $i++;
+        }
+
+        $departure = $request->input('name')[$count - 2];
+        $arrival = $request->input('name')[$count - 1];
+        $transfer = 'Fly';
+        $hotel = 'anybody hotel';
+        $user = Auth::user();
+        $user_email = $user['email'];
+
+
+        $res = DB::table('DataInfoTrip')->where('city_of_departure', $departure)->where('email', $user_email)->where('city_of_departure', $departure)->where('city_of_arrival', $arrival)->where('transfer', $transfer)->where('hotel', $hotel)->first();
+
+        $flag = 0;
+        if (isset($res)) {
+            $flag = 1;
+        } else $flag = 0;
+
+        if ($flag == 0) {
+            $resData->city_of_departure = $departure;
+            $resData->city_of_arrival = $arrival;
+            $resData->transfer = $transfer;
+            $resData->hotel = $hotel;
+            $resData->email = $user_email;
+
+            $resData->save();
+        }
+        return $user_email;
+
+    }
+
+
     public function json(Request $request)
     {
+
+        $exemlarTrips = new Trips();
+        $resultTrips = $exemlarTrips->getInformationApi($request);
+
+        $this->prepareToDataInfoTrip($request);
+        return $resultTrips;
+
+        //return $exemlarTrips;
+        /*
+         *
         $currency = $request->input('currency');
 
         if ($currency == 'usd') {
@@ -121,7 +174,7 @@ class HomeController extends Controller
         $res = [0 => $codeTickets, 1 => $info, 2 => $departureDate];
         return $res;
         //return $count;
-
+        */
 
     }
 
@@ -138,7 +191,6 @@ class HomeController extends Controller
         } else {
             echo 'Выберите валюту из выше перечисленных';
         }
-
 
 
 //        if ($request->input('popularCities') == 'KhKvLv'){
@@ -187,7 +239,6 @@ class HomeController extends Controller
                 $longtude2 = $city['coordinates']['lon'];
             }
         }
-
 
 
 //Departures from and to. According to the calendar and without. Currency

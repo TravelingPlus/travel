@@ -30,16 +30,8 @@ function add_input(){
     {
         console.log(text[i].value);
     }*/
-    console.log(text[text.length-8].value);
-    console.log(text[text.length-9].value);
-    console.log(text[text.length-10].value);
-    console.log(text[text.length-11].value);
-    console.log(text[text.length-12].value);
-    console.log(text[text.length-13].value);
-
     len_all=text.length;
-    //4 5
-    var area=document.getElementsByTagName("input")[len_all-8];
-    area.value=text[text.length-9].value;
+    var area=document.getElementsByTagName("input")[len_all-7];
+    area.value=text[text.length-8].value;
     //var area=document.getElementsByTagName("input")[3];
 }

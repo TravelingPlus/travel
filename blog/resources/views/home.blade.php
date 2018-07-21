@@ -447,7 +447,7 @@
             dataType: "html", //формат данных
             data: jQuery("#" + ajax_form).serialize(),  // Сеарилизуем объект
             success: function (response) { //Данные отправлены успешно
-                //console.log(response);
+                console.log(response);
                 result = jQuery.parseJSON(response);
                 information = jQuery.parseJSON(result[0]);
                 console.log(information);
