@@ -13,7 +13,7 @@ function save()
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8888/home/prepareToSave",
+        url: "http://localhost/lara2/blog/public/home/prepareToSave",
         data: dataString,
         success: function(msg){
      		alert(msg);

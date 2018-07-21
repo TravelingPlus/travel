@@ -8,7 +8,7 @@ class Trips extends Model
 {
 
     //protected $table = 'save1';
-    //protected $table = 'all_trips';
+    //protected $table = 'trips';
     public function getInformationApi($request)
     {
         //return '77777';
@@ -72,6 +72,7 @@ class Trips extends Model
 
         //Departures from and to. According to the calendar and without. Currency
         $codeTickets = file_get_contents("https://api.travelpayouts.com/v1/prices/calendar?depart_date={$departureDate}&return_date={$ArrivalDate}&currency={$currency}&origin={$cityOfDeparture}&destination={$cityOfArrival}&calendar_type=departure_date&token=ff86a5b4622103a85185456756893056");
+        //$codeTickets1=json_decode($codeTickets);
         $info = [0 => $latitude1, 1 => $longtude1, 2 => $latitude2, 3 => $longtude2];
         $res = [0 => $codeTickets, 1 => $info, 2 => $departureDate];
         return $res;

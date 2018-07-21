@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\AllInfo;
+use App\dateTrips;
 use App\Saave;
 use App\SaveDataInfoTrip;
 use Illuminate\Http\Request;
@@ -35,7 +37,6 @@ class HomeController extends Controller
     public function prepareToSave(Request $request)
     {
 
-        // $add = new ExemplarOfModel();
         $add = new Saave();
         $add->airline = $request['airline'];
         $add->price = $request['price'];
@@ -52,15 +53,11 @@ class HomeController extends Controller
 
         $add->save();
         return ($add);
-        //$res=(json_decode($request, true));
-        //return $request['aaaaa'];
-        //return $request;
     }
 
     public function prepareToDataInfoTrip(Request $request)
     {
         $resData = new SaveDataInfoTrip();
-
 
         $count = 0;
         $i = 0;
@@ -75,7 +72,6 @@ class HomeController extends Controller
         $hotel = 'anybody hotel';
         $user = Auth::user();
         $user_email = $user['email'];
-
 
         $res = DB::table('DataInfoTrip')->where('city_of_departure', $departure)->where('email', $user_email)->where('city_of_departure', $departure)->where('city_of_arrival', $arrival)->where('transfer', $transfer)->where('hotel', $hotel)->first();
 
@@ -102,80 +98,58 @@ class HomeController extends Controller
     {
 
         $exemlarTrips = new Trips();
-        $resultTrips = $exemlarTrips->getInformationApi($request);
+        $exemlarDateTrips = new dateTrips();
+        $exemlarAllInfo = new AllInfo();
 
         $this->prepareToDataInfoTrip($request);
-        return $resultTrips;
 
-        //return $exemlarTrips;
-        /*
-         *
-        $currency = $request->input('currency');
+        $origin = $request['name'][0];
+        $destination = $request['name'][1];
+        $departure_at = $request['depart'];
+        $return_at = $request['return'];
 
-        if ($currency == 'usd') {
-            $curr = 'usd';
-        } elseif ($currency == 'eur') {
-            $curr = 'eur';
-        } elseif ($currency == 'rub') {
-            $curr = 'rub';
+        $resultWhere = DB::table('info_trip')->where('from_city', $origin)->where('to_city', $destination)->where('date_from', $departure_at)->where('date_to', $return_at)->first();
+
+        $flag = 0;
+        if (isset($resultWhere)) {
+            $flag = 1;
+        } else $flag = 0;
+
+        if ($flag == 0) {
+            $resultTrips = $exemlarTrips->getInformationApi($request);
+            $exemlarDateTrips->to_city = $destination;
+            $exemlarDateTrips->from_city = $origin;
+            $exemlarDateTrips->date_from = $departure_at;
+            $exemlarDateTrips->date_to = $return_at;
+
+            $exemlarDateTrips->save();
+
+            $exemlarAllInfo->coordinates = serialize($resultTrips[1]);
+            $exemlarAllInfo->info_trip = $resultTrips[0];
+            $exemlarAllInfo->date_trip = $resultTrips[2];
+            $exemlarAllInfo->save();
+
+            return $resultTrips;
         } else {
-            echo 'Выберите валюту из выше перечисленных';
+            $resultAllInfo = DB::table('all_information_trips')->where('id', $resultWhere->id)->first();
+            $res = [0 => $resultAllInfo->info_trip, 1 => unserialize($resultAllInfo->coordinates), 2 => $resultAllInfo->date_trip];
+            return $res;
         }
 
-        $departureDate = $request->input('depart');
-        $ArrivalDate = $request->input('return');
 
-        //$rrr = count($request);
-        $count = 0;
-        $i = 0;
-        while (isset($request->input('name')[$i])) {
-            $count++;
-            $i++;
-        }
-        $departurePoint = $request->input('name')[$count - 2];
-        $arrivalPoint = $request->input('name')[$count - 1];
+        //$resultTrips = $exemlarTrips->getInformationApi($request);
+
+        //$exemlarAllInfo->coordinates =   serialize( $resultTrips[1] );
+        //$exemlarAllInfo->info_trip =  $resultTrips[0] ;
+        //$exemlarAllInfo->date_trip = $resultTrips[2];
+        //$exemlarAllInfo->save();
+        //$check=serialize( $resultTrips[1] );
+        //$resss=unserialize( $check );
 
 
-        //City codes in format IATA
-        $codeCity = file_get_contents('https://www.travelpayouts.com/widgets_suggest_params?q=' . urlencode("Из {$departurePoint} в {$arrivalPoint}"));
-        $decodeCity = json_decode($codeCity, true);
-
-
-        $cityOfDeparture = $decodeCity['origin']['iata'];
-        $cityOfArrival = $decodeCity['destination']['iata'];
-
-        $a = $cityOfDeparture;
-        $b = $cityOfArrival;
-
-        //Данные о городах в json формате
-        $cities = file_get_contents("http://api.travelpayouts.com/data/cities.json");
-        $infoOnCities = json_decode($cities, true);
-        $latitude1 = null;
-        $longtude1 = null;
-        $latitude2 = null;
-        $longtude2 = null;
-        foreach ($infoOnCities as $city) {
-            if ($city['code'] == $a) {
-                $latitude1 = $city['coordinates']['lat'];
-                $longtude1 = $city['coordinates']['lon'];
-            }
-        }
-
-        foreach ($infoOnCities as $city) {
-            if ($city['code'] == $b) {
-                $latitude2 = $city['coordinates']['lat'];
-                $longtude2 = $city['coordinates']['lon'];
-            }
-        }
-
-        //Departures from and to. According to the calendar and without. Currency
-        $codeTickets = file_get_contents("https://api.travelpayouts.com/v1/prices/calendar?depart_date={$departureDate}&return_date={$ArrivalDate}&currency={$currency}&origin={$cityOfDeparture}&destination={$cityOfArrival}&calendar_type=departure_date&token=ff86a5b4622103a85185456756893056");
-        $info = [0 => $latitude1, 1 => $longtude1, 2 => $latitude2, 3 => $longtude2];
-        $res = [0 => $codeTickets, 1 => $info, 2 => $departureDate];
-        return $res;
-        //return $count;
-        */
-
+        //$resultWhere->id;
+        //return $resss;
+        //return $flag;
     }
 
     public function popular(Request $request)

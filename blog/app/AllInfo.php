@@ -4,15 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Saave extends Model
+class AllInfo extends Model
 {
     /**
      * Связанная с моделью таблица.
      *
      * @var string
      */
-    //protected $table = 'save1';
-    protected $table = 'all_trips';
-
-
+    protected $table = 'all_information_trips';
 }
