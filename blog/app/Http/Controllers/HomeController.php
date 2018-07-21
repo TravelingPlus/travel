@@ -83,7 +83,19 @@ class HomeController extends Controller
 
             $exemlarDateTrips->save();
 
+            $exemlarAllInfo->coordinates =   serialize( $resultTrips[1] );
+            $exemlarAllInfo->info_trip =  $resultTrips[0] ;
+            $exemlarAllInfo->date_trip = $resultTrips[2];
+            $exemlarAllInfo->save();
+
+            return $resultTrips;
         }
+        else {
+            $resultAllInfo = DB::table('all_information_trips')->where('id',$resultWhere->id)->first();
+            $res = [0 => $resultAllInfo->info_trip, 1 => unserialize($resultAllInfo->coordinates), 2 => $resultAllInfo->date_trip];
+            return $res;
+        }
+
 
         //$resultTrips = $exemlarTrips->getInformationApi($request);
 
@@ -94,6 +106,8 @@ class HomeController extends Controller
         //$check=serialize( $resultTrips[1] );
         //$resss=unserialize( $check );
 
+
+        //$resultWhere->id;
         //return $resss;
         //return $flag;
     }
