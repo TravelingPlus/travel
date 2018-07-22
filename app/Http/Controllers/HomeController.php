@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Hotelsinfo;
+use App\Findhotel;
+use App\Hotellist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -49,11 +52,36 @@ class HomeController extends Controller
 
     public function hotels(Request $request)
     {
-        $to = $request->input('to');
-        $from = $request->input('from');
-        $city = $request->input('city');
-        $res = file_get_contents("http://engine.hotellook.com/api/v2/cache.json?location={$city}&currency=rub&checkIn={$to}&checkOut={$from}&limit=10");
-        return $res;
+        $findhotel = new Findhotel();
+        $hotels = new Hotelsinfo();
+        $list = new Hotellist();
+
+        $to = $request['to'];
+        $from = $request['from'];
+        $city = $request['city'];
+
+        $hoteldb = DB::table('find_hotel')->where('city', $city)->where('checkin', $to)->where('checkout', $from)->first();
+
+        if(isset($hoteldb)){
+            $result = DB::table('hotelslist')->where('id',$hoteldb->id)->first();
+            return $result->hotels;
+        }else{
+            $res = $hotels->Getihotelsinfo($request);
+            $serres = json_decode($res, true);
+            foreach ($serres as $serr){
+                $resultarr[] = $serr['hotelName'];
+            }
+            $resultstr = implode(',', $resultarr);
+            $findhotel->checkin = $to;
+            $findhotel->checkout = $from;
+            $findhotel->city = $city;
+            $findhotel->save();
+
+            $list->hotels = $resultstr;
+            $list->save();
+            return $resultstr;
+        }
+
     }
 
     public function json(Request $request)

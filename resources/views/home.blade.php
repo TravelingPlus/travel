@@ -512,14 +512,14 @@
             dataType: "html", //формат данных
             data: jQuery("#"+ajax_form).serialize(),  // Сеарилизуем объект
             success: function(response) { //Данные отправлены успешно
-                res = jQuery.parseJSON(response);
+                res = response.split(',');
                 for (var i = 0; i < res.length; i++)
                 {
                     var newLi = document.createElement('li');
-                    newLi.innerHTML = res[i].hotelName;
+                    newLi.innerHTML = res[i];
                     hotel.appendChild(newLi);
                 }
-                console.log(res);
+                console.log(response);
             },
             error: function(response) { // Данные не отправлены
                 jQuery('#result_form').html('Ошибка. Данные не отправлены.');
@@ -546,6 +546,8 @@ jQuery(document).on('click','.bron',function(){
         var bookdep = jQuery('.dep').val();
         jQuery('#ajax_form4 .to, .bookdeph').attr('value', bookdep);
     });
+
+
 </script>
 
 <script>

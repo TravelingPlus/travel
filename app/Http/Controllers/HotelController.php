@@ -36,7 +36,7 @@ class HotelController extends Controller
     public function store(Request $request)
     {
         //
-        $hotels = new Hotel;
+        $hotels = new Hotel();
         $hotels->user_name = $request->input('name');
         $hotels->title = $request->input('title');
         $hotels->checkin = $request->input('checkin');
