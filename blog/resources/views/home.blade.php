@@ -370,7 +370,7 @@
     jQuery(document).ready(function () {
         jQuery("#btn1").click(
             function () {
-                sendAjaxForm1('result_form1', 'ajax_form1', 'http://travelmerge/public/home/prepareToSave');
+                sendAjaxForm1('result_form1', 'ajax_form1', 'http://travel-sergey/public/home/prepareToSave');
                 return false;
             }
         );
@@ -434,7 +434,7 @@
     jQuery(document).ready(function () {
         jQuery("#btn").click(
             function () {
-                sendAjaxForm('result_form', 'ajax_form', 'http://travelmerge/public/home/json');
+                sendAjaxForm('result_form', 'ajax_form', 'http://travel-sergey/public/home/json');
                 return false;
             }
         );
@@ -522,7 +522,7 @@
     jQuery(document).ready(function () {
         jQuery("#btn2").click(
             function () {
-                sendAjaxForm2('result_form2', 'ajax_form2', 'http://travelmerge/public/home/popular');
+                sendAjaxForm2('result_form2', 'ajax_form2', 'http://travel-sergey/public/home/popular');
                 return false;
             }
         );

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AllInfo;
 use App\dateTrips;
 use App\Saave;
+use App\SaveDataInfoTrip;
 use Illuminate\Http\Request;
 use App\Trips;
 use Illuminate\Support\Facades\Auth;
@@ -37,22 +38,61 @@ class HomeController extends Controller
     {
 
         $add = new Saave();
-        $add->airline= $request['airline'];
-        $add->price= $request['price'];
-        $add->origin= $request['origin'];
-        $add->destination= $request['destination'];
-        $add->transfers= $request['transfers'];
-        $add->flight_number= $request['flight_number'];
-        $add->departure_at= $request['departure_at'];
-        $add->return_at= $request['return_at'];
-        $add->expires_at= $request['expires_at'];
+        $add->airline = $request['airline'];
+        $add->price = $request['price'];
+        $add->origin = $request['origin'];
+        $add->destination = $request['destination'];
+        $add->transfers = $request['transfers'];
+        $add->flight_number = $request['flight_number'];
+        $add->departure_at = $request['departure_at'];
+        $add->return_at = $request['return_at'];
+        $add->expires_at = $request['expires_at'];
         $user = Auth::user();
-        $user_email= $user['email'];
-        $add->email_user= $user_email;
+        $user_email = $user['email'];
+        $add->email_user = $user_email;
 
         $add->save();
         return ($add);
     }
+
+    public function prepareToDataInfoTrip(Request $request)
+    {
+        $resData = new SaveDataInfoTrip();
+
+        $count = 0;
+        $i = 0;
+        while (isset($request->input('name')[$i])) {
+            $count++;
+            $i++;
+        }
+
+        $departure = $request->input('name')[$count - 2];
+        $arrival = $request->input('name')[$count - 1];
+        $transfer = 'Fly';
+        $hotel = 'anybody hotel';
+        $user = Auth::user();
+        $user_email = $user['email'];
+
+        $res = DB::table('DataInfoTrip')->where('city_of_departure', $departure)->where('email', $user_email)->where('city_of_departure', $departure)->where('city_of_arrival', $arrival)->where('transfer', $transfer)->where('hotel', $hotel)->first();
+
+        $flag = 0;
+        if (isset($res)) {
+            $flag = 1;
+        } else $flag = 0;
+
+        if ($flag == 0) {
+            $resData->city_of_departure = $departure;
+            $resData->city_of_arrival = $arrival;
+            $resData->transfer = $transfer;
+            $resData->hotel = $hotel;
+            $resData->email = $user_email;
+
+            $resData->save();
+        }
+        return $user_email;
+
+    }
+
 
     public function json(Request $request)
     {
@@ -61,20 +101,35 @@ class HomeController extends Controller
         $exemlarDateTrips = new dateTrips();
         $exemlarAllInfo = new AllInfo();
 
+        $this->prepareToDataInfoTrip($request);
+
         $origin = $request['name'][0];
         $destination = $request['name'][1];
         $departure_at = $request['depart'];
         $return_at = $request['return'];
 
+        $resultWhereAllInfo = DB::table('info_trip')->get();
+        foreach ($resultWhereAllInfo as $allInfo) {
+            $time=$allInfo->created_at;
+            $time=strtotime(date('Y-m-d H:i:s')) - strtotime($time);
+            if($time>10){
+                DB::table('info_trip')->where('id',$allInfo->id )->delete();
+                DB::table('all_information_trips')->where('id',$allInfo->id )->delete();
+
+            }
+        }
+
+
         $resultWhere = DB::table('info_trip')->where('from_city', $origin)->where('to_city', $destination)->where('date_from', $departure_at)->where('date_to', $return_at)->first();
 
-        $flag=0;
-        if (isset($resultWhere)){
-            $flag=1;
-        }else $flag=0;
 
-        if ($flag==0)
-        {
+
+        $flag = 0;
+        if (isset($resultWhere)) {
+            $flag = 1;
+        } else $flag = 0;
+
+        if ($flag == 0) {
             $resultTrips = $exemlarTrips->getInformationApi($request);
             $exemlarDateTrips->to_city = $destination;
             $exemlarDateTrips->from_city = $origin;
@@ -83,16 +138,22 @@ class HomeController extends Controller
 
             $exemlarDateTrips->save();
 
-            $exemlarAllInfo->coordinates =   serialize( $resultTrips[1] );
-            $exemlarAllInfo->info_trip =  $resultTrips[0] ;
+            $exemlarAllInfo->coordinates = serialize($resultTrips[1]);
+            $exemlarAllInfo->info_trip = $resultTrips[0];
             $exemlarAllInfo->date_trip = $resultTrips[2];
             $exemlarAllInfo->save();
 
             return $resultTrips;
-        }
-        else {
-            $resultAllInfo = DB::table('all_information_trips')->where('id',$resultWhere->id)->first();
+        } else {
+            $resultAllInfo = DB::table('all_information_trips')->where('id', $resultWhere->id)->first();
             $res = [0 => $resultAllInfo->info_trip, 1 => unserialize($resultAllInfo->coordinates), 2 => $resultAllInfo->date_trip];
+            //return $res;
+            //$time=strtotime($resultWhere->id)) - strtotime($time);
+
+            //$time=$resultWhere->created_at;
+            //$time=strtotime(date('Y-m-d H:i:s')) - strtotime($time);
+
+
             return $res;
         }
 
@@ -125,7 +186,6 @@ class HomeController extends Controller
         } else {
             echo 'Выберите валюту из выше перечисленных';
         }
-
 
 
 //        if ($request->input('popularCities') == 'KhKvLv'){
@@ -174,7 +234,6 @@ class HomeController extends Controller
                 $longtude2 = $city['coordinates']['lon'];
             }
         }
-
 
 
 //Departures from and to. According to the calendar and without. Currency
