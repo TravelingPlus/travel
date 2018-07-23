@@ -129,7 +129,7 @@ class HomeController extends Controller
             $exemlarAllInfo->date_trip = $resultTrips[2];
             $exemlarAllInfo->save();
 
-            return $resultTrips;
+            return $resultTrips[1];
         } else {
             $resultAllInfo = DB::table('all_information_trips')->where('id', $resultWhere->id)->first();
             $res = [0 => $resultAllInfo->info_trip, 1 => unserialize($resultAllInfo->coordinates), 2 => $resultAllInfo->date_trip];
@@ -167,10 +167,15 @@ class HomeController extends Controller
         }
 
 
-//        if ($request->input('popularCities') == 'KhKvLv'){
-        $Kharkov = 'Харьков';
-        $Kiev = 'Киев';
-//        }
+        $citysPopular = $request->input('popularsCities');
+        if ($citysPopular == 'KhKv') {
+            $cityDepart = 'Харьков';
+            $cityArriv = 'Киев';
+        }
+        if ($citysPopular == 'KvLv') {
+            $cityDepart = 'Киев';
+            $cityArriv = 'Львов';
+        }
 //        else {
 //            echo 'Это не популярный маршрут';
 //        }
@@ -179,7 +184,7 @@ class HomeController extends Controller
         $ArrivalDate = $request->input('return');
 
 
-        $codeCity = file_get_contents('https://www.travelpayouts.com/widgets_suggest_params?q=' . urlencode("Из {$Kharkov} в {$Kiev}"));
+        $codeCity = file_get_contents('https://www.travelpayouts.com/widgets_suggest_params?q=' . urlencode("Из {$cityDepart} в {$cityArriv}"));
         $decodeCity = json_decode($codeCity, true);
 
 

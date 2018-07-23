@@ -210,7 +210,8 @@
                     </select>
                     <label>popular ways:</label>
                     <select name="popularsCities" class="form-control">
-                        <option value="KhKvLv">Харьков-Киев-Львов</option>
+                        <option value="KhKv">Харьков-Киев</option>
+                        <option value="KvLv">Киев-Львов</option>
                         {{--<option value="Cities">Cities</option>--}}
                         {{--<option value="Cities">Cities</option>--}}
                     </select>
@@ -530,13 +531,16 @@
 
     function sendAjaxForm2(result_form, ajax_form, url) {
 
+        // location.reload(false);
+        window.coordPopular = []; // обнулить переменную для того что бы можно было выбирать разные популярные маршруты
+
         jQuery.ajax({
             url: url, //url страницы (action_ajax_form.php)
             type: "POST", //метод отправки
             dataType: "html", //формат данных
             data: jQuery("#" + ajax_form).serialize(),  // Сеарилизуем объект
             success: function (response) { //Данные отправлены успешно
-                console.log('yeeeees');
+                // console.log('yeeeees');
                 result = jQuery.parseJSON(response);
                 information = jQuery.parseJSON(result[0]);
                 console.log(information);
