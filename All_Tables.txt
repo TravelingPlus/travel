@@ -65,3 +65,18 @@ CREATE TABLE `popularcities` (
   PRIMARY KEY (`id`)
 );
 
+CREATE TABLE add_informs (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  created_at timestamp NULL DEFAULT NULL,
+  updated_at timestamp NULL DEFAULT NULL,
+  email varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  first_name varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  last_name varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  patronymic varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  visa enum('YES','NO') COLLATE utf8mb4_unicode_ci NOT NULL,
+  sex enum('M','F') COLLATE utf8mb4_unicode_ci NOT NULL,
+  nationality varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  birthday date NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
