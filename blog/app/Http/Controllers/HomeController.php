@@ -108,7 +108,20 @@ class HomeController extends Controller
         $departure_at = $request['depart'];
         $return_at = $request['return'];
 
+        $resultWhereAllInfo = DB::table('info_trip')->get();
+        foreach ($resultWhereAllInfo as $allInfo) {
+            $time = $allInfo->created_at;
+            $time = strtotime(date('Y-m-d H:i:s')) - strtotime($time);
+            if ($time > 10) {
+                DB::table('info_trip')->where('id', $allInfo->id)->delete();
+                DB::table('all_information_trips')->where('id', $allInfo->id)->delete();
+
+            }
+        }
+
+
         $resultWhere = DB::table('info_trip')->where('from_city', $origin)->where('to_city', $destination)->where('date_from', $departure_at)->where('date_to', $return_at)->first();
+
 
         $flag = 0;
         if (isset($resultWhere)) {
@@ -129,10 +142,17 @@ class HomeController extends Controller
             $exemlarAllInfo->date_trip = $resultTrips[2];
             $exemlarAllInfo->save();
 
-            return $resultTrips[1];
+            return $resultTrips;
         } else {
             $resultAllInfo = DB::table('all_information_trips')->where('id', $resultWhere->id)->first();
             $res = [0 => $resultAllInfo->info_trip, 1 => unserialize($resultAllInfo->coordinates), 2 => $resultAllInfo->date_trip];
+            //return $res;
+            //$time=strtotime($resultWhere->id)) - strtotime($time);
+
+            //$time=$resultWhere->created_at;
+            //$time=strtotime(date('Y-m-d H:i:s')) - strtotime($time);
+
+
             return $res;
         }
 
@@ -167,15 +187,21 @@ class HomeController extends Controller
         }
 
 
+        $aaaa1 = DB::table('popularcities')->where('id', '=', '1')->first();
+        $aaaa2 = DB::table('popularcities')->where('id', '=', 2)->first();
+        $aaaa3 = DB::table('popularcities')->where('id', '=', 3)->first();
+
+
         $citysPopular = $request->input('popularsCities');
         if ($citysPopular == 'KhKv') {
-            $cityDepart = 'Харьков';
-            $cityArriv = 'Киев';
+            $cityDepart = $aaaa1->cities;
+            $cityArriv = $aaaa2->cities;
         }
         if ($citysPopular == 'KvLv') {
-            $cityDepart = 'Киев';
-            $cityArriv = 'Львов';
+            $cityDepart = $aaaa2->cities;
+            $cityArriv = $aaaa3->cities;
         }
+//        }
 //        else {
 //            echo 'Это не популярный маршрут';
 //        }
