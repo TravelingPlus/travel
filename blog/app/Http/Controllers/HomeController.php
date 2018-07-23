@@ -110,18 +110,17 @@ class HomeController extends Controller
 
         $resultWhereAllInfo = DB::table('info_trip')->get();
         foreach ($resultWhereAllInfo as $allInfo) {
-            $time=$allInfo->created_at;
-            $time=strtotime(date('Y-m-d H:i:s')) - strtotime($time);
-            if($time>10){
-                DB::table('info_trip')->where('id',$allInfo->id )->delete();
-                DB::table('all_information_trips')->where('id',$allInfo->id )->delete();
+            $time = $allInfo->created_at;
+            $time = strtotime(date('Y-m-d H:i:s')) - strtotime($time);
+            if ($time > 10) {
+                DB::table('info_trip')->where('id', $allInfo->id)->delete();
+                DB::table('all_information_trips')->where('id', $allInfo->id)->delete();
 
             }
         }
 
 
         $resultWhere = DB::table('info_trip')->where('from_city', $origin)->where('to_city', $destination)->where('date_from', $departure_at)->where('date_to', $return_at)->first();
-
 
 
         $flag = 0;
@@ -188,9 +187,20 @@ class HomeController extends Controller
         }
 
 
-//        if ($request->input('popularCities') == 'KhKvLv'){
-        $Kharkov = 'Харьков';
-        $Kiev = 'Киев';
+        $aaaa1 = DB::table('popularcities')->where('id', '=', '1')->first();
+        $aaaa2 = DB::table('popularcities')->where('id', '=', 2)->first();
+        $aaaa3 = DB::table('popularcities')->where('id', '=', 3)->first();
+
+
+        $citysPopular = $request->input('popularsCities');
+        if ($citysPopular == 'KhKv') {
+            $cityDepart = $aaaa1->cities;
+            $cityArriv = $aaaa2->cities;
+        }
+        if ($citysPopular == 'KvLv') {
+            $cityDepart = $aaaa2->cities;
+            $cityArriv = $aaaa3->cities;
+        }
 //        }
 //        else {
 //            echo 'Это не популярный маршрут';
@@ -200,7 +210,7 @@ class HomeController extends Controller
         $ArrivalDate = $request->input('return');
 
 
-        $codeCity = file_get_contents('https://www.travelpayouts.com/widgets_suggest_params?q=' . urlencode("Из {$Kharkov} в {$Kiev}"));
+        $codeCity = file_get_contents('https://www.travelpayouts.com/widgets_suggest_params?q=' . urlencode("Из {$cityDepart} в {$cityArriv}"));
         $decodeCity = json_decode($codeCity, true);
 
 

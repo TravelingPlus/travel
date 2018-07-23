@@ -197,6 +197,7 @@
                     </div>
                 </div>
 
+                <div id="scrol">
                 <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form2" action=""
                       method="post"
                       style="margin: 0;">
@@ -210,7 +211,8 @@
                     </select>
                     <label>popular ways:</label>
                     <select name="popularsCities" class="form-control">
-                        <option value="KhKvLv">Харьков-Киев-Львов</option>
+                        <option value="KhKv">Харьков-Киев</option>
+                        <option value="KvLv">Киев-Львов</option>
                         {{--<option value="Cities">Cities</option>--}}
                         {{--<option value="Cities">Cities</option>--}}
                     </select>
@@ -229,7 +231,10 @@
                     <input class="btn btn-primary send form-text text-muted" type="submit" value="Найти" id="btn2">
 
                 </form>
+                </div>
+                <input type="button" value="Click Me" id="click_me">
 
+                <script src="js/scrolForm.js"></script>
                 <script src="js/prepareToSave.js"></script>
 
 
@@ -319,7 +324,7 @@
         var element = document.getElementById('map');
         var options = {
             zoom: 3,
-            center: {lat: 30.988358, lng: 25.232341}
+            center: {lat: 49.98081, lng: 36.25272}
         };
 
         var myMap = new google.maps.Map(element, options);
@@ -530,12 +535,17 @@
 
     function sendAjaxForm2(result_form, ajax_form, url) {
 
+        // location.reload(false);
+        window.coordPopular = []; // обнулить переменную для того что бы можно было выбирать разные популярные маршруты
+
+
         jQuery.ajax({
             url: url, //url страницы (action_ajax_form.php)
             type: "POST", //метод отправки
             dataType: "html", //формат данных
             data: jQuery("#" + ajax_form).serialize(),  // Сеарилизуем объект
             success: function (response) { //Данные отправлены успешно
+                console.log(response);
                 console.log('yeeeees');
                 result = jQuery.parseJSON(response);
                 information = jQuery.parseJSON(result[0]);
