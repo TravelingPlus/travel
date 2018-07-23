@@ -1,0 +1,57 @@
+
+
+create table all_trips(
+	id int(5) not null primary key auto_increment,
+	updated_at datetime,
+	created_at datetime,
+	origin varchar(50),
+	destination varchar(50),
+	price int(10),
+	transfers int(10),
+	airline varchar(50),
+	flight_number varchar(40),
+	departure_at varchar(40),
+	return_at varchar(40),
+	expires_at varchar(40),
+	email_user varchar(50)
+);
+
+
+create table DataInfoTrip(
+	id int(5) not null primary key auto_increment,
+	email varchar(50),
+	city_of_departure varchar(50),
+	city_of_arrival varchar(50),
+	hotel varchar(50),
+	transfer varchar(50),
+	updated_at datetime,
+	created_at datetime
+);
+
+CREATE TABLE info_trip (
+id int(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+updated_at datetime DEFAULT NULL,
+created_at datetime DEFAULT NULL,
+from_city varchar(50) DEFAULT NULL,
+to_city varchar(50) DEFAULT NULL,
+date_from varchar(50) DEFAULT NULL,
+date_to varchar(50) DEFAULT NULL
+);
+
+create table all_information_trips(
+	id int(5) not null primary key auto_increment,
+	updated_at datetime,
+	created_at datetime,
+	coordinates text,
+	info_trip text, 
+	date_trip varchar(30)
+);
+
+CREATE TABLE `trip_info` (
+  `email` varchar(20) DEFAULT NULL,
+  `history_ticket` varchar(30) DEFAULT NULL,
+  `time_out` DATE,
+  `time_in` DATE,
+  `money` varchar(20) DEFAULT NULL
+);
+
