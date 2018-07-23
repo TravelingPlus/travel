@@ -55,3 +55,13 @@ CREATE TABLE `trip_info` (
   `money` varchar(20) DEFAULT NULL
 );
 
+CREATE TABLE `popularcities` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `cities` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
