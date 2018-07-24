@@ -103,8 +103,19 @@ class HomeController extends Controller
 
         $this->prepareToDataInfoTrip($request);
 
-        $origin = $request['name'][0];
-        $destination = $request['name'][1];
+        $count = 0;
+        $i = 0;
+        while (isset($request->input('name')[$i])) {
+            $count++;
+            $i++;
+        }
+
+        $origin = $request->input('name')[$count - 2];
+        $destination = $request->input('name')[$count - 1];
+
+        //$origin = $request['name'][0];
+        //$destination = $request['name'][1];
+
         $departure_at = $request['depart'];
         $return_at = $request['return'];
 
@@ -112,12 +123,13 @@ class HomeController extends Controller
         foreach ($resultWhereAllInfo as $allInfo) {
             $time = $allInfo->created_at;
             $time = strtotime(date('Y-m-d H:i:s')) - strtotime($time);
-            if ($time > 10) {
+            if ($time > 1000) {
                 DB::table('info_trip')->where('id', $allInfo->id)->delete();
                 DB::table('all_information_trips')->where('id', $allInfo->id)->delete();
 
             }
         }
+
 
 
         $resultWhere = DB::table('info_trip')->where('from_city', $origin)->where('to_city', $destination)->where('date_from', $departure_at)->where('date_to', $return_at)->first();

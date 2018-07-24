@@ -142,6 +142,10 @@
                         <img class="logo-plane" src="img/logo-plane.png" style="width:15%;">
                     </div>
                 </div>
+                <a href="{{ url('add') }}">ADD INFORMATION</a>
+
+                <a href="{{ url('allmartrutes') }}">ALL MY MARTRUTES</a>
+
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
@@ -233,6 +237,10 @@
                 </form>
                 </div>
                 <input type="button" value="Click Me" id="click_me">
+                {{--<a href="{{ route('add') }}">Login</a>--}}
+                {{--<a href="{{ url('add') }}">ADD INFORMATION</a>--}}
+
+                {{--<a href="{{ url('allmartrutes') }}">ALL MY MARTRUTES</a>--}}
 
                 <script src="js/scrolForm.js"></script>
                 <script src="js/prepareToSave.js"></script>
@@ -375,47 +383,19 @@
     jQuery(document).ready(function () {
         jQuery("#btn1").click(
             function () {
-                sendAjaxForm1('result_form1', 'ajax_form1', 'http://travel-sergey/public/home/prepareToSave');
+                sendAjaxForm1('result_form1', 'ajax_form1', 'http://travel-sergey/public/home/allmartrutes');
                 return false;
             }
         );
     });
 
     function sendAjaxForm1(result_form, ajax_form, url) {
-        //var dataString = 'from=' + '7777' + '&to=' + '999999';
-        //var dataString='';
-        if (window.dataString == undefined) {
-            window.dataString = '';
-        }
-        for (var i = 0; i < window.informationToSaveInDB.length; i++) {
-            window.dataString = '&airline' + "=" + window.informationToSaveInDB[i]['airline'] +
-                '&departure_at' + "=" + window.informationToSaveInDB[i]['departure_at'] +
-                '&destination' + "=" + window.informationToSaveInDB[i]['destination'] +
-                '&expires_at' + "=" + window.informationToSaveInDB[i]['expires_at'] +
-                '&flight_number' + "=" + window.informationToSaveInDB[i]['flight_number'] +
-                '&origin' + "=" + window.informationToSaveInDB[i]['origin'] +
-                '&price' + "=" + window.informationToSaveInDB[i]['price'] +
-                '&return_at' + "=" + window.informationToSaveInDB[i]['return_at'] +
-                '&transfers' + "=" + window.informationToSaveInDB[i]['transfers'];
-
-            /*window.dataString+='&airline'+i+"="+window.informationToSaveInDB[i]['airline']+
-                '&departure_at'+i+"="+window.informationToSaveInDB[i]['departure_at']+
-                '&destination'+i+"="+window.informationToSaveInDB[i]['destination']+
-                '&expires_at'+i+"="+window.informationToSaveInDB[i]['expires_at']+
-                '&flight_number'+i+"="+window.informationToSaveInDB[i]['flight_number']+
-                '&origin'+i+"="+window.informationToSaveInDB[i]['origin']+
-                '&price'+i+"="+window.informationToSaveInDB[i]['price']+
-                '&return_at'+i+"="+window.informationToSaveInDB[i]['return_at']+
-                '&transfers'+i+"="+window.informationToSaveInDB[i]['transfers'];*/
-        }
-        console.log(dataString);
-        console.log(window.informationToSaveInDB);
 
         jQuery.ajax({
             url: url, //url страницы (action_ajax_form.php)
             type: "POST", //метод отправки
             dataType: "html", //формат данных
-            data: jQuery("#" + ajax_form).serialize() + dataString,  // Сеарилизуем объект
+            data: jQuery("#" + ajax_form).serialize(),  // Сеарилизуем объект
             success: function (response) { //Данные отправлены успешно
                 console.log('yeeeees');
                 console.log(response);
@@ -480,9 +460,11 @@
                 if (window.sum == undefined) {
                     window.sum = 0;
                 }
+                window.strCoust='';
+                window.sum = 0;
                 //console.log(window.informationToSaveInDB[0]['price']);
                 var areaCoust = document.getElementById('123');
-
+                var k=0;
                 for (var i = 0; i < informationToSaveInDB.length; i++) {
                     if (i == 0) {
                         strCoust += informationToSaveInDB[i]['price'];
@@ -491,13 +473,18 @@
                         strCoust += "+" + informationToSaveInDB[i]['price'];
                     }
                     sum += informationToSaveInDB[i]['price'];
+                    k++;
                 }
-                console.log('555555555555');
+
+                //console.log('555555555555');
                 console.log(window.sum);
                 console.log(window.strCoust);
                 areaCoust.value = '';
-                areaCoust.value = window.strCoust;
-
+                if(k==1) {
+                    areaCoust.value = window.strCoust;
+                }else {
+                    areaCoust.value = window.strCoust + '=' + window.sum;
+                }
                 coordinatesInform = result[1];
                 if (window.coord == undefined) {
                     window.coord = [];
