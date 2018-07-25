@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\AllHotel;
 use Illuminate\Http\Request;
 use App\HotelModel;
+use App\tableHotel;
+use Illuminate\Support\Facades\DB;
 
 class HotelController extends Controller
 {
@@ -30,40 +33,54 @@ class HotelController extends Controller
 
     public function apihotel(Request $request)
     {
-        $currency = $request->input('currency_hotel');
-
-        if ($currency == 'usd') {
-            $curr = 'usd';
-        } elseif ($currency == 'eur') {
-            $curr = 'eur';
-        } elseif ($currency == 'rub') {
-            $curr = 'rub';
-        } else {
-            echo 'Выберите валюту из выше перечисленных';
-        }
-
-        $arrival = $request->input('arrival');
-        $out = $request->input('out');
-        $city = $request->input('city');
-
-        $codeCity = file_get_contents('https://www.travelpayouts.com/widgets_suggest_params?q=' . urlencode("Из {$city} в Харьков"));
-        $decodeCity = json_decode($codeCity, true);
-
-
-        $cityOfDeparture = $decodeCity['origin']['iata'];
-
-
-        $res = file_get_contents("http://engine.hotellook.com/api/v2/cache.json?location={$cityOfDeparture}&language=ru&customerIp&currency={$currency}&checkIn={$arrival}&checkOut={$out}&limit=10");
-        return $res;
-
-    }
-
-    public function InfHotel(Request $request)
-    {
 
         $hot = new HotelModel();
+        $tableHotel = new tableHotel();
+        $exempAllHotel = new AllHotel();
+
+        $hotel = $request->input('city');
+
+
+        $resultWhereAllHotel = DB::table('info_hotel')->get();
+        foreach ($resultWhereAllHotel as $allInfo) {
+            $time = $allInfo->created_at;
+            $time = strtotime(date('Y-m-d H:i:s')) - strtotime($time);
+            if ($time > 1000) {
+                DB::table('info_hotel')->where('id', $allInfo->id)->delete();
+                DB::table('all_information_hotel')->where('id', $allInfo->id)->delete();
+
+            }
+        }
+
+        //$resultWhere = DB::table('info_hotel')->where('city', 'Москва')->first();
+
+        $resultWhere = DB::table('info_hotel')->where('city', $hotel)->first();
+
+        $flag = 0;
+        if (isset($resultWhere)) {
+            $flag = 1;
+        } else $flag = 0;
+
+        if ($flag == 0) {
+            $resultHotel = $hot->getHotelApi($request);
+            $tableHotel->city = $hotel;
+
+            $tableHotel->save();
+
+//            return $resultHotel;
+
+            $exempAllHotel->json_info = serialize($resultHotel[0]);
+
+            $exempAllHotel->save();
+
+            return $resultHotel;
+        } else {
+            $resultAllHotel = DB::table('all_information_hotel')->where('id', $resultWhere->id)->first();
+            $res = [0 => unserialize($resultAllHotel->json_info)];
+
+            return $res;
+        }
 
     }
-
 
 }

@@ -308,50 +308,7 @@
                 <input class="input form-control" id="123" name="textAreaAllCoust"/>
 
                 <br><br>
-                <h1><label>Hotel serch:</label></h1>
 
-                <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form_hotel" action=""
-                      method="post"
-                      style="margin: 0;">
-                    {{ csrf_field() }}
-                    {{--<hr class="hr">--}}
-                    <label>Select currency:</label>
-                    <select name="currency_hotel" class="form-control">
-                        <option value="usd">USD</option>
-                        <option value="rub">RUB</option>
-                        <option value="eur">EUR</option>
-                    </select>
-                    <hr class="hr">
-                    <div class="form-group">
-                        <label>Arrival date:</label>
-                        <input type="date" name="arrival" class="input form-control text-muted" max="2020-12-01"
-                               min="now">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Out of hotel date:</label>
-                        <input type="date" name="out" class="input form-control text-muted" max="2020-12-01"
-                               min="now">
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="inputs">
-                            <label>City:</label>
-                            <input type="search" class="input form-control text-muted" name="city"
-                                   placeholder="city for hotel"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <input class="btn btn-primary send form-text text-muted" type="submit" value="Отправить"
-                                       id="btnHotel">
-                            </div>
-                        </div>
-                    </div>
-                </form>
 
                 <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="time" style="width:190px; margin: 0;">
                     <hr>
@@ -380,6 +337,7 @@
 <script src="js/addForm.js"></script>
 <script>
     function initMap(allCoordinates) {
+        var allCoordinates = 0;
         var element = document.getElementById('map');
         var options = {
             zoom: 3,

@@ -280,7 +280,9 @@
 </div>
 <script src="js/addForm.js"></script>
 <script>
+
     function initMap(allCoordinates) {
+        var allCoordinates = 0;
         var element = document.getElementById('map');
         var options = {
             zoom: 3,
@@ -406,10 +408,10 @@
                 initMap(window.coordPopular);
                 // console.log(response);
                 */
-
             },
             error: function (response) { // Данные не отправлены
                 jQuery('#result_form').html('Ошибка. Данные не отправлены.');
+                console.log(response);
             }
         });
     }
