@@ -11,7 +11,7 @@ class dateTrips extends Model
      *
      * @var string
      */
-    protected $table = 'info_trip';
+    protected $table = 'info_trip_update';
     //protected $table = 'trips';
 
 

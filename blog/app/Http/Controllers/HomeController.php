@@ -119,12 +119,14 @@ class HomeController extends Controller
         $departure_at = $request['depart'];
         $return_at = $request['return'];
 
-        $resultWhereAllInfo = DB::table('info_trip')->get();
+        $currency_check = $request->input('currency');
+
+        $resultWhereAllInfo = DB::table('info_trip_update')->get();
         foreach ($resultWhereAllInfo as $allInfo) {
             $time = $allInfo->created_at;
             $time = strtotime(date('Y-m-d H:i:s')) - strtotime($time);
             if ($time > 1000) {
-                DB::table('info_trip')->where('id', $allInfo->id)->delete();
+                DB::table('info_trip_update')->where('id', $allInfo->id)->delete();
                 DB::table('all_information_trips')->where('id', $allInfo->id)->delete();
 
             }
@@ -132,7 +134,7 @@ class HomeController extends Controller
 
 
 
-        $resultWhere = DB::table('info_trip')->where('from_city', $origin)->where('to_city', $destination)->where('date_from', $departure_at)->where('date_to', $return_at)->first();
+        $resultWhere = DB::table('info_trip_update')->where('curr', $currency_check)->where('from_city', $origin)->where('to_city', $destination)->where('date_from', $departure_at)->where('date_to', $return_at)->first();
 
 
         $flag = 0;
@@ -146,6 +148,7 @@ class HomeController extends Controller
             $exemlarDateTrips->from_city = $origin;
             $exemlarDateTrips->date_from = $departure_at;
             $exemlarDateTrips->date_to = $return_at;
+            $exemlarDateTrips->curr = $currency_check;
 
             $exemlarDateTrips->save();
 
@@ -158,12 +161,6 @@ class HomeController extends Controller
         } else {
             $resultAllInfo = DB::table('all_information_trips')->where('id', $resultWhere->id)->first();
             $res = [0 => $resultAllInfo->info_trip, 1 => unserialize($resultAllInfo->coordinates), 2 => $resultAllInfo->date_trip];
-            //return $res;
-            //$time=strtotime($resultWhere->id)) - strtotime($time);
-
-            //$time=$resultWhere->created_at;
-            //$time=strtotime(date('Y-m-d H:i:s')) - strtotime($time);
-
 
             return $res;
         }
