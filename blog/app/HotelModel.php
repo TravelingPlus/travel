@@ -29,9 +29,7 @@ class HotelModel extends Model
         $codeCity = file_get_contents('https://www.travelpayouts.com/widgets_suggest_params?q=' . urlencode("Из {$city} в Харьков"));
         $decodeCity = json_decode($codeCity, true);
 
-
         $cityOfDeparture = $decodeCity['origin']['iata'];
-
 
         $res = file_get_contents("http://engine.hotellook.com/api/v2/cache.json?location={$cityOfDeparture}&language=ru&customerIp&currency={$currency}&checkIn={$arrival}&checkOut={$out}&limit=10");
         return $res;
