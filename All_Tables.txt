@@ -80,3 +80,61 @@ CREATE TABLE add_informs (
   PRIMARY KEY (`id`)
 );
 
+CREATE TABLE hotel (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  user_name varchar(50),
+  title varchar(50),
+  checkin date,
+  checkout date,
+  person int(10),
+  price int(10),
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE hotellists (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  city varchar(50),
+  name varchar(50),
+  price varchar(50),
+  PRIMARY KEY (`id`)
+);
+
+
+
+
+CREATE TABLE info_trip_update (
+id int(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+updated_at datetime DEFAULT NULL,
+created_at datetime DEFAULT NULL,
+from_city varchar(50) DEFAULT NULL,
+to_city varchar(50) DEFAULT NULL,
+curr varchar(50) DEFAULT NULL,
+date_from varchar(50) DEFAULT NULL,
+date_to varchar(50) DEFAULT NULL
+);
+
+
+
+CREATE TABLE info_hotel (
+id int(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+
+
+
+updated_at datetime DEFAULT NULL,
+created_at datetime DEFAULT NULL,
+from_city varchar(50) DEFAULT NULL,
+to_city varchar(50) DEFAULT NULL,
+curr varchar(50) DEFAULT NULL,
+date_from varchar(50) DEFAULT NULL,
+date_to varchar(50) DEFAULT NULL
+);
+
+
+
+
+
+
+
+
+
+

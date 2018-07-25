@@ -75,7 +75,15 @@ Route::resource('/home/add1', 'SaaveController');
 
 //Route::post('/home/save', 'SaveController');
 
-Route::resource('/home/add', 'AddInformController');
+//Route::get('/home/add', 'AddInformController@create' );
+Route::get('/add', function () {
+    return view('site.add');
+});
+
 Route::post('/home/prepareToSave', 'HomeController@prepareToSave')->name('prepareToSave');
 Route::post('/home/popular', 'HomeController@popular')->name('popular');
-Route::get('/home/allmartrutes', 'MartrutesController@allMartrutes')->name('martrutes');
+Route::get('/allmartrutes', 'MartrutesController@allMartrutes')->name('martrutes');
+Route::post('/home/hotel', 'HomeController@hotel')->name('hotel');
+
+Route::get('/hotel', 'HotelController@index')->name('hotel');
+Route::post('/hotel/apihotel', 'HotelController@apihotel')->name('apihotel');

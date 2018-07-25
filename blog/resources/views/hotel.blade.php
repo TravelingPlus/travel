@@ -188,7 +188,7 @@
                 <div class="icon col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="icons col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <a href="http://localhost:8888/home">
-                            <img src="img/icons8-взлет-самолета-80.png" style="width:100%;">
+                        <img src="img/icons8-взлет-самолета-80.png" style="width:100%;">
                         </a>
                     </div>
                     <div style="padding:0;text-align:center;color: #fff" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
@@ -196,116 +196,12 @@
                     </div>
                 </div>
                 <div class="icon col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="icons col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <a href="http://localhost:8888/hotel">
-                            <img src="img/icons8-кровать-80.png" style="width:100%;">
-                        </a>
-                    </div>
+                    <div class="icons col-lg-12 col-md-12 col-sm-12 col-xs-12"><img src="img/icons8-кровать-80.png"
+                                                                                    style="width:100%;"></div>
                     <div style="padding:0;color: #fff;text-align:center;"
                          class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">Hotel
                     </div>
                 </div>
-
-                <div id="scrol">
-                    <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form2" action=""
-                          method="post"
-                          style="margin: 0;">
-                        {{ csrf_field() }}
-                        <hr class="hr">
-                        <label>Select currency for popular cities:</label>
-                        <select name="currency" class="form-control">
-                            <option value="usd">USD</option>
-                            <option value="rub">RUB</option>
-                            <option value="eur">EUR</option>
-                        </select>
-                        <label>popular ways:</label>
-                        <select name="popularsCities" class="form-control">
-                            <option value="KhKv">Харьков-Киев</option>
-                            <option value="KvLv">Киев-Львов</option>
-                            {{--<option value="Cities">Cities</option>--}}
-                            {{--<option value="Cities">Cities</option>--}}
-                        </select>
-                        <hr class="hr">
-                        <div class="form-group">
-                            <label>Depart date:</label>
-                            <input type="date" name="depart" class="input form-control text-muted" max="2020-12-01"
-                                   min="now">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Return date:</label>
-                            <input type="date" class="input form-control text-muted" name="return" max="2020-12-01"
-                                   min="now">
-                        </div>
-                        <input class="btn btn-primary send form-text text-muted" type="submit" value="Найти" id="btn2">
-
-                    </form>
-                </div>
-                <input type="button" value="Click Me" id="click_me">
-                {{--<a href="{{ route('add') }}">Login</a>--}}
-                {{--<a href="{{ url('add') }}">ADD INFORMATION</a>--}}
-
-                {{--<a href="{{ url('allmartrutes') }}">ALL MY MARTRUTES</a>--}}
-
-                <script src="js/scrolForm.js"></script>
-                <script src="js/prepareToSave.js"></script>
-
-
-                <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form" action="" method="post"
-                      style="margin: 0;">
-                    {{ csrf_field() }}
-                    <hr class="hr">
-                    <label>Select currency:</label>
-                    <select name="currency" class="form-control">
-                        <option value="usd">USD</option>
-                        <option value="rub">RUB</option>
-                        <option value="eur">EUR</option>
-                    </select>
-                    <hr class="hr">
-                    <div class="form-group">
-                        <label>Depart date:</label>
-                        <input type="date" name="depart" class="input form-control text-muted" max="2020-12-01"
-                               min="now">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Return date:</label>
-                        <input type="date" class="input form-control text-muted" name="return" max="2020-12-01"
-                               min="now">
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="inputs">
-                            <label>Go from:</label>
-                            <input type="search" class="input form-control text-muted" name="name[]"
-                                   placeholder="from"/>
-                            <label>To:</label>
-                            <input type="search" class="input form-control" name="name[]" placeholder="to"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <input class="btn btn-primary send form-text text-muted" type="submit" value="Отправить"
-                                       id="btn">
-                            </div>
-                            <div class="col-lg-8">
-                                <input type="button" class="btn btn-success add form-text text-muted"
-                                       onclick="add_input()" value="Добавить"/>
-                            </div>
-
-                        </div>
-                    </div>
-                </form>
-                {{--<form name="form" id="ajax_form1" action="" method="post">--}}
-                {{--{{ csrf_field() }}--}}
-                {{--<input type="button" value="Save in db" id="btn1"/>--}}
-                {{--</form>--}}
-                <hr>
-                {{--<p><input maxlength="25" size="40" name="textAreaAllCoust" ></p>--}}
-                <input class="input form-control" id="123" name="textAreaAllCoust"/>
 
                 <br><br>
                 <h1><label>Hotel serch:</label></h1>
@@ -349,6 +245,11 @@
                                 <input class="btn btn-primary send form-text text-muted" type="submit" value="Отправить"
                                        id="btnHotel">
                             </div>
+                            {{--<div class="col-lg-8">--}}
+                            {{--<input type="button" class="btn btn-success add form-text text-muted"--}}
+                            {{--onclick="add_input()" value="Добавить"/>--}}
+                            {{--</div>--}}
+
                         </div>
                     </div>
                 </form>
@@ -459,102 +360,7 @@
 {{--</script>--}}
 
 
-<script>
-    jQuery.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
 
-
-    jQuery(document).ready(function () {
-        jQuery("#btn").click(
-            function () {
-                sendAjaxForm('result_form', 'ajax_form', 'http://localhost:8888/home/json');
-                return false;
-            }
-        );
-    });
-
-    function sendAjaxForm(result_form, ajax_form, url) {
-        jQuery.ajax({
-            url: url, //url страницы (action_ajax_form.php)
-            type: "POST", //метод отправки
-            dataType: "html", //формат данных
-            data: jQuery("#" + ajax_form).serialize(),  // Сеарилизуем объект
-            success: function (response) { //Данные отправлены успешно
-                console.dir(response);
-                result = jQuery.parseJSON(response);
-                information = jQuery.parseJSON(result[0]);
-                console.log(information);
-
-                //informationToSaveInDB=information['data'];
-                //console.log(informationToSaveInDB);
-                //console.log(result[2]);
-                //console.log(informationToSaveInDB[result[2]]['origin']);
-
-                if (window.informationToSaveInDB == undefined) {
-                    window.informationToSaveInDB = [];
-                }
-                window.informationToSaveInDB.push(information['data'][result[2]]);
-                console.log(window.informationToSaveInDB);
-
-                areaCoust = document.getElementsByTagName("textAreaAllCoust");
-                //areaCoust.value=window.informationToSaveInDB[0]['price'];
-                console.log(areaCoust);
-                //var sum=null;
-                //var strCoust;
-
-                if (window.strCoust == undefined) {
-                    window.strCoust = '';
-                }
-                if (window.sum == undefined) {
-                    window.sum = 0;
-                }
-                window.strCoust = '';
-                window.sum = 0;
-                //console.log(window.informationToSaveInDB[0]['price']);
-                var areaCoust = document.getElementById('123');
-                var k = 0;
-                for (var i = 0; i < informationToSaveInDB.length; i++) {
-                    if (i == 0) {
-                        strCoust += informationToSaveInDB[i]['price'];
-                    }
-                    else {
-                        strCoust += "+" + informationToSaveInDB[i]['price'];
-                    }
-                    sum += informationToSaveInDB[i]['price'];
-                    k++;
-                }
-
-                //console.log('555555555555');
-                console.log(window.sum);
-                console.log(window.strCoust);
-                areaCoust.value = '';
-                if (k == 1) {
-                    areaCoust.value = window.strCoust;
-                } else {
-                    areaCoust.value = window.strCoust + '=' + window.sum;
-                }
-                coordinatesInform = result[1];
-                if (window.coord == undefined) {
-                    window.coord = [];
-                }
-                for (var i = 0; i < coordinatesInform.length; i++) {
-                    window.coord.push(coordinatesInform[i]);
-                }
-                document.getElementById("min").innerHTML = JSON.stringify(information);
-                //initMap(coordinatesInform);
-                initMap(window.coord);
-                //jQuery('#result_form').html('ОТ: '+result.a+'<br>До: '+result.b);
-            },
-            error: function (response) { // Данные не отправлены
-                jQuery('#result_form').html('Ошибка. Данные не отправлены.');
-            }
-        });
-    }
-
-</script>
 <script>
     jQuery.ajaxSetup({
         headers: {
@@ -563,15 +369,15 @@
     });
 
     jQuery(document).ready(function () {
-        jQuery("#btn2").click(
+        jQuery("#btnHotel").click(
             function () {
-                sendAjaxForm2('result_form2', 'ajax_form2', 'http://localhost:8888/home/popular');
+                sendAjaxFormHotel('result_formHotel', 'ajax_form_hotel', 'http://localhost:8888/hotel/apihotel');
                 return false;
             }
         );
     });
 
-    function sendAjaxForm2(result_form, ajax_form, url) {
+    function sendAjaxFormHotel(result_form, ajax_form, url) {
 
         // location.reload(false);
         window.coordPopular = []; // обнулить переменную для того что бы можно было выбирать разные популярные маршруты
@@ -585,8 +391,9 @@
             success: function (response) { //Данные отправлены успешно
                 console.log(response);
                 console.log('yeeeees');
-                result = jQuery.parseJSON(response);
-                information = jQuery.parseJSON(result[0]);
+                var result = jQuery.parseJSON(response);
+                console.log(result);
+                /*information = jQuery.parseJSON(result[0]);
                 console.log(information);
 
                 coordinatesInformPopular = result[1];
@@ -598,6 +405,7 @@
                 }
                 initMap(window.coordPopular);
                 // console.log(response);
+                */
 
             },
             error: function (response) { // Данные не отправлены
@@ -606,7 +414,6 @@
         });
     }
 </script>
-
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhZNdBlfHjvqdPZ4z5Uk3hGeyZYCaXzZY&callback=initMap">
 </script>

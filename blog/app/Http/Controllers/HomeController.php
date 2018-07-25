@@ -103,24 +103,37 @@ class HomeController extends Controller
 
         $this->prepareToDataInfoTrip($request);
 
-        $origin = $request['name'][0];
-        $destination = $request['name'][1];
+        $count = 0;
+        $i = 0;
+        while (isset($request->input('name')[$i])) {
+            $count++;
+            $i++;
+        }
+
+        $origin = $request->input('name')[$count - 2];
+        $destination = $request->input('name')[$count - 1];
+
+        //$origin = $request['name'][0];
+        //$destination = $request['name'][1];
+
         $departure_at = $request['depart'];
         $return_at = $request['return'];
 
-        $resultWhereAllInfo = DB::table('info_trip')->get();
+        $currency_check = $request->input('currency');
+
+        $resultWhereAllInfo = DB::table('info_trip_update')->get();
         foreach ($resultWhereAllInfo as $allInfo) {
             $time = $allInfo->created_at;
             $time = strtotime(date('Y-m-d H:i:s')) - strtotime($time);
-            if ($time > 10) {
-                DB::table('info_trip')->where('id', $allInfo->id)->delete();
+            if ($time > 1000) {
+                DB::table('info_trip_update')->where('id', $allInfo->id)->delete();
                 DB::table('all_information_trips')->where('id', $allInfo->id)->delete();
 
             }
         }
 
 
-        $resultWhere = DB::table('info_trip')->where('from_city', $origin)->where('to_city', $destination)->where('date_from', $departure_at)->where('date_to', $return_at)->first();
+        $resultWhere = DB::table('info_trip_update')->where('curr', $currency_check)->where('from_city', $origin)->where('to_city', $destination)->where('date_from', $departure_at)->where('date_to', $return_at)->first();
 
 
         $flag = 0;
@@ -134,6 +147,7 @@ class HomeController extends Controller
             $exemlarDateTrips->from_city = $origin;
             $exemlarDateTrips->date_from = $departure_at;
             $exemlarDateTrips->date_to = $return_at;
+            $exemlarDateTrips->curr = $currency_check;
 
             $exemlarDateTrips->save();
 
@@ -146,30 +160,10 @@ class HomeController extends Controller
         } else {
             $resultAllInfo = DB::table('all_information_trips')->where('id', $resultWhere->id)->first();
             $res = [0 => $resultAllInfo->info_trip, 1 => unserialize($resultAllInfo->coordinates), 2 => $resultAllInfo->date_trip];
-            //return $res;
-            //$time=strtotime($resultWhere->id)) - strtotime($time);
-
-            //$time=$resultWhere->created_at;
-            //$time=strtotime(date('Y-m-d H:i:s')) - strtotime($time);
-
 
             return $res;
         }
 
-
-        //$resultTrips = $exemlarTrips->getInformationApi($request);
-
-        //$exemlarAllInfo->coordinates =   serialize( $resultTrips[1] );
-        //$exemlarAllInfo->info_trip =  $resultTrips[0] ;
-        //$exemlarAllInfo->date_trip = $resultTrips[2];
-        //$exemlarAllInfo->save();
-        //$check=serialize( $resultTrips[1] );
-        //$resss=unserialize( $check );
-
-
-        //$resultWhere->id;
-        //return $resss;
-        //return $flag;
     }
 
     public function popular(Request $request)
@@ -252,6 +246,36 @@ class HomeController extends Controller
         $res = [0 => $codeTickets, 1 => $info];
         return $res;
 
+
+    }
+
+    public function apihotel(Request $request)
+    {
+        $currency = $request->input('currency_hotel');
+
+        if ($currency == 'usd') {
+            $curr = 'usd';
+        } elseif ($currency == 'eur') {
+            $curr = 'eur';
+        } elseif ($currency == 'rub') {
+            $curr = 'rub';
+        } else {
+            echo 'Выберите валюту из выше перечисленных';
+        }
+
+        $arrival = $request->input('arrival');
+        $out = $request->input('out');
+        $city = $request->input('city');
+
+        $codeCity = file_get_contents('https://www.travelpayouts.com/widgets_suggest_params?q=' . urlencode("Из {$city} в Киев"));
+        $decodeCity = json_decode($codeCity, true);
+
+
+        $cityOfDeparture = $decodeCity['origin']['iata'];
+
+
+        $res = file_get_contents("http://engine.hotellook.com/api/v2/cache.json?location={$cityOfDeparture}&language=ru&customerIp&currency={$currency}&checkIn={$arrival}&checkOut={$out}&limit=10");
+        return $res;
 
     }
 
