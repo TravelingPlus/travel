@@ -294,10 +294,10 @@
                         </div>
                     </div>
                 </form>
-                <form name="form" id="ajax_form1" action="" method="post">
-                    {{ csrf_field() }}
-                    <input type="button" value="Save in db" id="btn1"/>
-                </form>
+                {{--<form name="form" id="ajax_form1" action="" method="post">--}}
+                    {{--{{ csrf_field() }}--}}
+                    {{--<input type="button" value="Save in db" id="btn1"/>--}}
+                {{--</form>--}}
                 <hr>
                 {{--<p><input maxlength="25" size="40" name="textAreaAllCoust" ></p>--}}
                 <input class="input form-control" id="123" name="textAreaAllCoust"/>
@@ -372,40 +372,40 @@
 </script>
 
 
-<script>
-    jQuery.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-        }
-    });
+{{--<script>--}}
+    {{--jQuery.ajaxSetup({--}}
+        {{--headers: {--}}
+            {{--'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')--}}
+        {{--}--}}
+    {{--});--}}
 
 
-    jQuery(document).ready(function () {
-        jQuery("#btn1").click(
-            function () {
-                sendAjaxForm1('result_form1', 'ajax_form1', 'http://travel-sergey/public/home/allmartrutes');
-                return false;
-            }
-        );
-    });
+    {{--jQuery(document).ready(function () {--}}
+        {{--jQuery("#btn1").click(--}}
+            {{--function () {--}}
+                {{--sendAjaxForm1('result_form1', 'ajax_form1', 'http://travel-sergey/public/home/allmartrutes');--}}
+                {{--return false;--}}
+            {{--}--}}
+        {{--);--}}
+    {{--});--}}
 
-    function sendAjaxForm1(result_form, ajax_form, url) {
+    {{--function sendAjaxForm1(result_form, ajax_form, url) {--}}
 
-        jQuery.ajax({
-            url: url, //url страницы (action_ajax_form.php)
-            type: "POST", //метод отправки
-            dataType: "html", //формат данных
-            data: jQuery("#" + ajax_form).serialize(),  // Сеарилизуем объект
-            success: function (response) { //Данные отправлены успешно
-                console.log('yeeeees');
-                console.log(response);
-            },
-            error: function (response) { // Данные не отправлены
-                jQuery('#result_form').html('Ошибка. Данные не отправлены.');
-            }
-        });
-    }
-</script>
+        {{--jQuery.ajax({--}}
+            {{--url: url, //url страницы (action_ajax_form.php)--}}
+            {{--type: "POST", //метод отправки--}}
+            {{--dataType: "html", //формат данных--}}
+            {{--data: jQuery("#" + ajax_form).serialize(),  // Сеарилизуем объект--}}
+            {{--success: function (response) { //Данные отправлены успешно--}}
+                {{--console.log('yeeeees');--}}
+                {{--console.log(response);--}}
+            {{--},--}}
+            {{--error: function (response) { // Данные не отправлены--}}
+                {{--jQuery('#result_form').html('Ошибка. Данные не отправлены.');--}}
+            {{--}--}}
+        {{--});--}}
+    {{--}--}}
+{{--</script>--}}
 
 
 <script>

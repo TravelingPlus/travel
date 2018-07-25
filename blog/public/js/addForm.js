@@ -31,7 +31,7 @@ function add_input(){
         console.log(text[i].value);
     }*/
     len_all=text.length;
-    var area=document.getElementsByTagName("input")[len_all-7];
-    area.value=text[text.length-8].value;
+    var area=document.getElementsByTagName("input")[len_all-5];
+    area.value=text[text.length-6].value;
     //var area=document.getElementsByTagName("input")[3];
 }
