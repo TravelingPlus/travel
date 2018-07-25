@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class HotelModel extends Model
 {
 
-
     public function getHotelApi($request){
 
         $currency = $request->input('currency_hotel');
