@@ -337,7 +337,6 @@
 <script src="js/addForm.js"></script>
 <script>
     function initMap(allCoordinates) {
-        var allCoordinates = 0;
         var element = document.getElementById('map');
         var options = {
             zoom: 3,
