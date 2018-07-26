@@ -1,5 +1,4 @@
 
-
 create table all_trips(
 	id int(5) not null primary key auto_increment,
 	updated_at datetime,
@@ -15,7 +14,6 @@ create table all_trips(
 	expires_at varchar(40),
 	email_user varchar(50)
 );
-
 
 create table DataInfoTrip(
 	id int(5) not null primary key auto_increment,
@@ -100,8 +98,6 @@ CREATE TABLE hotellists (
 );
 
 
-
-
 CREATE TABLE info_trip_update (
 id int(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 updated_at datetime DEFAULT NULL,
@@ -112,7 +108,6 @@ curr varchar(50) DEFAULT NULL,
 date_from varchar(50) DEFAULT NULL,
 date_to varchar(50) DEFAULT NULL
 );
-
 
 
 CREATE TABLE info_hotel (
@@ -128,11 +123,3 @@ json_info text DEFAULT NULL,
 updated_at datetime DEFAULT NULL,
 created_at datetime DEFAULT NULL
 );
-
-
-
-
-
-
-
-
