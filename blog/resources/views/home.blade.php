@@ -222,6 +222,11 @@
                         <select name="popularsCities" class="form-control">
                             <option value="KhKv">Харьков-Киев</option>
                             <option value="KvLv">Киев-Львов</option>
+                            <option value="KvOd">Киев-Одесса</option>
+                            <option value="NyMi">New York-Miami</option>
+                            <option value="MoLn">Москва-Лондон</option>
+
+
                             {{--<option value="Cities">Cities</option>--}}
                             {{--<option value="Cities">Cities</option>--}}
                         </select>
