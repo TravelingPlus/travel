@@ -181,42 +181,20 @@ class HomeController extends Controller
         }
 
 
-        $kharkov = DB::table('popularcities')->where('id', '=', 1)->first();
-        $kiev = DB::table('popularcities')->where('id', '=', 2)->first();
-        $lvov = DB::table('popularcities')->where('id', '=', 3)->first();
-        $odessa = DB::table('popularcities')->where('id', '=', 4)->first();
-        $new_york = DB::table('popularcities')->where('id', '=', 5)->first();
-        $miami = DB::table('popularcities')->where('id', '=', 6)->first();
-        $moscow = DB::table('popularcities')->where('id', '=', 7)->first();
-        $london = DB::table('popularcities')->where('id', '=', 8)->first();
+        $aaaa1 = DB::table('popularcities')->where('id', '=', '1')->first();
+        $aaaa2 = DB::table('popularcities')->where('id', '=', 2)->first();
+        $aaaa3 = DB::table('popularcities')->where('id', '=', 3)->first();
 
 
         $citysPopular = $request->input('popularsCities');
         if ($citysPopular == 'KhKv') {
-            $cityDepart = $kharkov->cities;
-            $cityArriv = $kiev->cities;
+            $cityDepart = $aaaa1->cities;
+            $cityArriv = $aaaa2->cities;
         }
         if ($citysPopular == 'KvLv') {
-            $cityDepart = $kiev->cities;
-            $cityArriv = $lvov->cities;
+            $cityDepart = $aaaa2->cities;
+            $cityArriv = $aaaa3->cities;
         }
-
-        if ($citysPopular == 'KvOd') {
-            $cityDepart = $kiev->cities;
-            $cityArriv = $odessa->cities;
-        }
-
-        if ($citysPopular == 'NyMi') {
-            $cityDepart = $new_york->cities;
-            $cityArriv = $miami->cities;
-        }
-
-        if ($citysPopular == 'MoLn') {
-            $cityDepart = $moscow->cities;
-            $cityArriv = $london->cities;
-        }
-
-
 //        }
 //        else {
 //            echo 'Это не популярный маршрут';

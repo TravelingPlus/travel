@@ -1,346 +1,292 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
+    <title>Trip-optimizer</title>
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="media.css">
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="myoiQq8CyPGrq0b15KNZFqtpnyOAJaazVs85F6IF">
-
-    <title>Laravel</title>
 
     <!-- Styles -->
-    <link href="css/app.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <style>
-        body {
-            background-image: url('http://www.hopeindustrysglobaltravels.com/Banner_2.jpg');
-        }
-
-        #map {
-            width: 100%;
-            height: 600px;
-        }
-
-        .add {
-            margin-left: 18px;
-        }
-
-        .send {
-            margin-left: -2px;
-        }
-
-        .result {
-            font-size: 20px;
-            color: #fff;
-            margin-bottom: 15px;
-        }
-
-        .form-control {
-            margin-top: 0;
-            width: 78px;
-        }
-
-        .logo-plane {
-            margin-top: 10px;
-        }
-
-        label {
-            color: #fff;
-            margin-top: 5px;
-        }
-
-        .input {
-            margin-top: 0;
-            width: 160px;
-        }
-
-        .icon {
-            cursor: pointer;
-        }
-
-        .navbar {
-            background: linear-gradient(to left, #341348 20%, #6fbbe6 50%, #341348 80%);
-        }
-
-        .icons {
-            background-color: rgba(255, 255, 255, 1);
-            border: 1px solid #fff;
-        }
-
-        .icons:hover {
-            border: 1px solid #6fbbe6;
-        }
-
-        .logo-text {
-
-            font-size: 20px;
-            color: #fff;
-        }
-
-        .link:hover {
-            margin-top: 15px;
-            text-decoration: none;
-        }
-
-        .user .dropdown-toggle {
-            color: #fff;
-        }
-
-        .caret {
-            color: #fff;
-        }
-
-        .footer {
-            border-top: 1px solid #fff;
-            background: #280f38;
-            width: 100%;
-            height: 60px;
-        }
-
-        .content {
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .content div:first-child {
-            margin-top: 7px;
-        }
-
-        .my-content {
-            padding: 20px 20px 0 0;
-            margin-bottom: 20px;
-            background-color: rgba(55, 55, 55, 0.7);
-        }
-
-        .hr {
-            width: 160px;
-        }
-
-    </style>
 </head>
 <body>
-<div id="app">
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="row">
-                <div class=" col-lg-4 col-md-4 col-sm-12 col-xs-12 navbar-header">
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <!-- Branding Image -->
-                    <div>
-                        <a class="link" href="http://trip.trip.php.a-level.com.ua">
-                            <span class="logo-text">Trip optimizer</span>
-                        </a>
-                        <img class="logo-plane" src="img/logo-plane.png" style="width:15%;">
-                    </div>
+<header class="header_section">
+        <div class="inner_wrapper">
+            <section class="header_links">
+                <div class="logo" style="width: 30%;">
+                        <img src="img/trip optimizer logo.png"" alt="I-travel logo">
+                        <span class="haa">Trip-optimizer</span>
                 </div>
-                <a href="{{ url('add') }}">ADD INFORMATION</a>
-
-                <a href="{{ url('allmartrutes') }}">ALL MY MARTRUTES</a>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        <li class="dropdown">
+                <nav>
+                    <ul class="main_navigation nav">
+                        <li class="main_navigation_item">
+                            Перелеты
+                        </li>
+                        <li class="main_navigation_item">
+                            Отели
+                        </li>
+                        <li class="main_navigation_item">
+                            Отзывы
+                        </li>
+                        <li class="main_navigation_item">
+                            <input class="clos" type="button" value="Популярное" id="click_me">
+                        </li>
+                        <li onClick="openCollapse()" id="dr-panel" style="position: relative;">
                             <a href="#" class=" dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false" aria-haspopup="true" v-pre style="color: #fff">
+                               aria-expanded="false" aria-haspopup="true" v-pre style="position: absolute; left: 225px; color: #fff">
                                 <span class="caret"></span>
                             </a>
-                            <ul class="dropdown-menu">
-                                <li>
+                            <ul class="navbar dropdown-menu"  style="display: none; background: #341348; width: 250px;top: 23px; left: 11px;">
+                                <li style="margin: 0 0 5px 7px; width: 250px;">
+                                    <div class="phone" style="width: 250px;margin: 0;">
+                                        <a href="{{ url('add') }}" style=" text-decoration: none;">Информация пользователя</a>
+                                    </div>
+                                    
+                                </li>
+                                <li style="margin: 0 0 5px 7px; width: 250px;">
+                                    <div class="phone" style="width: 250px;margin: 0;">
+                                    <a href="{{ url('allmartrutes') }}" style=" text-decoration: none;">Мои маршруты</a>
+                                </div>
+                                    </li>
+                                    <li style="margin: 0 0 3px 7px; width: 250px;">
+                                        <div class="phone" style="width: 250px; margin: 0;">
                                     <a href="http://trip.trip.php.a-level.com.ua/logout"
                                        onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
+                                                 document.getElementById('logout-form').submit();" style=" text-decoration: none;">
+                                        Выйти
+                                    </a></div></li>
                                     <form id="logout-form" action="http://trip.trip.php.a-level.com.ua/logout"
                                           method="POST" style="display: none;">
                                         <input type="hidden" name="_token"
                                                value="myoiQq8CyPGrq0b15KNZFqtpnyOAJaazVs85F6IF">
                                     </form>
-                                </li>
+                                
                             </ul>
                         </li>
                     </ul>
+                </nav>
+            </section>
+            <section class="first_screen_content">
+                <div class="banner">
+                    <div class="text_content">
+                        <h2 class="main_header">Открывай мир заново!</h2>
+                        <p class="paragraph" style="font-style: italic;">Сотни стран ждут, когда вы посетите их! Не откладывайте путешествие на завтра, если можно полететь уже сегодня!</p>
+                    </div>
+                    <img src="imga/banner_backpack.png" alt="Backpack">
+                    <button class="btn_btn_inverse_angled">Исследуй</button>
                 </div>
-            </div>
+            </section>
         </div>
-</div>
-</nav>
+    </header>
 
-<div class="container">
+    <div class="container">
     <div class="my-content">
+        <section class="offer_description" id="experiance">
+                <h2 class="main_header">Мы предлагаем</h2>
+                <h3 class="subheader">путешествие вашей мечты!</h3>
+        </section>
+        <hr>
         <div class="row">
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                <div class="icon col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="icons col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <a href="http://localhost:8888/home">
-                            <img src="img/icons8-взлет-самолета-80.png" style="width:100%;">
-                        </a>
-                    </div>
-                    <div style="padding:0;text-align:center;color: #fff" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
-                         style="text-align:center;">Plane
-                    </div>
-                </div>
-                <div class="icon col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="icons col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <a href="http://localhost:8888/hotel">
-                            <img src="img/icons8-кровать-80.png" style="width:100%;">
-                        </a>
-                    </div>
-                    <div style="padding:0;color: #fff;text-align:center;"
-                         class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">Hotel
-                    </div>
-                </div>
-
+            <div class="col-lg-12 col-md-12 col-sm-2 col-xs-12">
                 <div id="scrol">
-                    <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form2" action=""
-                          method="post"
-                          style="margin: 0;">
+                    <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12 for" name="form" id="ajax_form2" action="" method="post" style="margin: 0;">
                         {{ csrf_field() }}
-                        <hr class="hr">
-                        <label>Select currency for popular cities:</label>
-                        <select name="currency" class="form-control">
-                            <option value="usd">USD</option>
-                            <option value="rub">RUB</option>
-                            <option value="eur">EUR</option>
-                        </select>
-                        <label>popular ways:</label>
-                        <select name="popularsCities" class="form-control">
-                            <option value="KhKv">Харьков-Киев</option>
-                            <option value="KvLv">Киев-Львов</option>
-                            <option value="KvOd">Киев-Одесса</option>
-                            <option value="NyMi">New York-Miami</option>
-                            <option value="MoLn">Москва-Лондон</option>
-
-
-                            {{--<option value="Cities">Cities</option>--}}
-                            {{--<option value="Cities">Cities</option>--}}
-                        </select>
-                        <hr class="hr">
-                        <div class="form-group">
-                            <label>Depart date:</label>
-                            <input type="date" name="depart" class="input form-control text-muted" max="2020-12-01"
-                                   min="now">
+                        <div class="row forms">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group">
+                                <div>Валюта:</div>
+                                <select name="currency" class="form-control">
+                                    <option value="usd">USD</option>
+                                    <option value="rub">RUB</option>
+                                    <option value="eur">EUR</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 some-form-gr form-group">
+                                <div class="labels">Популярные маршруты:</div>
+                                <select name="popularsCities" class="form-control my-form-control">
+                                    <option value="KhKv">Харьков-Киев</option>
+                                    <option value="KvLv">Киев-Львов</option>
+                                    {{--<option value="Cities">Cities</option>--}}
+                                    {{--<option value="Cities">Cities</option>--}}
+                                </select>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group">
+                                <div>Отправление:</div>
+                                <input type="date" name="depart" class="input form-control text-muted" max="2020-12-01"
+                                       min="now">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group">
+                                <div>Возвращение:</div>
+                                <input type="date" class="input form-control text-muted" name="return" max="2020-12-01"
+                                       min="now">
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 form-group">
+                                <div class="send">
+                                    <input class="btn btn-primary send form-text" type="submit" value="Найти" id="btn2" style="color: #fff">
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label>Return date:</label>
-                            <input type="date" class="input form-control text-muted" name="return" max="2020-12-01"
-                                   min="now">
-                        </div>
-                        <input class="btn btn-primary send form-text text-muted" type="submit" value="Найти" id="btn2">
-
-                    </form>
+                    </form> 
+                    
                 </div>
-                <input type="button" value="Click Me" id="click_me">
+
                 {{--<a href="{{ route('add') }}">Login</a>--}}
                 {{--<a href="{{ url('add') }}">ADD INFORMATION</a>--}}
-
                 {{--<a href="{{ url('allmartrutes') }}">ALL MY MARTRUTES</a>--}}
 
                 <script src="js/scrolForm.js"></script>
                 <script src="js/prepareToSave.js"></script>
+                </form>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-10 col-xs-12">
+                    <div id="map"></div>
+                </div>
+            </div>
+    </div>
 
-
-                <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form" action="" method="post"
+    <main class="main_content_section">
+        <div class="row">
+            <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h2 class="somet">Окунись в увлекательный мир путешествий!</h2><br>
+            </section>
+            <div class="dir">
+            <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form" action="" method="post"
                       style="margin: 0;">
                     {{ csrf_field() }}
-                    <hr class="hr">
-                    <label>Select currency:</label>
-                    <select name="currency" class="form-control">
-                        <option value="usd">USD</option>
-                        <option value="rub">RUB</option>
-                        <option value="eur">EUR</option>
-                    </select>
-                    <hr class="hr">
-                    <div class="form-group">
-                        <label>Depart date:</label>
-                        <input type="date" name="depart" class="input form-control text-muted" max="2020-12-01"
-                               min="now">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Return date:</label>
-                        <input type="date" class="input form-control text-muted" name="return" max="2020-12-01"
-                               min="now">
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="inputs">
-                            <label>Go from:</label>
+                    <hr style="color: #fff; height: 1px;">
+                    <div class="row forms">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group">
+                            <label>Валюта:</label>
+                            <select name="currency" class="form-control">
+                                <option value="usd">USD</option>
+                                <option value="rub">RUB</option>
+                                <option value="eur">EUR</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group">
+                            <label>Откуда:</label>
                             <input type="search" class="input form-control text-muted" name="name[]"
-                                   placeholder="from"/>
-                            <label>To:</label>
+                                       placeholder="from"/>
+                        </div>    
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group">
+                            <label>Куда:</label>
                             <input type="search" class="input form-control" name="name[]" placeholder="to"/>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <input class="btn btn-primary send form-text text-muted" type="submit" value="Отправить"
-                                       id="btn">
-                            </div>
-                            <div class="col-lg-8">
-                                <input type="button" class="btn btn-success add form-text text-muted"
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group">
+                            <label>Отправление:</label>
+                            <input type="date" name="depart" class="input form-control text-muted" max="2020-12-01" min="now">
+                        </div>
+                        <div>
+                            <label>Возвращение:</label>
+                            <input type="date" class="input form-control text-muted" name="return" max="2020-12-01" min="now">
+                        </div>
+                        <div class="try d-flex justify-content-center">
+                            <div class="true">
+                                    <input type="button" class="form-text btn btn-success"
                                        onclick="add_input()" value="Добавить"/>
                             </div>
-
+                            <div class="true">
+                                <div class="sfr">
+                                <input class="btn btn-primary send form-text" type="submit" value="Отправить"id="btn">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </form>
-                {{--<form name="form" id="ajax_form1" action="" method="post">--}}
-                {{--{{ csrf_field() }}--}}
-                {{--<input type="button" value="Save in db" id="btn1"/>--}}
-                {{--</form>--}}
-                <hr>
-                {{--<p><input maxlength="25" size="40" name="textAreaAllCoust" ></p>--}}
-                <input class="input form-control" id="123" name="textAreaAllCoust"/>
-
-                <br><br>
-
-
-                <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="time" style="width:190px; margin: 0;">
                     <hr>
-                    <div class="result">Result:</div>
-                    <span class="got-result"></span>
-                    <div id="min"></div>
-                </h1>
-
-
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="result_form"></div>
-
-            </div>
-            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                <div id="map"></div>
-            </div>
+                </form>
+                </div>
         </div>
+        <div class="inner_wrapper">
+            <section class="offer_description" id="experiance">
+                <div class="video_wrapper">
+                    <video controls height="225" width="400" src="media/Iceland.mp4"></video>
+                </div>
+                <section class="experiance">
+                    <h3 class="cta_header">Горячее предложение</h3>
+                    <ul class="experiance_list">
+                        <li class="experiance_list_item">7-14 дней приключений</li>
+                        <li class="experiance_list_item">Прекрасные виды, водопады великолепной Ирландии!</li>
+                        <li class="experiance_list_item">Комфортабельный перелет</li>
+                        <li class="experiance_list_item">Культурные и тематические туры</li>
+                        <li class="experiance_list_item">Экскурсии</li>
+                    </ul>
+                    <button class="btn-angled">Подробнее</button>
+                </section>
+            </section>
+            <section class="image_gallery" id="explore">
+                <h2 class="cta_header">Исследуй!</h2>
+                <div class="hero_image">
+                    <img src="imga/slider/1.jpg" alt="Landscape 1">
+                </div>
+                <div class="image_slider">
+                    <ul>
+                        <li class="slide_item-active_slide">
+                            <img src="imga/slider/1.jpg" alt="Landscape 2">
+                        </li>
+                        <li class="slide_item">
+                            <img src="imga/slider/2.jpg" alt="Landscape 2">
+                        </li>
+                        <li class="slide_item">
+                            <img src="imga/slider/3.jpg" alt="Landscape 3">
+                        </li>
+                        <li class="slide_item">
+                            <img src="imga/slider/4.jpg" alt="Landscape 4">
+                        </li>
+                    </ul>
+                    <div class="slider_controls">
+                        <span class="prev"></span>
+                        <span class="next"></span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
     </div>
-</div>
+    <footer class="footer_section">
+        <div class="inner_wrapper">
+            <section class="contact_info" id="contacts">
+                <h2 class="main_header-header_inverse">Наши контакты</h2>
+                <div class="email">
+                    <a href="mailto:iceland@i-travel.com?subject=Want_to_attend_for_an_Iceland_tour">optimizer@trip.com</a>
+                </div>
+                <div class="phone">тел:
+                    <a href="tel:+354727272">+38095 72 726 72</a>
+                </div>
+                <div class="phone">тел:
+                    <a href="tel:+354272727">+38097 27 275 27</a>
+                </div>
+            </section>
+            <section class="social">
+                <ul class="social_links">
+                    <li class="social_item">
+                        <a class="twitter" href="#"></a>
+                    </li>
+                    <li class="social_item">
+                        <a class="facebook" href="#"></a>
+                    </li>
+                    <li class="social_item">
+                        <a class="instagram" href="#"></a>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </footer>
 
-<div class="footer">
-    <div class="content" style="color: #fff; font-size: 14px;">
-        <div>All rights reserved by MEGO</div>
-        <div>©Copywrite 2018</div>
-    </div>
-</div>
 <script src="js/addForm.js"></script>
 <script>
+function openCollapse() {
+    var parentEl = document.getElementById('dr-panel');
+    var el = parentEl.childNodes[3];
+    el.style.display = el.style.display === 'none' ? 'flex' : 'none';
+}
+
     function initMap(allCoordinates) {
         var element = document.getElementById('map');
         var options = {
@@ -445,9 +391,10 @@
             dataType: "html", //формат данных
             data: jQuery("#" + ajax_form).serialize(),  // Сеарилизуем объект
             success: function (response) { //Данные отправлены успешно
-                console.dir(response);
+                console.log(response);
                 result = jQuery.parseJSON(response);
                 information = jQuery.parseJSON(result[0]);
+                console.log('123');
                 console.log(information);
 
                 //informationToSaveInDB=information['data'];
@@ -461,9 +408,9 @@
                 window.informationToSaveInDB.push(information['data'][result[2]]);
                 console.log(window.informationToSaveInDB);
 
-                areaCoust = document.getElementsByTagName("textAreaAllCoust");
+                //areaCoust = document.getElementsByTagName("textAreaAllCoust");
                 //areaCoust.value=window.informationToSaveInDB[0]['price'];
-                console.log(areaCoust);
+                //console.log(areaCoust);
                 //var sum=null;
                 //var strCoust;
 
@@ -476,7 +423,7 @@
                 window.strCoust = '';
                 window.sum = 0;
                 //console.log(window.informationToSaveInDB[0]['price']);
-                var areaCoust = document.getElementById('123');
+                //var areaCoust = document.getElementById('123');
                 var k = 0;
                 for (var i = 0; i < informationToSaveInDB.length; i++) {
                     if (i == 0) {
@@ -492,12 +439,12 @@
                 //console.log('555555555555');
                 console.log(window.sum);
                 console.log(window.strCoust);
-                areaCoust.value = '';
-                if (k == 1) {
-                    areaCoust.value = window.strCoust;
-                } else {
-                    areaCoust.value = window.strCoust + '=' + window.sum;
-                }
+                //areaCoust.value = '';
+                //if (k == 1) {
+                //    areaCoust.value = window.strCoust;
+                //} else {
+                 //   areaCoust.value = window.strCoust + '=' + window.sum;
+               // }
                 coordinatesInform = result[1];
                 if (window.coord == undefined) {
                     window.coord = [];
@@ -505,7 +452,7 @@
                 for (var i = 0; i < coordinatesInform.length; i++) {
                     window.coord.push(coordinatesInform[i]);
                 }
-                document.getElementById("min").innerHTML = JSON.stringify(information);
+                //document.getElementById("min").innerHTML = JSON.stringify(information);
                 //initMap(coordinatesInform);
                 initMap(window.coord);
                 //jQuery('#result_form').html('ОТ: '+result.a+'<br>До: '+result.b);
@@ -568,12 +515,9 @@
         });
     }
 </script>
-
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhZNdBlfHjvqdPZ4z5Uk3hGeyZYCaXzZY&callback=initMap">
 </script>
-
-</div>
 
 <!-- Scripts -->
 <script src="http://trip.trip.php.a-level.com.ua/js/app.js"></script>

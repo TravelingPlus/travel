@@ -187,7 +187,7 @@
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                 <div class="icon col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="icons col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <a href="http://localhost:8888/home">
+                        <a href="https://trip.trip.php.a-level.com.ua/home">
                         <img src="img/icons8-взлет-самолета-80.png" style="width:100%;">
                         </a>
                     </div>
@@ -196,8 +196,12 @@
                     </div>
                 </div>
                 <div class="icon col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="icons col-lg-12 col-md-12 col-sm-12 col-xs-12"><img src="img/icons8-кровать-80.png"
-                                                                                    style="width:100%;"></div>
+
+                    <div class="icons col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <a href="https://trip.trip.php.a-level.com.ua/hotel">
+                        <img src="img/icons8-кровать-80.png" style="width:100%;">
+                        </a>
+                    </div>
                     <div style="padding:0;color: #fff;text-align:center;"
                          class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">Hotel
                     </div>
@@ -372,7 +376,7 @@
     jQuery(document).ready(function () {
         jQuery("#btnHotel").click(
             function () {
-                sendAjaxFormHotel('result_formHotel', 'ajax_form_hotel', 'http://localhost:8888/hotel/apihotel');
+                sendAjaxFormHotel('result_formHotel', 'ajax_form_hotel', 'https://trip.trip.php.a-level.com.ua/home/apihotel');
                 return false;
             }
         );
