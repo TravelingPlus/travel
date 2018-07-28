@@ -111,8 +111,9 @@
                                 <select name="popularsCities" class="form-control my-form-control">
                                     <option value="KhKv">Харьков-Киев</option>
                                     <option value="KvLv">Киев-Львов</option>
-                                    {{--<option value="Cities">Cities</option>--}}
-                                    {{--<option value="Cities">Cities</option>--}}
+                                    <option value="KvOd">Киев-Одесса</option>
+                                    <option value="NyMi">New York-Miami</option>
+                                    <option value="MoLn">Москва-Лондон</option>
                                 </select>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group">
