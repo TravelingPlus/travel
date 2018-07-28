@@ -189,8 +189,7 @@
                         </div>
                         <div class="try d-flex justify-content-center">
                             <div class="true">
-                                    <input type="button" class="form-text btn btn-success"
-                                       onclick="add_input()" value="Добавить"/>
+                                    <input type="button" class="form-text btn btn-success add" data-action="add" value="Добавить"/>
                             </div>
                             <div class="true">
                                 <div class="sfr">
@@ -517,7 +516,25 @@ function openCollapse() {
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhZNdBlfHjvqdPZ4z5Uk3hGeyZYCaXzZY&callback=initMap">
 </script>
+<script>
+    function Menu(elem) {
+    this.add = function() {
+      add_input();
+    };
 
+    var self = this;
+
+    elem.onclick = function(e) {
+      var target = e.target;
+      var action = target.getAttribute('data-action');
+      if (action) {
+        self[action]();
+      }
+    };
+  }
+
+  new Menu(ajax_form);
+</script>
 <!-- Scripts -->
 <script src="http://trip.trip.php.a-level.com.ua/js/app.js"></script>
 </body>

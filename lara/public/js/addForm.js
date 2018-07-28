@@ -23,7 +23,7 @@ function add_input(){
             $('.inputs').append('<input id=idnew  class="input form-control"  name="name[]" placeholder="from"/>');
         }
     }
-
+    $('#ajax_form').append('<br/><span id="ajax_form">форма<span><span id="add" data-action="add">test</span>');
     var text = document.getElementsByTagName("input");
     console.log('AAAAAAAAAAAA');
     /*for (var i = 0; i < text.length; i++)
