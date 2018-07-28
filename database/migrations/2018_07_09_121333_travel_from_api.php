@@ -34,6 +34,7 @@ class TravelFromApi extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('travel_from_api');
+
     }
 }

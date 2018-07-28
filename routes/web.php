@@ -55,7 +55,7 @@ Route::get('first/second', function () {
 });
 Route::get('inform',['uses' => 'UsersController@index']);
 
-Route::post('users/create',['uses' => 'UsersController@create']);
+Route::get('users/create',['uses' => 'UsersController@create']);
 
 Route::post('users',['uses' => 'UsersController@store']);
 Auth::routes();
@@ -70,5 +70,20 @@ Route::get('/check', function () {
 
 Route::resource('/home/add', 'AddInformController');
 Route::post('/home/prepareToSave', 'HomeController@prepareToSave')->name('prepareToSave');
-Route::post('/home/hotels', 'HomeController@hotels')->name('hotels');
-Route::resource('/hotels', 'HotelController');
+
+Route::resource('/home/add1', 'SaaveController');
+
+//Route::post('/home/save', 'SaveController');
+
+//Route::get('/home/add', 'AddInformController@create' );
+Route::get('/add', function () {
+    return view('site.add');
+});
+
+Route::post('/home/prepareToSave', 'HomeController@prepareToSave')->name('prepareToSave');
+Route::post('/home/popular', 'HomeController@popular')->name('popular');
+Route::get('/allmartrutes', 'MartrutesController@allMartrutes')->name('martrutes');
+Route::post('/home/hotel', 'HomeController@hotel')->name('hotel');
+
+Route::get('/hotel', 'HotelController@index')->name('hotel');
+Route::post('/hotel/apihotel', 'HotelController@apihotel')->name('apihotel');

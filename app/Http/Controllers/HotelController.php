@@ -2,94 +2,85 @@
 
 namespace App\Http\Controllers;
 
-use App\Hotel;
+use App\AllHotel;
 use Illuminate\Http\Request;
+use App\HotelModel;
+use App\tableHotel;
+use Illuminate\Support\Facades\DB;
 
 class HotelController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return view('hotel');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function apihotel(Request $request)
     {
-        //
+
+        $hot = new HotelModel();
+        $tableHotel = new tableHotel();
+        $exempAllHotel = new AllHotel();
+
+        $hotel = $request->input('city');
+
+
+        $resultWhereAllHotel = DB::table('info_hotel')->get();
+        foreach ($resultWhereAllHotel as $allInfo) {
+            $time = $allInfo->created_at;
+            $time = strtotime(date('Y-m-d H:i:s')) - strtotime($time);
+            if ($time > 1000) {
+                DB::table('info_hotel')->where('id', $allInfo->id)->delete();
+                DB::table('all_information_hotel')->where('id', $allInfo->id)->delete();
+
+            }
+        }
+
+        //$resultWhere = DB::table('info_hotel')->where('city', 'Москва')->first();
+
+        $resultWhere = DB::table('info_hotel')->where('city', $hotel)->first();
+
+        $flag = 0;
+        if (isset($resultWhere)) {
+            $flag = 1;
+        } else $flag = 0;
+
+        if ($flag == 0) {
+            $resultHotel = $hot->getHotelApi($request);
+            $tableHotel->city = $hotel;
+
+            $tableHotel->save();
+
+//            return $resultHotel;
+
+            $exempAllHotel->json_info = serialize($resultHotel);
+
+            $exempAllHotel->save();
+
+            return $resultHotel;
+        } else {
+            $resultAllHotel = DB::table('all_information_hotel')->where('id', $resultWhere->id)->first();
+            $res = [unserialize($resultAllHotel->json_info)];
+
+            return $res;
+        }
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-        $hotels = new Hotel();
-        $hotels->user_name = $request->input('name');
-        $hotels->title = $request->input('title');
-        $hotels->checkin = $request->input('checkin');
-        $hotels->checkout = $request->input('checkout');
-        $hotels->persons = $request->input('persons');
-        $hotels->price = $request->input('price');
-        $hotels->save();
-
-        return $hotels;
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Hotel  $hotel
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Hotel $hotel)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Hotel  $hotel
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Hotel $hotel)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Hotel  $hotel
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Hotel $hotel)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Hotel  $hotel
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Hotel $hotel)
-    {
-        //
-    }
 }

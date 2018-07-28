@@ -32,6 +32,7 @@ class CreatePupularCities extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('popularcities');
+
     }
 }
