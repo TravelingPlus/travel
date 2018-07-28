@@ -83,3 +83,7 @@ Route::get('/add', function () {
 Route::post('/home/prepareToSave', 'HomeController@prepareToSave')->name('prepareToSave');
 Route::post('/home/popular', 'HomeController@popular')->name('popular');
 Route::get('/allmartrutes', 'MartrutesController@allMartrutes')->name('martrutes');
+Route::post('/home/hotel', 'HomeController@hotel')->name('hotel');
+
+Route::get('/hotel', 'HotelController@index')->name('hotel');
+Route::post('/hotel/apihotel', 'HotelController@apihotel')->name('apihotel');

@@ -187,54 +187,59 @@
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                 <div class="icon col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="icons col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <img src="img/icons8-взлет-самолета-80.png" style="width:100%;">
+                        <a href="http://localhost:8888/home">
+                            <img src="img/icons8-взлет-самолета-80.png" style="width:100%;">
+                        </a>
                     </div>
                     <div style="padding:0;text-align:center;color: #fff" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
                          style="text-align:center;">Plane
                     </div>
                 </div>
                 <div class="icon col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="icons col-lg-12 col-md-12 col-sm-12 col-xs-12"><img src="img/icons8-кровать-80.png"
-                                                                                    style="width:100%;"></div>
+                    <div class="icons col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <a href="http://localhost:8888/hotel">
+                            <img src="img/icons8-кровать-80.png" style="width:100%;">
+                        </a>
+                    </div>
                     <div style="padding:0;color: #fff;text-align:center;"
                          class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">Hotel
                     </div>
                 </div>
 
                 <div id="scrol">
-                <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form2" action=""
-                      method="post"
-                      style="margin: 0;">
-                    {{ csrf_field() }}
-                    <hr class="hr">
-                    <label>Select currency for popular cities:</label>
-                    <select name="currency" class="form-control">
-                        <option value="usd">USD</option>
-                        <option value="rub">RUB</option>
-                        <option value="eur">EUR</option>
-                    </select>
-                    <label>popular ways:</label>
-                    <select name="popularsCities" class="form-control">
-                        <option value="KhKv">Харьков-Киев</option>
-                        <option value="KvLv">Киев-Львов</option>
-                        {{--<option value="Cities">Cities</option>--}}
-                        {{--<option value="Cities">Cities</option>--}}
-                    </select>
-                    <hr class="hr">
-                    <div class="form-group">
-                        <label>Depart date:</label>
-                        <input type="date" name="depart" class="input form-control text-muted" max="2020-12-01"
-                               min="now">
-                    </div>
+                    <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form2" action=""
+                          method="post"
+                          style="margin: 0;">
+                        {{ csrf_field() }}
+                        <hr class="hr">
+                        <label>Select currency for popular cities:</label>
+                        <select name="currency" class="form-control">
+                            <option value="usd">USD</option>
+                            <option value="rub">RUB</option>
+                            <option value="eur">EUR</option>
+                        </select>
+                        <label>popular ways:</label>
+                        <select name="popularsCities" class="form-control">
+                            <option value="KhKv">Харьков-Киев</option>
+                            <option value="KvLv">Киев-Львов</option>
+                            {{--<option value="Cities">Cities</option>--}}
+                            {{--<option value="Cities">Cities</option>--}}
+                        </select>
+                        <hr class="hr">
+                        <div class="form-group">
+                            <label>Depart date:</label>
+                            <input type="date" name="depart" class="input form-control text-muted" max="2020-12-01"
+                                   min="now">
+                        </div>
 
-                    <div class="form-group">
-                        <label>Return date:</label>
-                        <input type="date" class="input form-control text-muted" name="return" max="2020-12-01"
-                               min="now">
-                    </div>
-                    <input class="btn btn-primary send form-text text-muted" type="submit" value="Найти" id="btn2">
+                        <div class="form-group">
+                            <label>Return date:</label>
+                            <input type="date" class="input form-control text-muted" name="return" max="2020-12-01"
+                                   min="now">
+                        </div>
+                        <input class="btn btn-primary send form-text text-muted" type="submit" value="Найти" id="btn2">
 
-                </form>
+                    </form>
                 </div>
                 <input type="button" value="Click Me" id="click_me">
                 {{--<a href="{{ route('add') }}">Login</a>--}}
@@ -295,12 +300,15 @@
                     </div>
                 </form>
                 {{--<form name="form" id="ajax_form1" action="" method="post">--}}
-                    {{--{{ csrf_field() }}--}}
-                    {{--<input type="button" value="Save in db" id="btn1"/>--}}
+                {{--{{ csrf_field() }}--}}
+                {{--<input type="button" value="Save in db" id="btn1"/>--}}
                 {{--</form>--}}
                 <hr>
                 {{--<p><input maxlength="25" size="40" name="textAreaAllCoust" ></p>--}}
                 <input class="input form-control" id="123" name="textAreaAllCoust"/>
+
+                <br><br>
+
 
                 <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="time" style="width:190px; margin: 0;">
                     <hr>
@@ -329,6 +337,7 @@
 <script src="js/addForm.js"></script>
 <script>
     function initMap(allCoordinates) {
+        var allCoordinates = 0;
         var element = document.getElementById('map');
         var options = {
             zoom: 3,
@@ -373,38 +382,38 @@
 
 
 {{--<script>--}}
-    {{--jQuery.ajaxSetup({--}}
-        {{--headers: {--}}
-            {{--'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')--}}
-        {{--}--}}
-    {{--});--}}
+{{--jQuery.ajaxSetup({--}}
+{{--headers: {--}}
+{{--'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')--}}
+{{--}--}}
+{{--});--}}
 
 
-    {{--jQuery(document).ready(function () {--}}
-        {{--jQuery("#btn1").click(--}}
-            {{--function () {--}}
-                {{--sendAjaxForm1('result_form1', 'ajax_form1', 'http://travel-sergey/public/home/allmartrutes');--}}
-                {{--return false;--}}
-            {{--}--}}
-        {{--);--}}
-    {{--});--}}
+{{--jQuery(document).ready(function () {--}}
+{{--jQuery("#btn1").click(--}}
+{{--function () {--}}
+{{--sendAjaxForm1('result_form1', 'ajax_form1', 'http://travel-sergey/public/home/allmartrutes');--}}
+{{--return false;--}}
+{{--}--}}
+{{--);--}}
+{{--});--}}
 
-    {{--function sendAjaxForm1(result_form, ajax_form, url) {--}}
+{{--function sendAjaxForm1(result_form, ajax_form, url) {--}}
 
-        {{--jQuery.ajax({--}}
-            {{--url: url, //url страницы (action_ajax_form.php)--}}
-            {{--type: "POST", //метод отправки--}}
-            {{--dataType: "html", //формат данных--}}
-            {{--data: jQuery("#" + ajax_form).serialize(),  // Сеарилизуем объект--}}
-            {{--success: function (response) { //Данные отправлены успешно--}}
-                {{--console.log('yeeeees');--}}
-                {{--console.log(response);--}}
-            {{--},--}}
-            {{--error: function (response) { // Данные не отправлены--}}
-                {{--jQuery('#result_form').html('Ошибка. Данные не отправлены.');--}}
-            {{--}--}}
-        {{--});--}}
-    {{--}--}}
+{{--jQuery.ajax({--}}
+{{--url: url, //url страницы (action_ajax_form.php)--}}
+{{--type: "POST", //метод отправки--}}
+{{--dataType: "html", //формат данных--}}
+{{--data: jQuery("#" + ajax_form).serialize(),  // Сеарилизуем объект--}}
+{{--success: function (response) { //Данные отправлены успешно--}}
+{{--console.log('yeeeees');--}}
+{{--console.log(response);--}}
+{{--},--}}
+{{--error: function (response) { // Данные не отправлены--}}
+{{--jQuery('#result_form').html('Ошибка. Данные не отправлены.');--}}
+{{--}--}}
+{{--});--}}
+{{--}--}}
 {{--</script>--}}
 
 
@@ -419,7 +428,7 @@
     jQuery(document).ready(function () {
         jQuery("#btn").click(
             function () {
-                sendAjaxForm('result_form', 'ajax_form', 'http://travel-sergey/public/home/json');
+                sendAjaxForm('result_form', 'ajax_form', 'http://localhost:8888/home/json');
                 return false;
             }
         );
@@ -460,11 +469,11 @@
                 if (window.sum == undefined) {
                     window.sum = 0;
                 }
-                window.strCoust='';
+                window.strCoust = '';
                 window.sum = 0;
                 //console.log(window.informationToSaveInDB[0]['price']);
                 var areaCoust = document.getElementById('123');
-                var k=0;
+                var k = 0;
                 for (var i = 0; i < informationToSaveInDB.length; i++) {
                     if (i == 0) {
                         strCoust += informationToSaveInDB[i]['price'];
@@ -480,9 +489,9 @@
                 console.log(window.sum);
                 console.log(window.strCoust);
                 areaCoust.value = '';
-                if(k==1) {
+                if (k == 1) {
                     areaCoust.value = window.strCoust;
-                }else {
+                } else {
                     areaCoust.value = window.strCoust + '=' + window.sum;
                 }
                 coordinatesInform = result[1];
@@ -514,7 +523,7 @@
     jQuery(document).ready(function () {
         jQuery("#btn2").click(
             function () {
-                sendAjaxForm2('result_form2', 'ajax_form2', 'http://travel-sergey/public/home/popular');
+                sendAjaxForm2('result_form2', 'ajax_form2', 'http://localhost:8888/home/popular');
                 return false;
             }
         );
@@ -555,6 +564,7 @@
         });
     }
 </script>
+
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhZNdBlfHjvqdPZ4z5Uk3hGeyZYCaXzZY&callback=initMap">
 </script>

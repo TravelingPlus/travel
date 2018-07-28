@@ -133,7 +133,6 @@ class HomeController extends Controller
         }
 
 
-
         $resultWhere = DB::table('info_trip_update')->where('curr', $currency_check)->where('from_city', $origin)->where('to_city', $destination)->where('date_from', $departure_at)->where('date_to', $return_at)->first();
 
 
@@ -165,20 +164,6 @@ class HomeController extends Controller
             return $res;
         }
 
-
-        //$resultTrips = $exemlarTrips->getInformationApi($request);
-
-        //$exemlarAllInfo->coordinates =   serialize( $resultTrips[1] );
-        //$exemlarAllInfo->info_trip =  $resultTrips[0] ;
-        //$exemlarAllInfo->date_trip = $resultTrips[2];
-        //$exemlarAllInfo->save();
-        //$check=serialize( $resultTrips[1] );
-        //$resss=unserialize( $check );
-
-
-        //$resultWhere->id;
-        //return $resss;
-        //return $flag;
     }
 
     public function popular(Request $request)
@@ -261,6 +246,36 @@ class HomeController extends Controller
         $res = [0 => $codeTickets, 1 => $info];
         return $res;
 
+
+    }
+
+    public function apihotel(Request $request)
+    {
+        $currency = $request->input('currency_hotel');
+
+        if ($currency == 'usd') {
+            $curr = 'usd';
+        } elseif ($currency == 'eur') {
+            $curr = 'eur';
+        } elseif ($currency == 'rub') {
+            $curr = 'rub';
+        } else {
+            echo 'Выберите валюту из выше перечисленных';
+        }
+
+        $arrival = $request->input('arrival');
+        $out = $request->input('out');
+        $city = $request->input('city');
+
+        $codeCity = file_get_contents('https://www.travelpayouts.com/widgets_suggest_params?q=' . urlencode("Из {$city} в Киев"));
+        $decodeCity = json_decode($codeCity, true);
+
+
+        $cityOfDeparture = $decodeCity['origin']['iata'];
+
+
+        $res = file_get_contents("http://engine.hotellook.com/api/v2/cache.json?location={$cityOfDeparture}&language=ru&customerIp&currency={$currency}&checkIn={$arrival}&checkOut={$out}&limit=10");
+        return $res;
 
     }
 
