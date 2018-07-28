@@ -1,0 +1,56 @@
+@media screen and (max-width: 1024px){
+
+.banner img{ 
+	width: 50%;
+	margin: -8% 0 0 45%;
+}
+
+.text_content .paragraph{
+	padding-top: 5.5%;
+	font-size: 11px;
+}
+
+.btn-rounded {
+	width: 10%;
+	padding-top: -20.5%;
+}
+
+.video_wrapper video {
+
+	margin: 0 0 0 15%;
+}
+
+.experiance {
+	margin: 2% 2% 0 2%;
+}
+
+.image_gallery .cta_header {
+	font-size: 70px;
+	margin: -50% 0 30% 60%;
+}
+
+.image_slider ul li:nth-child(odd){
+	
+
+}
+
+.slide_item-active_slide,  {
+	width: 100px;
+}
+
+.image_slider ul {
+	margin: -73% 0 0 50%;
+	float: none;
+}
+
+.hero_image {
+  	float: none;
+  	padding: 10% 6% 0 0;
+
+}
+
+.hero_image img {
+	width: 80%;
+
+}
+}
