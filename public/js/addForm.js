@@ -17,12 +17,6 @@ function add_input(m){
 
         //var area=document.getElementById(2);
         //area.value='333';
-
-        if(i%2 == 0){
-            $('.inputs').append('<input id=idnew   class="input form-control"  name="name[]" placeholder="to"/>');
-        }else {
-            $('.inputs').append('<input id=idnew  class="input form-control"  name="name[]" placeholder="from"/>');
-        }
     }
     count+=m;
     $('#ajax_form').append('<form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form'+m+'" action="" method="post" style="margin: 0;"><input type="hidden" name="_token" value="e0uNlbkj8Yb4OCwCFb1WgD7HJ531wLhLxdPAiDoP"><hr style="color: #fff; height: 1px;"><div class="row forms"><div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group"><label>Валюта:</label><select name="currency" class="form-control"><option value="usd">USD</option><option value="rub">RUB</option><option value="eur">EUR</option></select></div><div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group"><label>Откуда:</label><input type="search" class="input form-control text-muted" name="name[]" placeholder="from"/></div><div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group"><label>Куда:</label><input type="search" class="input form-control" name="name[]" placeholder="to"/></div><div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group"><label>Отправление:</label><input type="date" name="depart" class="input form-control text-muted" max="2020-12-01" min="now"></div><div><label>Возвращение:</label><input type="date" class="input form-control text-muted" name="return" max="2020-12-01" min="now"></div><div class="try d-flex justify-content-center"><div class="true"><input type="button" class="form-text btn btn-success add" data-action="add" value="Добавить перелет"/></div><div class="true"><input type="button" class="form-text btn btn-success add" data-action="addhotel" value="Добавить отель"/></div><div class="true"><div class="sfr"><input class="btn btn-primary send form-text" type="submit" value="Отправить"id="btn"></div></div></div></div><hr></form>');
