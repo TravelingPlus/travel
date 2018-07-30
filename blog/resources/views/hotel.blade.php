@@ -307,7 +307,8 @@
         function addMarker(coordinates) {
             var marker = new google.maps.Marker({
                 position: coordinates,
-                map: myMap
+                map: myMap,
+                icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
             });
         }
 
