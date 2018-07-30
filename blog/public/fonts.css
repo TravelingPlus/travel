@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Segoe WP Light';
+    src: local('Segoe WP Light'), local('Segoe WP Light'), 
+    url('fonts/Segoe WP Light.woff2') format('woff2'), 
+    url('fonts/Segoe WP Light.woff') format('woff'), 
+    url('fonts/Segoe WP Light.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Beer money';
+    src: local('beer money'), local('beermoney'), 
+    url('fonts/beermoney.woff2') format('woff2'), 
+    url('fonts/beermoney.woff') format('woff'), 
+    url('fonts/beermoney.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}

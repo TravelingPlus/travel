@@ -187,7 +187,7 @@
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                 <div class="icon col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="icons col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <a href="http://localhost:8888/home">
+                        <a href="https://trip.trip.php.a-level.com.ua/home">
                         <img src="img/icons8-взлет-самолета-80.png" style="width:100%;">
                         </a>
                     </div>
@@ -196,8 +196,12 @@
                     </div>
                 </div>
                 <div class="icon col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="icons col-lg-12 col-md-12 col-sm-12 col-xs-12"><img src="img/icons8-кровать-80.png"
-                                                                                    style="width:100%;"></div>
+
+                    <div class="icons col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <a href="https://trip.trip.php.a-level.com.ua/hotel">
+                        <img src="img/icons8-кровать-80.png" style="width:100%;">
+                        </a>
+                    </div>
                     <div style="padding:0;color: #fff;text-align:center;"
                          class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">Hotel
                     </div>
@@ -245,6 +249,10 @@
                                 <input class="btn btn-primary send form-text text-muted" type="submit" value="Отправить"
                                        id="btnHotel">
                             </div>
+                            {{--<div class="col-lg-8">--}}
+                            {{--<input type="button" class="btn btn-success add form-text text-muted"--}}
+                            {{--onclick="add_input()" value="Добавить"/>--}}
+                            {{--</div>--}}
 
                         </div>
                     </div>
@@ -262,7 +270,7 @@
 
             </div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                <div id="allHotel" style="padding:0; text-align:left; font-size: 18px;color: #fff;margin-top: 5px;"></div>
+                <div id="map"></div>
             </div>
         </div>
     </div>
@@ -275,6 +283,87 @@
     </div>
 </div>
 <script src="js/addForm.js"></script>
+<script>
+
+    function initMap(allCoordinates) {
+        var element = document.getElementById('map');
+        var options = {
+            zoom: 3,
+            center: {lat: 49.98081, lng: 36.25272}
+        };
+
+        var myMap = new google.maps.Map(element, options);
+        for (var i = 0; i < allCoordinates.length; i++) {
+            console.log(allCoordinates[i]);
+        }
+
+        var coords;
+
+        if (coords == undefined) {
+            coords = [];
+        }
+
+        for (var i = 0; i < allCoordinates.length; i += 2) {
+            addMarker({lat: allCoordinates[i], lng: allCoordinates[i + 1]});
+            coords.push({lat: allCoordinates[i], lng: allCoordinates[i + 1]});
+        }
+
+        function addMarker(coordinates) {
+            var marker = new google.maps.Marker({
+                position: coordinates,
+                map: myMap
+            });
+        }
+
+        var flightPath = new google.maps.Polyline({
+            path: coords,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2,
+        });
+
+        flightPath.setMap(myMap);
+    }
+
+</script>
+
+
+{{--<script>--}}
+{{--jQuery.ajaxSetup({--}}
+{{--headers: {--}}
+{{--'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')--}}
+{{--}--}}
+{{--});--}}
+
+
+{{--jQuery(document).ready(function () {--}}
+{{--jQuery("#btn1").click(--}}
+{{--function () {--}}
+{{--sendAjaxForm1('result_form1', 'ajax_form1', 'http://travel-sergey/public/home/allmartrutes');--}}
+{{--return false;--}}
+{{--}--}}
+{{--);--}}
+{{--});--}}
+
+{{--function sendAjaxForm1(result_form, ajax_form, url) {--}}
+
+{{--jQuery.ajax({--}}
+{{--url: url, //url страницы (action_ajax_form.php)--}}
+{{--type: "POST", //метод отправки--}}
+{{--dataType: "html", //формат данных--}}
+{{--data: jQuery("#" + ajax_form).serialize(),  // Сеарилизуем объект--}}
+{{--success: function (response) { //Данные отправлены успешно--}}
+{{--console.log('yeeeees');--}}
+{{--console.log(response);--}}
+{{--},--}}
+{{--error: function (response) { // Данные не отправлены--}}
+{{--jQuery('#result_form').html('Ошибка. Данные не отправлены.');--}}
+{{--}--}}
+{{--});--}}
+{{--}--}}
+{{--</script>--}}
+
 
 
 <script>
@@ -287,7 +376,7 @@
     jQuery(document).ready(function () {
         jQuery("#btnHotel").click(
             function () {
-                sendAjaxFormHotel('result_formHotel', 'ajax_form_hotel', 'http://travel-sergey/public/hotel/apihotel');
+                sendAjaxFormHotel('result_formHotel', 'ajax_form_hotel', 'https://trip.trip.php.a-level.com.ua/home/apihotel');
                 return false;
             }
         );
@@ -309,27 +398,6 @@
                 console.log('yeeeees');
                 var result = jQuery.parseJSON(response);
                 console.log(result);
-                if (window.AllHotel == undefined) {
-                    window.AllHotel = [];
-                }
-                for (var i = 0; i < result.length; i++) {
-                    console.log(result[i]['hotelName']);
-                    window.AllHotel.push(result[i]['hotelName']);
-                }
-                var elementByIdAllHotel = document.getElementById('allHotel');
-
-                if (window.AllHotelstr == undefined) {
-                    window.AllHotelstr = 'All Hotels:'+"<br>";
-                }
-
-                for (var i = 0; i < window.AllHotel.length; i++) {
-                    var count=i+1;
-                    window.AllHotelstr+=count+". " + window.AllHotel[i]+"<br>";
-                    //window.AllHotelstr+="<a href="">"+ window.AllHotel[i]+"</a>"+"<br>";
-                }
-
-                elementByIdAllHotel.innerHTML = window.AllHotelstr;
-
                 /*information = jQuery.parseJSON(result[0]);
                 console.log(information);
 

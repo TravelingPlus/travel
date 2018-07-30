@@ -69,14 +69,14 @@ class HotelController extends Controller
 
 //            return $resultHotel;
 
-            $exempAllHotel->json_info = serialize($resultHotel);
+            $exempAllHotel->json_info = $resultHotel;
 
             $exempAllHotel->save();
 
             return $resultHotel;
         } else {
             $resultAllHotel = DB::table('all_information_hotel')->where('id', $resultWhere->id)->first();
-            $res = unserialize($resultAllHotel->json_info);
+            $res = $resultAllHotel->json_info;
 
             return $res;
         }
