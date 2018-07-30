@@ -142,9 +142,6 @@
                         <img class="logo-plane" src="img/logo-plane.png" style="width:15%;">
                     </div>
                 </div>
-                <a href="{{ url('add') }}">ADD INFORMATION</a>
-
-                <a href="{{ url('allmartrutes') }}">ALL MY MARTRUTES</a>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
@@ -376,7 +373,7 @@
     jQuery(document).ready(function () {
         jQuery("#btnHotel").click(
             function () {
-                sendAjaxFormHotel('result_formHotel', 'ajax_form_hotel', 'https://trip.trip.php.a-level.com.ua/home/apihotel');
+                sendAjaxFormHotel('result_formHotel', 'ajax_form_hotel', 'http://newdesign1/public/hotel/apihotel');
                 return false;
             }
         );

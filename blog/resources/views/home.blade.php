@@ -32,7 +32,7 @@
                             Отели
                         </li>
                         <li class="main_navigation_item">
-                            Отзывы
+                            <a href="http://newdesign1/public/hotel" style=" text-decoration: none;">Отели</a>
                         </li>
                         <li class="main_navigation_item">
                             <input class="clos" type="button" value="Популярное" id="click_me">
@@ -135,7 +135,7 @@
                     </form> 
                     
                 </div>
-                
+
                 {{--<a href="{{ route('add') }}">Login</a>--}}
                 {{--<a href="{{ url('add') }}">ADD INFORMATION</a>--}}
                 {{--<a href="{{ url('allmartrutes') }}">ALL MY MARTRUTES</a>--}}
