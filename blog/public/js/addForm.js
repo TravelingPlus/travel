@@ -1,8 +1,8 @@
 function add_input(){
 
-    var new_id;
-    var inputs = $('.row_forms input[type="text"]');
-    var id_element = (inputs.length);
+    //var new_id;
+    //var inputs = $('.row_forms input[type="text"]');
+    //var id_element = (inputs.length);
     //alert(id_element);
     //var target = document.getElementsByTagName();
     //target.insertAdjacentHTML('afterEnd', '<br>');
@@ -23,15 +23,20 @@ function add_input(){
         //    $('.inputs').append('<input id=idnew  class="input form-control"  name="name[]" placeholder="from"/>');
        // }
     }
+
     //var flight = {}
     // $($(".dir .flight")[0]).find('input').each((i, input) => flight[input.name] = input.value)
-    var div = document.getElementById('all_inputs');
-    div.innerHTML +='<hr>';
-    div.innerHTML +=' <br /> <br />';
-    div.innerHTML += '<input type="search" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group" name="name[]"placeholder="from"/> ';
-    div.innerHTML += '<input type="search" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group" name="name[]" placeholder="to"/>';
-    div.innerHTML += '<input type="date" name="depart" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group" max="2020-12-01" min="now">';
-    div.innerHTML += '<input type="date" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group" name="return" max="2020-12-01" min="now">';
+    //var all_input = document.getElementById('all_inputs');
+    $('#ajax_form').append('<input type="search" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group" name="name[]"placeholder="from"/>');
+    // $("all_input").append("<li>Appended item</li>");
+
+    //div.innerHTML +='<hr>';
+    // div.innerHTML +=' <br /> <br />';
+    //div.innerHTML += '<input type="search" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group" name="name[]"placeholder="from"/> ';
+    //all_input.appendChild("<input type="search" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group" name="name[]"placeholder="from"/> ');
+    //div.innerHTML += '<input type="search" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group" name="name[]" placeholder="to"/>';
+    //div.innerHTML += '<input type="date" name="depart" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group" max="2020-12-01" min="now">';
+    //div.innerHTML += '<input type="date" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 form-group" name="return" max="2020-12-01" min="now">';
 
 
         //var div = document.createElement('all_inputs');

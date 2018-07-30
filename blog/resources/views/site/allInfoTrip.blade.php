@@ -2,14 +2,6 @@
     window.allmass=[];
 </script>
 
-@foreach(  $exemlarDateTrips as $element)
-    window.allmass.push($element->email);
-    {{--<h1>{{  $element->email }}</h1>--}}
-    {{--<h1>{{  $element->city_of_departure }}</h1>--}}
-    {{--<h1>{{  $element->city_of_arrival }}</h1>--}}
-    {{--<h1>{{  $element->hotel }}</h1>--}}
-    {{--<h1>{{  $element->transfer }}</h1>--}}
-@endforeach
 
 
 
@@ -62,17 +54,12 @@
 
 
 <script type="text/javascript">
-//    alert('1111111');
-    debugger;
+    //debugger;
     var data = JSON.parse('<?php echo $exemlarDateTrips; ?>');
     var array_table = [];
-    for (var i = 0; i < 5; i++)
+    for (var i = 0; i < data.length; i++)
     {
         array_table[i] = [];
-        //for (var j = 0; j < 5; j++)
-        //{
-
-
             var res_departure = data[i]['city_of_departure'];
             array_table[i][0] = res_departure;
             var res_arrival = data[i]['city_of_arrival'];
@@ -81,8 +68,6 @@
              array_table[i][2]=res_hotel;
             var res_transfer = data[i]['transfer'];
             array_table[i][3]=res_transfer;
-
-        //}
     }
 
 
@@ -99,7 +84,6 @@
     code += '</table>';
     var elem = document.getElementById("from_script");
     elem.innerHTML =  code;
-    alert('333333333');
 
 </script>
 
