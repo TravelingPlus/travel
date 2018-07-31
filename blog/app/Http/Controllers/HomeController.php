@@ -96,7 +96,6 @@ class HomeController extends Controller
 
     public function json(Request $request)
     {
-
         $exemlarTrips = new Trips();
         $exemlarDateTrips = new dateTrips();
         $exemlarAllInfo = new AllInfo();

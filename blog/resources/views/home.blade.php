@@ -29,10 +29,10 @@
                             Перелеты
                         </li>
                         <li class="main_navigation_item">
-                            Отели
+                            Отзывы
                         </li>
                         <li class="main_navigation_item">
-                            <a href="http://localhost:8888/hotel" style=" text-decoration: none;">Отели</a>
+                            <a href="https://trip.trip.php.a-level.com.ua/hotel" style=" text-decoration: none;">Отели</a>
                         </li>
                         <li class="main_navigation_item">
                             <input class="clos" type="button" value="Популярное" id="click_me">
@@ -56,12 +56,12 @@
                                     </li>
                                     <li style="margin: 0 0 3px 7px; width: 250px;">
                                         <div class="phone" style="width: 250px; margin: 0;">
-                                    <a href="http://trip.trip.php.a-level.com.ua/logout"
+                                    <a href="https://trip.trip.php.a-level.com.ua"
                                        onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();" style=" text-decoration: none;">
                                         Выйти
                                     </a></div></li>
-                                    <form id="logout-form" action="http://trip.trip.php.a-level.com.ua/logout"
+                                    <form id="logout-form" action="https://trip.trip.php.a-level.com.ua"
                                           method="POST" style="display: none;">
                                         <input type="hidden" name="_token"
                                                value="myoiQq8CyPGrq0b15KNZFqtpnyOAJaazVs85F6IF">
@@ -157,6 +157,9 @@
             <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h2 class="somet">Окунись в увлекательный мир путешествий!</h2><br>
             </section>
+            <div id ="all_sum" style="color: red;">
+
+            </div>
             <div class="dir">
             <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form" action="" method="post"
                       style="margin: 0;">
@@ -384,7 +387,7 @@ function openCollapse() {
     jQuery(document).ready(function () {
         jQuery("#btn").click(
             function () {
-                sendAjaxForm('result_form', 'ajax_form', 'http://localhost:8888/home/json');
+                sendAjaxForm('result_form', 'ajax_form', 'https://trip.trip.php.a-level.com.ua/home/json');
                 return false;
             }
         );
@@ -429,7 +432,6 @@ function openCollapse() {
                 window.strCoust = '';
                 window.sum = 0;
                 //console.log(window.informationToSaveInDB[0]['price']);
-                //var areaCoust = document.getElementById('123');
                 var k = 0;
                 for (var i = 0; i < informationToSaveInDB.length; i++) {
                     if (i == 0) {
@@ -445,12 +447,17 @@ function openCollapse() {
                 //console.log('555555555555');
                 console.log(window.sum);
                 console.log(window.strCoust);
-                //areaCoust.value = '';
-                //if (k == 1) {
-                //    areaCoust.value = window.strCoust;
-                //} else {
-                 //   areaCoust.value = window.strCoust + '=' + window.sum;
-               // }
+                //var SummDok = document.getElementById('Summ'),
+                //SummSumm='tra-la-la';
+                //SummDok.innerHTML = SummSum
+
+                var areaCoust = document.getElementById('all_sum');
+                areaCoust.innerHTML = '';
+                if (k == 1) {
+                    areaCoust.innerHTML = 'All sum: '+window.strCoust;
+                } else {
+                    areaCoust.innerHTML = 'All sum: '+ window.strCoust + '=' + window.sum;
+                }
                 coordinatesInform = result[1];
                 if (window.coord == undefined) {
                     window.coord = [];
@@ -480,7 +487,7 @@ function openCollapse() {
     jQuery(document).ready(function () {
         jQuery("#btn2").click(
             function () {
-                sendAjaxForm2('result_form2', 'ajax_form2', 'http://localhost:8888/home/popular');
+                sendAjaxForm2('result_form2', 'ajax_form2', 'https://trip.trip.php.a-level.com.ua/home/popular');
                 return false;
             }
         );
@@ -527,7 +534,7 @@ function openCollapse() {
 
 <script>
     // var citiesInDB = ("${$citiesInDB}");
-    var countries = ["Киев", "Москва", "Лондон", "Вашингтон", "Минск", "Венгрия", "Прага", "Варшава", "Берлин", "Рим", "Харьков", "Анкара", "Хургада"];
+    var countries = ["Киев", "Москва", "Лондон", "Вашингтон", "Минск", "Венгрия", "Прага", "Варшава", "Берлин", "Рим", "Харьков", "Анкара", "Хургада", "Париж", "Мадрид", "Шри-Ланка", "Шанхай"];
 </script>
 
 <script>
@@ -635,7 +642,8 @@ function openCollapse() {
 
 </script>
 
+
 <!-- Scripts -->
-<script src="http://trip.trip.php.a-level.com.ua/js/app.js"></script>
+<script src="https://trip.trip.php.a-level.com.ua/js/app.js"></script>
 </body>
 </html>
