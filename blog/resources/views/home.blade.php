@@ -157,6 +157,9 @@
             <section class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h2 class="somet">Окунись в увлекательный мир путешествий!</h2><br>
             </section>
+            <div id ="all_sum" style="color: red;">
+
+            </div>
             <div class="dir">
             <form class="col-lg-12 col-md-12 col-sm-12 col-xs-12" name="form" id="ajax_form" action="" method="post"
                       style="margin: 0;">
@@ -429,7 +432,6 @@ function openCollapse() {
                 window.strCoust = '';
                 window.sum = 0;
                 //console.log(window.informationToSaveInDB[0]['price']);
-                //var areaCoust = document.getElementById('123');
                 var k = 0;
                 for (var i = 0; i < informationToSaveInDB.length; i++) {
                     if (i == 0) {
@@ -445,12 +447,17 @@ function openCollapse() {
                 //console.log('555555555555');
                 console.log(window.sum);
                 console.log(window.strCoust);
-                //areaCoust.value = '';
-                //if (k == 1) {
-                //    areaCoust.value = window.strCoust;
-                //} else {
-                 //   areaCoust.value = window.strCoust + '=' + window.sum;
-               // }
+                //var SummDok = document.getElementById('Summ'),
+                //SummSumm='tra-la-la';
+                //SummDok.innerHTML = SummSum
+
+                var areaCoust = document.getElementById('all_sum');
+                areaCoust.innerHTML = '';
+                if (k == 1) {
+                    areaCoust.innerHTML = 'All sum: '+window.strCoust;
+                } else {
+                    areaCoust.innerHTML = 'All sum: '+ window.strCoust + '=' + window.sum;
+                }
                 coordinatesInform = result[1];
                 if (window.coord == undefined) {
                     window.coord = [];
