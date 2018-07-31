@@ -19,7 +19,7 @@
 
         #map {
             width: 100%;
-            height: 600px;
+            height: 450px;
         }
 
         .add {
@@ -142,9 +142,6 @@
                         <img class="logo-plane" src="img/logo-plane.png" style="width:15%;">
                     </div>
                 </div>
-                <a href="{{ url('add') }}">ADD INFORMATION</a>
-
-                <a href="{{ url('allmartrutes') }}">ALL MY MARTRUTES</a>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
@@ -260,9 +257,7 @@
 
                 <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="time" style="width:190px; margin: 0;">
                     <hr>
-                    <div class="result">Result:</div>
-                    <span class="got-result"></span>
-                    <div id="min"></div>
+
                 </h1>
 
 
@@ -271,6 +266,7 @@
             </div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                 <div id="map"></div>
+                <div id="allHotel" style="padding:0; text-align:left; font-size: 18px;color: #fff;margin-top: 5px;"></div>
             </div>
         </div>
     </div>
@@ -311,7 +307,8 @@
         function addMarker(coordinates) {
             var marker = new google.maps.Marker({
                 position: coordinates,
-                map: myMap
+                map: myMap,
+                icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
             });
         }
 
@@ -376,7 +373,7 @@
     jQuery(document).ready(function () {
         jQuery("#btnHotel").click(
             function () {
-                sendAjaxFormHotel('result_formHotel', 'ajax_form_hotel', 'https://trip.trip.php.a-level.com.ua/home/apihotel');
+                sendAjaxFormHotel('result_formHotel', 'ajax_form_hotel', 'http://localhost:8888/hotel/apihotel');
                 return false;
             }
         );
@@ -398,6 +395,39 @@
                 console.log('yeeeees');
                 var result = jQuery.parseJSON(response);
                 console.log(result);
+
+                if (window.AllHotel == undefined) {
+                    window.AllHotel = [];
+                }
+                for (var i = 0; i < result.length; i++) {
+                    console.log(result[i]['hotelName']);
+                    window.AllHotel.push(result[i]['hotelName']);
+                }
+                var elementByIdAllHotel = document.getElementById('allHotel');
+
+                if (window.AllHotelstr == undefined) {
+                    window.AllHotelstr = 'All Hotels:'+"<br>";
+                }
+
+                for (var i = 0; i < window.AllHotel.length; i++) {
+                    var count=i+1;
+                    window.AllHotelstr+=count+". " + window.AllHotel[i]+"<br>";
+                    //window.AllHotelstr+="<a href="">"+ window.AllHotel[i]+"</a>"+"<br>";
+                }
+
+                elementByIdAllHotel.innerHTML = window.AllHotelstr;
+
+                console.log(result[0]['location']['geo']['lat']);
+                console.log(result[0]['location']['geo']['lon']);
+                if (window.coordCity == undefined) {
+                    window.coordCity = [];
+                }
+
+                window.coordCity.push(result[0]['location']['geo']['lat']);
+                window.coordCity.push(result[0]['location']['geo']['lon']);
+                console.log(window.coordCity);
+                initMap(window.coordCity);
+
                 /*information = jQuery.parseJSON(result[0]);
                 console.log(information);
 

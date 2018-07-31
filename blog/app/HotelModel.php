@@ -35,11 +35,11 @@ class HotelModel extends Model
         /**
          * Другие API отелей(работает)
          */
-//        $res = file_get_contents("http://engine.hotellook.com/api/v2/cache.json?location={$cityOfDeparture}&language=ru&customerIp&currency={$currency}&checkIn={$arrival}&checkOut={$out}&limit=10");
-//        return $res;
-
-        $res = file_get_contents("http://engine.hotellook.com/api/v2/lookup.json?query={$cityOfDeparture}&lang=en&lookFor=hotel&limit=3");
+        $res = file_get_contents("http://engine.hotellook.com/api/v2/cache.json?location={$cityOfDeparture}&language=ru&customerIp&currency={$currency}&checkIn={$arrival}&checkOut={$out}&limit=10");
         return $res;
+
+        //$res = file_get_contents("http://engine.hotellook.com/api/v2/lookup.json?query={$cityOfDeparture}&lang=en&lookFor=hotel&limit=3");
+        //return $res;
 
     }
 }
