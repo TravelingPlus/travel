@@ -148,8 +148,10 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-10 col-xs-12">
                     <div id="map"></div>
+                    <div id="allHotel" style="padding:0; text-align:left; font-size: 18px;color: #fff;margin-top: 5px;"></div>
                 </div>
             </div>
+
     </div>
 
     <main class="main_content_section">
@@ -201,7 +203,11 @@
             <div class="try d-flex justify-content-center">
                 <div class="true">
                     <input type="button" class="form-text btn btn-success"
-                           onclick="add_input()" value="Добавить"/>
+                           onclick="add_input()" value="Добавить перелет"/>
+                </div>
+                <div class="true">
+                    <input type="button" class="form-text btn btn-success"
+                           onclick="add_hotel()" value="Добавить отель"/>
                 </div>
                 <div class="true">
                     <div class="sfr">
@@ -210,7 +216,11 @@
                 </div>
             </div>
 
-
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-10 col-xs-12">
+                    <div id="map1"></div>
+                </div>
+            </div>
         </div>
         <div class="inner_wrapper">
             <section class="offer_description" id="experiance">
@@ -289,6 +299,8 @@
     </footer>
 
 <script src="js/addForm.js"></script>
+<script src="js/addHotel.js"></script>
+
 <script>
 function openCollapse() {
     var parentEl = document.getElementById('dr-panel');
@@ -405,6 +417,46 @@ function openCollapse() {
                 information = jQuery.parseJSON(result[0]);
                 console.log('123');
                 console.log(information);
+                if((result[3])!=='') {
+                    all_hotels = jQuery.parseJSON(result[3]);
+                    console.log(all_hotels);
+
+                    if (window.AllHotel == undefined) {
+                        window.AllHotel = [];
+                    }
+
+                    if (window.AllHotelstr == undefined) {
+                        window.AllHotelstr = 'All Hotels:'+"<br>";
+                    }
+
+                    for (var i = 0; i < all_hotels.length; i++) {
+                        console.log(all_hotels[i]['hotelName']);
+                        //var flag =0;
+                        //for (var j = 0; j < all_hotels.length; j++) {
+                          //  if (all_hotels[i]['hotelName'] == window.AllHotel[j]){
+                           // flag=1;
+                           // }
+                        //}
+                        //if(flag==1)
+                        window.AllHotel.push(all_hotels[i]['hotelName']);
+
+                    }
+                    var elementByIdAllHotel = document.getElementById('allHotel');
+
+
+                    window.AllHotelstr='';
+                    for (var i = 0; i < 10; i++) {
+                        var count=i+1;
+                        window.AllHotelstr+=count+". " + window.AllHotel[i]+"<br>";
+                        //window.AllHotelstr+="<a href="">"+ window.AllHotel[i]+"</a>"+"<br>";
+                    }
+                    //elementByIdAllHotel.innerHTML='';
+                    elementByIdAllHotel.innerHTML = window.AllHotelstr;
+
+                }
+                else {
+                    console.log('пустая строка');
+                }
 
                 //informationToSaveInDB=information['data'];
                 //console.log(informationToSaveInDB);
@@ -414,7 +466,19 @@ function openCollapse() {
                 if (window.informationToSaveInDB == undefined) {
                     window.informationToSaveInDB = [];
                 }
-                window.informationToSaveInDB.push(information['data'][result[2]]);
+
+
+                //if (do_not_write == 0)
+                //if(window.informationToSaveInDB.length > 0) {
+                  //  if (window.informationToSaveInDB[informationToSaveInDB.length]['price'] !== information['data'][result[2]['price']]) {
+                   //     window.informationToSaveInDB.push(information['data'][result[2]]);
+                    //}
+                //}else {
+                        window.informationToSaveInDB.push(information['data'][result[2]]);
+                  //  }
+
+
+
                 console.log(window.informationToSaveInDB);
 
                 //areaCoust = document.getElementsByTagName("textAreaAllCoust");
@@ -450,6 +514,7 @@ function openCollapse() {
                 //var SummDok = document.getElementById('Summ'),
                 //SummSumm='tra-la-la';
                 //SummDok.innerHTML = SummSum
+
 
                 var areaCoust = document.getElementById('all_sum');
                 areaCoust.innerHTML = '';

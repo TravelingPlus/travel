@@ -63,13 +63,15 @@ function add_input(){
     {
         console.log(text[i].value);
     }*/
-    len_all=text.length;
+    //len_all=text.length;
     //10
-    var area=document.getElementsByTagName("input")[len_all-6];
+
+    //var area=document.getElementsByTagName("input")[len_all-6];
+
     //console.log(area);
     //var area1=document.getElementsByTagName("input")[len_all-9];
     //console.log(area1);
 
-    area.value=text[text.length-9].value;
+    //area.value=text[text.length-9].value;
     //var area=document.getElementsByTagName("input")[3];
 }

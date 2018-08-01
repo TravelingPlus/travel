@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\AllHotel;
+use App\HotelModel;
+use App\tableHotel;
+use App\AllRequest;
 use App\AllInfo;
 use App\dateTrips;
 use App\Saave;
@@ -93,9 +97,79 @@ class HomeController extends Controller
 
     }
 
+    public function hotel_find($request_all)
+    {
+        //return $request;
+        $hot = new HotelModel();
+        $tableHotel = new tableHotel();
+        $exempAllHotel = new AllHotel();
+
+        $count_element = 0;
+        $k = 0;
+        while (isset($request_all->input('city')[$k])) {
+            $count_element++;
+            $k++;
+        }
+
+        $hotel = $request_all->input('city')[$count_element - 1];
+        //return $hotel;
+
+        $resultWhereAllHotel = DB::table('info_hotel')->get();
+        foreach ($resultWhereAllHotel as $allInfo) {
+            $time = $allInfo->created_at;
+            $time = strtotime(date('Y-m-d H:i:s')) - strtotime($time);
+            if ($time > 1000) {
+                DB::table('info_hotel')->where('id', $allInfo->id)->delete();
+                DB::table('all_information_hotel')->where('id', $allInfo->id)->delete();
+            }
+        }
+
+        //$resultWhere = DB::table('info_hotel')->where('city', 'Москва')->first();
+
+        $resultWhere = DB::table('info_hotel')->where('city', $hotel)->first();
+
+        $flag = 0;
+        if (isset($resultWhere)) {
+            $flag = 1;
+        } else $flag = 0;
+
+        if ($flag == 0) {
+            $resultHotel = $hot->getHotelApi($request_all);
+            $tableHotel->city = $hotel;
+
+            $tableHotel->save();
+
+//            return $resultHotel;
+
+            $exempAllHotel->json_info = $resultHotel;
+
+            $exempAllHotel->save();
+
+            return $resultHotel;
+        } else {
+            $resultAllHotel = DB::table('all_information_hotel')->where('id', $resultWhere->id)->first();
+            $res = $resultAllHotel->json_info;
+
+            return $res;
+        }
+    }
 
     public function json(Request $request)
-    {
+    {   $mas_hotel = '';
+        $out_input=$request->input('out');
+        if($out_input !== null){
+            $mas_hotel = $this->hotel_find($request);
+        }else{
+            //return '0000';
+        }
+        //$exemlar_info = new AllRequest();
+        //$exemlar_info->all_request_info = ;
+        //$exemlar_info->save();
+
+        //return $request;
+        //$mas_hotel = $this->hotel_find($request);
+        //return $mas_hotel;
+
         $exemlarTrips = new Trips();
         $exemlarDateTrips = new dateTrips();
         $exemlarAllInfo = new AllInfo();
@@ -127,7 +201,6 @@ class HomeController extends Controller
             if ($time > 1000) {
                 DB::table('info_trip_update')->where('id', $allInfo->id)->delete();
                 DB::table('all_information_trips')->where('id', $allInfo->id)->delete();
-
             }
         }
 
@@ -155,10 +228,13 @@ class HomeController extends Controller
             $exemlarAllInfo->date_trip = $resultTrips[2];
             $exemlarAllInfo->save();
 
+            array_push($resultTrips, $mas_hotel);
+            //$res_new=[0=>$resultTrips, 1=>$mas_hotel];
             return $resultTrips;
+            //return $res_new;
         } else {
             $resultAllInfo = DB::table('all_information_trips')->where('id', $resultWhere->id)->first();
-            $res = [0 => $resultAllInfo->info_trip, 1 => unserialize($resultAllInfo->coordinates), 2 => $resultAllInfo->date_trip];
+            $res = [0 => $resultAllInfo->info_trip, 1 => unserialize($resultAllInfo->coordinates), 2 => $resultAllInfo->date_trip, 3=> $mas_hotel];
 
             return $res;
         }

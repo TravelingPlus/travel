@@ -23,9 +23,19 @@ class HotelModel extends Model
             echo 'Выберите валюту из выше перечисленных';
         }
 
+        $count = 0;
+        $i = 0;
+        while (isset($request->input('city')[$i])) {
+            $count++;
+            $i++;
+        }
+
+        $city = $request->input('city')[$count-1];
+
+
         $arrival = $request->input('arrival');
         $out = $request->input('out');
-        $city = $request->input('city');
+        //$city = $request->input('city');
 
         $codeCity = file_get_contents('https://www.travelpayouts.com/widgets_suggest_params?q=' . urlencode("Из {$city} в Харьков"));
         $decodeCity = json_decode($codeCity, true);
